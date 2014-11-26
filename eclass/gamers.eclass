@@ -41,25 +41,25 @@ gamers_pkg_setup() {
 # Fixes permissions of var games data, such as bones files.
 # This may be security relevant.
 dovarlibgames() {
-    local R=
-    if [[ ${1} == -R ]]; then
-        R=-R
-        shift
-    fi
+	local R=
+	if [[ ${1} == -R ]]; then
+		R=-R
+		shift
+	fi
 
-    local f
-    for f in "${@-/var/lib/games}"; do
-        [[ ${f} == ${D%+(/)}/* ]] && f=${f#${D%+(/)}}
-        [[ -e "${D}/${f}" ]] || dodir "${f}"
-        chown ${R} gamers:gamers "${D}${f}" || die
-        chmod ${R} g+w "${D}${f}" || die
-        if [[ -d "${D}/${f}" ]]; then
-            chmod g+s "${D}${f}" || die
-            if [[ -n ${R} ]]; then
-                find "${D}/${f}" -type d -exec chmod g+s '{}' +
-            fi
-        fi
-    done
+	local f
+	for f in "${@-/var/lib/games}"; do
+		[[ ${f} == ${D%+(/)}/* ]] && f=${f#${D%+(/)}}
+		[[ -e "${D}/${f}" ]] || dodir "${f}"
+		chown ${R} gamers:gamers "${D}${f}" || die
+		chmod ${R} g+w "${D}${f}" || die
+		if [[ -d "${D}/${f}" ]]; then
+			chmod g+s "${D}${f}" || die
+			if [[ -n ${R} ]]; then
+				find "${D}/${f}" -type d -exec chmod g+s '{}' +
+			fi
+		fi
+	done
 }
 
 # @FUNCTION: preserve_scores
@@ -67,12 +67,12 @@ dovarlibgames() {
 # @DESCRIPTION:
 # Preserve score files from the live filesystem.
 preserve_scores() {
-    local f
-    for f in "${@}"; do
-        [[ ${f} == ${D%+(/)}/* ]] && f=${f#${D%+(/)}}
-        [[ ( -e ${D}/${f} || -L ${D}/${f} ) && ! -f ${D}/${f} ]] && continue
-        GAME_SCORES+=( "${f}" )
-    done
+	local f
+	for f in "${@}"; do
+		[[ ${f} == ${D%+(/)}/* ]] && f=${f#${D%+(/)}}
+		[[ ( -e ${D}/${f} || -L ${D}/${f} ) && ! -f ${D}/${f} ]] && continue
+		GAME_SCORES+=( "${f}" )
+	done
 }
 
 # @FUNCTION: gamers_pkg_preinst
@@ -80,14 +80,14 @@ preserve_scores() {
 # Prepares the games score files for copying in pkg_postinst,
 # not optional if you ran preserve_scores() in src_install().
 gamers_pkg_preinst() {
-    local staging="${T}"/gamers.eclass-scores
-    mkdir "${staging}"
+	local staging="${T}"/gamers.eclass-scores
+	mkdir "${staging}"
 
-    local f
-    for f in "${GAME_SCORES[@]}"; do
-        mkdir -p "${staging}/${f%/*}" || die
-        mv {"${D}","${staging}"}/"${f}" || die
-    done
+	local f
+	for f in "${GAME_SCORES[@]}"; do
+		mkdir -p "${staging}/${f%/*}" || die
+		mv {"${D}","${staging}"}/"${f}" || die
+	done
 }
 
 # @FUNCTION: gamers_pkg_postinst
@@ -95,11 +95,11 @@ gamers_pkg_preinst() {
 # Copies the games score files for,
 # not optional if you ran preserve_scores() in src_install().
 gamers_pkg_postinst() {
-    local staging="${T}"/gamers.eclass-scores f
-    for f in "${GAME_SCORES[@]}"; do
-        # don't die in pkg_postinst
-        [[ -f ${ROOT}/${f} ]] || cp -p {"${staging}","${ROOT}"}/"${f}"
-    done
+	local staging="${T}"/gamers.eclass-scores f
+	for f in "${GAME_SCORES[@]}"; do
+		# don't die in pkg_postinst
+		[[ -f ${ROOT}/${f} ]] || cp -p {"${staging}","${ROOT}"}/"${f}"
+	done
 
 	ewarn "In order to play this game and access the variable data files,"
 	ewarn "you have to be in the 'gamers' group."
