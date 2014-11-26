@@ -100,6 +100,10 @@ gamers_pkg_postinst() {
         # don't die in pkg_postinst
         [[ -f ${ROOT}/${f} ]] || cp -p {"${staging}","${ROOT}"}/"${f}"
     done
+
+	ewarn "In order to play this game and access the variable data files,"
+	ewarn "you have to be in the 'gamers' group."
+	ewarn "Just run 'gpasswd -a <USER> gamers', then have <USER> re-login."
 }
 
 
