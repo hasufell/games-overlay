@@ -1,0 +1,69 @@
+--- cmake/Modules/FindJson.cmake
++++ cmake/Modules/FindJson.cmake
+@@ -1,18 +1,18 @@
+ # Look for json, use our own if not found
+ 
+-#FIND_PATH(JSON_INCLUDE_DIR json.h)
++FIND_PATH(JSON_INCLUDE_DIR json.h PATHS /usr/include/jsoncpp/json)
+ 
+-#FIND_LIBRARY(JSON_LIBRARY NAMES json)
++FIND_LIBRARY(JSON_LIBRARY NAMES jsoncpp json)
+ 
+-#IF(JSON_LIBRARY AND JSON_INCLUDE_DIR)
+-#	SET( JSON_FOUND TRUE )
+-#ENDIF(JSON_LIBRARY AND JSON_INCLUDE_DIR)
++IF(JSON_LIBRARY AND JSON_INCLUDE_DIR)
++	SET( JSON_FOUND TRUE )
++ENDIF(JSON_LIBRARY AND JSON_INCLUDE_DIR)
+ 
+-#IF(JSON_FOUND)
+-#	MESSAGE(STATUS "Found system json header file in ${JSON_INCLUDE_DIR}")
+-#	MESSAGE(STATUS "Found system json library ${JSON_LIBRARY}")
+-#ELSE(JSON_FOUND)
++IF(JSON_FOUND)
++	MESSAGE(STATUS "Found system json header file in ${JSON_INCLUDE_DIR}")
++	MESSAGE(STATUS "Found system json library ${JSON_LIBRARY}")
++ELSE(JSON_FOUND)
+ 	SET(JSON_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/json)
+ 	SET(JSON_LIBRARY json)
+ 	MESSAGE(STATUS "Using project json library")
+-#ENDIF(JSON_FOUND)
++ENDIF(JSON_FOUND)
+--- src/serverlist.cpp
++++ src/serverlist.cpp
+@@ -27,7 +27,15 @@
+ #include "filesys.h"
+ #include "porting.h"
+ #include "log.h"
+-#include "json/json.h"
++#include <json/json.h>
++#include <json/config.h>
++#include <json/features.h>
++#include <json/forwards.h>
++#include <json/json.h>
++#include <json/reader.h>
++#include <json/value.h>
++#include <json/writer.h>
++#include <json/autolink.h>
+ #if USE_CURL
+ #include <curl/curl.h>
+ #endif
+--- src/serverlist.h
++++ src/serverlist.h
+@@ -19,7 +19,15 @@
+ 
+ #include <iostream>
+ #include "config.h"
+-#include "json/json.h"
++#include <json/json.h>
++#include <json/config.h>
++#include <json/features.h>
++#include <json/forwards.h>
++#include <json/json.h>
++#include <json/reader.h>
++#include <json/value.h>
++#include <json/writer.h>
++#include <json/autolink.h>
+ 
+ #ifndef SERVERLIST_HEADER
+ #define SERVERLIST_HEADER
