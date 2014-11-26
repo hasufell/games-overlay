@@ -4,7 +4,7 @@
   <repo quality="experimental" status="unofficial">
     <name>games-overlay</name>
     <description lang="en">gentoo overlay containing games ebuilds only</description>
-    <homepage>https://github.com/urras/gentoo-overlay-tox</homepage>
+    <homepage>https://github.com/hasufell/games-overlay</homepage>
     <owner type="person">
 		<email>hasufell@posteo.de</email>
 		<name>Julian Ospald</name>
