@@ -87,7 +87,7 @@ gamers_prep_vardata() {
 # @FUNCTION: gamers_preserve_vardata
 # @USAGE: [-R|-r] [<dirs|files>]
 # @DESCRIPTION:
-# Preserve variable game data files or directories such as scores
+# Preserve variable game data files such as scores
 # from the live filesystem.
 # Make sure gamers_pkg_preinst() is executed.
 # This must be called after the files are installed to ${D},
