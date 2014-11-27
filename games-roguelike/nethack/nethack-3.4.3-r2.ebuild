@@ -82,6 +82,8 @@ src_prepare() {
 src_compile() {
 	local lflags="${LDFLAGS}"
 
+	tc-export CC CXX LD AR RANLIB
+
 	cd "${S}"/src
 	append-flags -I../include
 
