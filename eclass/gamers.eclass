@@ -51,12 +51,14 @@ dovarlibgames() {
 	for f in "${@-/var/lib/games}"; do
 		[[ ${f} == ${D%+(/)}/* ]] && f=${f#${D%+(/)}}
 		[[ -e "${D}/${f}" ]] || dodir "${f}"
-		chown ${R} gamers:gamers "${D}${f}" || die
-		chmod ${R} g+w "${D}${f}" || die
+		fowners ${R} gamers:gamers "${f}" || die
+		fperms ${R} g+w "${f}" || die
 		if [[ -d "${D}/${f}" ]]; then
-			chmod g+s "${D}${f}" || die
+			fperms g+s "${f}" || die
 			if [[ -n ${R} ]]; then
-				find "${D}/${f}" -type d -exec chmod g+s '{}' +
+				pushd "${D}" > /dev/null
+				find "${f}" -type d -exec fperms g+s '{}' +
+				popd > /dev/null
 			fi
 		fi
 	done
