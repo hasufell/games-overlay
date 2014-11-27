@@ -8,8 +8,22 @@
 # @BLURB: Handling games that install variable data/bones/score files.
 # @DESCRIPTION:
 # This eclass is only for games that install saves, bones or score files
-# into /var/lib/games or similar directories. It sets up necessary permissions
-# for the user/group 'gamers' on those files which may be security relevant.
+# into /var/lib/games or subdirectories.
+#
+# It sets up necessary permissions for the user/group 'gamers' on those
+# files via gamers_prep_vardata(), which is security relevant.
+#
+# It also allows to preserve those files across (re-)installations via
+# gamers_preserve_vardata().
+#
+# If you are unsure what files specifically need to be fixed or preserved,
+# you can just do the following at the END of src_install():
+# @CODE
+#   gamers_prep_vardata -R
+#   gamers_preserve_vardata -R
+# @CODE
+# which fixes all related permissions in /var/lib/games and subdirs and
+# preserves all files inside those dirs.
 #
 # Don't use this for games that don't need it.
 
@@ -36,7 +50,7 @@ gamers_pkg_setup() {
 }
 
 # @FUNCTION: gamers_prep_vardata
-# @USAGE: [-R|-r] [<var-dirs>]
+# @USAGE: [-R|-r] [<dirs|files>]
 # @DESCRIPTION:
 # Fixes permissions of var games data, such as bones files.
 # Default directory is "/var/lib/games" if no dirs are given.
@@ -45,15 +59,15 @@ gamers_pkg_setup() {
 # Also mind that this must be called after the files are installed to ${D},
 # so usually at the end of src_install().
 # @CODE
-#  options:
-#  -R, -r
-#    recursively fix permissions
+#   options:
+#     -R, -r
+#       recursively fix permissions
 #
-# example1: gamers_prep_vardata /var/lib/games/${PN}
-# results in: fixes permissions of the file/dir /var/lib/games/${PN} only
+#   example1: gamers_prep_vardata /var/lib/games/${PN}
+#   results in: fixes permissions of the file/dir /var/lib/games/${PN} only
 #
-# example2: gamers_prep_vardata -r
-# results in: fixes all permissions of /var/lib/games recursively
+#   example2: gamers_prep_vardata -r
+#   results in: fixes all permissions of /var/lib/games recursively
 # @CODE
 gamers_prep_vardata() {
 	local recursive=false
@@ -93,16 +107,16 @@ gamers_prep_vardata() {
 # This must be called after the files are installed to ${D},
 # so usually at the end of src_install().
 # @CODE
-#  options:
-#  -R, -r
-#    recursively preserve files
+#   options:
+#     -R, -r
+#       recursively preserve files
 #
-# example1: gamers_preserve_vardata /var/lib/games/${PN}/scores
-# results in: only preserve /var/lib/games/${PN}/scores which is a regular
-#             file
+#   example1: gamers_preserve_vardata /var/lib/games/${PN}/scores
+#   results in: only preserve /var/lib/games/${PN}/scores which is a regular
+#               file
 #
-# example2: gamers_preserve_vardata -R
-# results in: preserve all related files from /var/lib/games and subdirs
+#   example2: gamers_preserve_vardata -R
+#   results in: preserve all related files from /var/lib/games and subdirs
 # @CODE
 gamers_preserve_vardata() {
 	local recursive=false
