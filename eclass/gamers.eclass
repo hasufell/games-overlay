@@ -23,7 +23,8 @@
 #   gamers_preserve_vardata -R
 # @CODE
 # which fixes all related permissions in /var/lib/games and subdirs and
-# preserves all files inside those dirs.
+# preserves all files inside those dirs. Then make sure pkg_setup() and
+# pkg_preinst() are not overwritten (or call games_pkg_* functions manually)!
 #
 # Don't use this for games that don't need it.
 
