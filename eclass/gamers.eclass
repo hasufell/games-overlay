@@ -63,8 +63,8 @@ gamers_prep_vardata() {
 	fi
 	einfo "fixing permissions of:"
 
-    local f
-    for f in "${@:-/var/lib/games}"; do
+	local f
+	for f in "${@:-/var/lib/games}"; do
 		[[ -e "${D}${f}" ]] || die "${D}${f} does not exist"
 
 		einfo "  ${f}"
