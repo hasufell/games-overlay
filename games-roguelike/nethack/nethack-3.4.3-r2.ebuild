@@ -172,9 +172,9 @@ src_install() {
 
 	local statedir="/var/lib/games/${PN}"
 	keepdir "${statedir}/save"
-	preserve_scores "${D}${statedir}"/*
+	gamers_prep_vardata -R
+	gamers_preserve_vardata "${statedir}"/*
 	make_desktop_entry nethack "Nethack"
-	dovarlibgames -R
 	chmod o-r "${D}${statedir}" || die
 }
 
