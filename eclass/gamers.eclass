@@ -23,8 +23,8 @@ EXPORT_FUNCTIONS pkg_setup pkg_preinst pkg_postinst
 # @ECLASS-VARIABLE: GAME_SCORES
 # @INTERNAL
 # @DESCRIPTION:
-# Holds the games scores that will be preserved. Used by preserve_scores(),
-# gamers_pkg_preinst() and gamers_pkg_postinst().
+# Holds the games files that will be preserved. Used by
+# gamers_preserve_vardata(), gamers_pkg_preinst() and gamers_pkg_postinst().
 GAME_SCORES=()
 
 # @FUNCTION: gamers_pkg_setup
@@ -64,45 +64,74 @@ dovarlibgames() {
 	done
 }
 
-# @FUNCTION: preserve_scores
-# @USAGE: <score-dirs>
+# @FUNCTION: gamers_preserve_vardata
+# @USAGE: [-R|-r] [<dirs|files>]
 # @DESCRIPTION:
-# Preserve score files from the live filesystem.
-preserve_scores() {
-	local f
-	for f in "${@}"; do
-		[[ ${f} == ${D%+(/)}/* ]] && f=${f#${D%+(/)}}
-		[[ ( -e ${D}/${f} || -L ${D}/${f} ) && ! -f ${D}/${f} ]] && continue
-		GAME_SCORES+=( "${f}" )
+# Preserve variable game data files or directories such as scores
+# from the live filesystem.
+# Make sure gamers_pkg_preinst() is executed.
+# This must be called after the files are installed to ${D},
+# so usually at the end of src_install().
+# @CODE
+#  options:
+#  -R, -r
+#    recursively preserve files
+#
+# example1: gamers_preserve_vardata /var/lib/games/${PN}/scores
+# results in: only preserve /var/lib/games/${PN}/scores which is a regular
+#             file
+#
+# example2: gamers_preserve_vardata -R
+# results in: preserve all related files from /var/lib/games and subdirs
+# @CODE
+gamers_preserve_vardata() {
+	local recursive=false
+	if [[ ${1} == "-R" || ${1} == "-r" ]]; then
+		recursive=true
+		shift
+	fi
+
+	local f p
+	for f in "${@:-/var/lib/games}"; do
+		if [[ -f ${D}${f} ]] ; then
+			GAME_SCORES+=( "${f}" )
+		elif [[ -d ${D}${f} && ${recursive} ]] ; then
+			# also preserve all files from subdirs as well
+			while read p ; do
+				[[ -f ${D}${f%/}/${p} ]] && GAME_SCORES+=( "${f%/}/${p}" )
+			done < <(find "${D}${f}" -printf '%P\n' 2>/dev/null)
+		fi
+	done
+
+	einfo "preserving files:"
+	for f in ${GAME_SCORES[@]} ; do
+		einfo "  ${f}"
 	done
 }
 
 # @FUNCTION: gamers_pkg_preinst
 # @DESCRIPTION:
-# Prepares the games score files for copying in pkg_postinst,
-# not optional if you ran preserve_scores() in src_install().
+# Synchronizes the files from GAME_SCORES with the live filesystem, so
+# we don't overwrite e.g. score files.
+# This does have no effect if gamers_preserve_vardata() is not used,
+# but is mandatory if it is used.
 gamers_pkg_preinst() {
-	local staging="${T}"/gamers.eclass-scores
-	mkdir "${staging}"
-
 	local f
 	for f in "${GAME_SCORES[@]}"; do
-		mkdir -p "${staging}/${f%/*}" || die
-		mv {"${D}","${staging}"}/"${f}" || die
+		if [[ -e ${ROOT}${f} ]] ; then
+			cp -p \
+				"${ROOT}${f}" \
+				"${D}${f}" \
+				|| die "cp failed"
+		fi
 	done
 }
 
 # @FUNCTION: gamers_pkg_postinst
 # @DESCRIPTION:
-# Copies the games score files for,
-# not optional if you ran preserve_scores() in src_install().
+# Prints a warning to add the current user to the 'gamers' group.
+# Not mandatory.
 gamers_pkg_postinst() {
-	local staging="${T}"/gamers.eclass-scores f
-	for f in "${GAME_SCORES[@]}"; do
-		# don't die in pkg_postinst
-		[[ -f ${ROOT}/${f} ]] || cp -p {"${staging}","${ROOT}"}/"${f}"
-	done
-
 	ewarn "In order to play this game and access the variable data files,"
 	ewarn "you have to be in the 'gamers' group."
 	ewarn "Just run 'gpasswd -a <USER> gamers', then have <USER> re-login."
