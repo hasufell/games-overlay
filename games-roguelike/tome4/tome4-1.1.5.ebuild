@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit multilib pax-utils
+inherit multilib pax-utils toolchain-funcs
 
 MY_PN="t-engine4"
 MY_PV="${PV/_/}"
