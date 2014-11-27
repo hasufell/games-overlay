@@ -20,7 +20,7 @@ inherit user
 
 EXPORT_FUNCTIONS pkg_setup pkg_preinst pkg_postinst
 
-# @ECLASS-VARIABLE: GAMES_PREFIX_OPT
+# @ECLASS-VARIABLE: GAME_SCORES
 # @INTERNAL
 # @DESCRIPTION:
 # Holds the games scores that will be preserved. Used by preserve_scores(),
