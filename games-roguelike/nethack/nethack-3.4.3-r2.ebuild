@@ -170,7 +170,6 @@ src_install() {
 
 	local statedir="/var/lib/games/${PN}"
 	keepdir "${statedir}/save"
-	mv "${D}/${HACKDIR}/"{record,logfile,perm} "${D}/${statedir}/"
 	preserve_scores "${D}${statedir}"/*
 	make_desktop_entry nethack "Nethack"
 	dovarlibgames -R
