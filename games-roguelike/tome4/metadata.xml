@@ -5,4 +5,7 @@
 		<email>hasufell@posteo.de</email>
 		<name>Julian Ospald</name>
 	</maintainer>
+	<use>
+		<flag name="music">Enable music support</flag>
+	</use>
 </pkgmetadata>
