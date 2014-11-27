@@ -6,8 +6,9 @@
 		<name>Julian Ospald</name>
 	</maintainer>
 	<use>
-		<flag name="audio">Audio support</flag>
 		<flag name="editor">Include Atlas scenario editor projects</flag>
+		<flag name="lobby">Enable the use of <pkg>net-libs/gloox</pkg>
+			and the multiplayer lobby</flag>
 		<flag name="nvtt">Support for some uncompressed data formats
 			via <pkg>media-gfx/nvidia-texture-tools</pkg>
 			(might be needed for some mods)</flag>
