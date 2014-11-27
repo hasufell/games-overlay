@@ -76,6 +76,8 @@ src_configure() {
 }
 
 src_compile() {
+	tc-export CC CXX LD AR RANLIB
+
 	# parallel make broken
 	# http://forums.te4.org/viewtopic.php?f=42&t=38713
 	config='release' emake -j1 verbose=1
