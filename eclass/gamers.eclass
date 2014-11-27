@@ -29,33 +29,53 @@ GAME_SCORES=()
 
 # @FUNCTION: gamers_pkg_setup
 # @DESCRIPTION:
-# Creates the gamers user and group used in dovarlibgames().
+# Creates the gamers user and group used in gamers_prep_vardata().
 gamers_pkg_setup() {
 	enewgroup gamers 40
 	enewuser gamers 40 -1 -1 gamers
 }
 
-# @FUNCTION: dovarlibgames
-# @USAGE: [-R] [<var-dirs>]
+# @FUNCTION: gamers_prep_vardata
+# @USAGE: [-R|-r] [<var-dirs>]
 # @DESCRIPTION:
 # Fixes permissions of var games data, such as bones files.
-# This may be security relevant.
-dovarlibgames() {
-	local R=
-	if [[ ${1} == -R ]]; then
-		R=-R
+# Default directory is "/var/lib/games" if no dirs are given.
+# This may be security relevant and is mandatory if the ebuild installs
+# into "/var/lib/games".
+# Also mind that this must be called after the files are installed to ${D},
+# so usually at the end of src_install().
+# @CODE
+#  options:
+#  -R, -r
+#    recursively fix permissions
+#
+# example1: gamers_prep_vardata /var/lib/games/${PN}
+# results in: fixes permissions of the file/dir /var/lib/games/${PN} only
+#
+# example2: gamers_prep_vardata -r
+# results in: fixes all permissions of /var/lib/games recursively
+# @CODE
+gamers_prep_vardata() {
+	local recursive=false
+	if [[ ${1} == "-R" || ${1} == "-r" ]]; then
+		recursive=true
 		shift
 	fi
+	einfo "fixing permissions of:"
 
-	local f
-	for f in "${@-/var/lib/games}"; do
-		[[ ${f} == ${D%+(/)}/* ]] && f=${f#${D%+(/)}}
-		[[ -e "${D}/${f}" ]] || dodir "${f}"
-		fowners ${R} gamers:gamers "${f}" || die
-		fperms ${R} g+w "${f}" || die
-		if [[ -d "${D}/${f}" ]]; then
+    local f
+    for f in "${@:-/var/lib/games}"; do
+		[[ -e "${D}${f}" ]] || die "${D}${f} does not exist"
+
+		einfo "  ${f}"
+
+		fowners $(${recursive} && echo "-R") gamers:gamers "${f}"
+		fperms $(${recursive} && echo "-R") g+w "${f}"
+
+		# set gid on directories
+		if [[ -d "${D}${f}" ]]; then
 			fperms g+s "${f}" || die
-			if [[ -n ${R} ]]; then
+			if ${recursive} ; then
 				pushd "${D}" > /dev/null
 				find "${f}" -type d -exec fperms g+s '{}' +
 				popd > /dev/null
