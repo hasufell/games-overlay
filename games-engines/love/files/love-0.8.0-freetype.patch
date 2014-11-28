@@ -1,0 +1,50 @@
+--- ./src/modules/font/freetype/Font.h.orig	2014-03-18 10:26:17.228152259 +0100
++++ ./src/modules/font/freetype/Font.h	2014-03-18 10:26:33.092151744 +0100
+@@ -30,10 +30,11 @@
+ #else
+ #include <ft2build.h>
+ #endif
+-#include <freetype/freetype.h>
+-#include <freetype/ftglyph.h>
+-#include <freetype/ftoutln.h>
+-#include <freetype/fttrigon.h>
++#include <ft2build.h>
++#include FT_FREETYPE_H
++#include FT_GLYPH_H
++#include FT_OUTLINE_H
++#include FT_TRIGONOMETRY_H
+ 
+ namespace love
+ {
+@@ -73,4 +74,4 @@
+ } // font
+ } // love
+ 
+-#endif // LOVE_FONT_FREETYPE_FONT_H
+\ Manca newline alla fine del file
++#endif // LOVE_FONT_FREETYPE_FONT_H
+--- ./src/modules/font/freetype/TrueTypeRasterizer.h.orig	2014-03-18 10:26:48.444151247 +0100
++++ ./src/modules/font/freetype/TrueTypeRasterizer.h	2014-03-18 10:27:19.852150229 +0100
+@@ -27,10 +27,11 @@
+ 
+ // TrueType2
+ #include <ft2build.h>
+-#include <freetype/freetype.h>
+-#include <freetype/ftglyph.h>
+-#include <freetype/ftoutln.h>
+-#include <freetype/fttrigon.h>
++#include <ft2build.h>
++#include FT_FREETYPE_H
++#include FT_GLYPH_H
++#include FT_OUTLINE_H
++#include FT_TRIGONOMETRY_H
+ 
+ namespace love
+ {
+@@ -67,4 +68,4 @@
+ } // font
+ } // love
+ 
+-#endif // LOVE_FONT_FREETYPE_TRUE_TYPE_RASTERIZER_H
+\ Manca newline alla fine del file
++#endif // LOVE_FONT_FREETYPE_TRUE_TYPE_RASTERIZER_H
