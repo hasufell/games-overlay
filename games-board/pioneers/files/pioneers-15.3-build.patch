@@ -1,0 +1,41 @@
+From: Julian Ospald <hasufell@gentoo.org>
+Date: Thu Dec 19 21:30:53 UTC 2013
+
+* add --enable-minimal-flags switch
+
+--- a/configure.ac
++++ b/configure.ac
+@@ -125,6 +125,15 @@
+ esac],
+ 	[pioneers_deprecationChecks=$USE_MAINTAINER_MODE])
+ 
++AC_ARG_ENABLE([minimal-flags],
++	AS_HELP_STRING([--enable-minimal-flags],
++		["Don't add unneeded flags."]),
++[case "${enableval}" in
++  yes)  minimal_flags=yes ;;
++  "")   minimal_flags=no ;;
++  *)    minimal_flags=no  ;;
++esac])
++
+ AC_ARG_ENABLE([help],
+ 	AS_HELP_STRING([--enable-help],
+ 		[Enable help in the programs that support it.]),
+@@ -175,7 +184,7 @@
+ esac],
+ 	[with_notify=yes])
+ 
+-if test "x$GCC" = xyes && test $enable_hardening = yes; then
++if test "x$GCC" = xyes && test $enable_hardening = yes && test "x$minimal_flags" != xyes; then
+ 	if test "$pioneers_is_windows_port" = "no"; then
+ 		# Flags from Debian hardening (dpkg-buildflags --get CFLAGS)
+ 		AC_SUBST(AM_CFLAGS, ["$AM_CFLAGS -g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security -Werror=format-security"])
+@@ -191,7 +200,7 @@
+ fi
+ 
+ ## The warnings are in the same order as in 'man gcc'
+-if test "x$GCC" = xyes; then
++if test "x$GCC" = xyes && test "x$minimal_flags" != xyes; then
+ 	# Only link the directly needed libraries	
+ 	AC_SUBST(AM_CFLAGS, ["$AM_CFLAGS -Wl,--as-needed"])
+ 
