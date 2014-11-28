@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer>
+		<email>hasufell@posteo.de</email>
+		<name>Julian Ospald</name>
+	</maintainer>
+	<longdescription lang="en">
+		The Zod Engine is an open source remake of the 1996 game Z by the
+		Bitmap Brothers written in C++ using the SDL library for
+		Linux / Windows / Etc.
+
+		The Story and Gameplay...
+		In Z you were a commander under General Zod in his attempt to
+		conquer the universe. Your team, Brad and Allan, went from site to
+		site and planet to planet pushing back the Blue forces while getting
+		bitched at by General Zod. In the Zod Engine the doors are opened
+		up so that you can play all the levels and make new levels the way
+		you've always wanted to. The Zod Engine is more then just a remake
+		of Z however, it is a fully commercially supported online game that
+		is perpetually running at all times. Players can connect and
+		disconnect at any time.
+
+		The Zod Engine is a MMORTS / RTS style game. In the game you command
+		an army of robots and vehicles to take over neighboring territories
+		in the ultimate goal of destroying all of your enemies. Unlike
+		traditional RTS (Real Time Strategy) games the Zod Engine does not
+		create units from collected resources but instead construction is
+		constant from preset factories scattered throughout the level.
+
+		What is New?
+		The Zod Engine is a multiplayer oriented game where as Z is a single
+		player oriented game. Here you will be able to for the first time do
+		things such as play games against multiple bot players, or play the
+		original levels with friends helping you on the same team. The Zod
+		Engine is cross platform for Linux and Windows and can support any
+		resolution. There are no limits on map size or players per game.
+		The Zod Engine is also in a state of continual development so new
+		features may come at any time with idea's from the players. 
+	</longdescription>
+</pkgmetadata>
+
