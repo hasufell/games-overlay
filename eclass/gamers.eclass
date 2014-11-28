@@ -104,9 +104,9 @@ gamers_prep_vardata() {
 # @DESCRIPTION:
 # Preserve variable game data files such as scores
 # from the live filesystem.
-# Make sure gamers_pkg_preinst() is executed.
 # This must be called after the files are installed to ${D},
 # so usually at the end of src_install().
+# Also make sure gamers_pkg_preinst() is executed.
 # @CODE
 #   options:
 #     -R, -r
