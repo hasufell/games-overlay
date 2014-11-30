@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=ePSXe
+GenericName=Emulator
+Comment=ePSXe PlayStation Emulator
+Categories=Game;
+Exec=epsxe
+Icon=epsxe
+StartupNotify=true
+Terminal=false
+Type=Application
