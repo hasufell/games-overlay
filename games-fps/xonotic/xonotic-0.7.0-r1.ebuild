@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=5
-inherit eutils check-reqs
+inherit eutils check-reqs toolchain-funcs
 
 MY_PN="${PN^}"
 DESCRIPTION="Fork of Nexuiz, Deathmatch FPS based on DarkPlaces, an advanced Quake 1 engine"
@@ -77,6 +77,8 @@ src_prepare() {
 src_compile() {
 	local t="$(use debug && echo debug || echo release)"
 	local i
+
+	tc-export CC CXX LD AR RANLIB
 
 	# use a for-loop wrt bug 473352
 	for i in sv-${t} $(use !dedicated && echo "cl-${t} $(use sdl && echo sdl-${t})") ; do
