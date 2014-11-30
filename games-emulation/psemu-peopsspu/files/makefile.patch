@@ -1,0 +1,51 @@
+--- Makefile.orig	2004-09-19 20:25:26.000000000 +0200
++++ Makefile	2012-01-03 02:56:53.299270036 +0100
+@@ -13,12 +13,9 @@
+ 
+ ##############################################################################
+ 
+-CC = gcc
+-CCFLAGS1 = -fPIC -c -Wall -m486 -O3
+-CCFLAGS2 = -fPIC -c -Wall -m486 -O2 -ffast-math
+-CCFLAGS3 = -fPIC -c -Wall -mpentium -O3 -ffast-math -fomit-frame-pointer
++CC?=gcc
++CFLAGS+=-m32
+ INCLUDE =
+-LINK = gcc
+ OBJ =   spu.o cfg.o dma.o freeze.o psemu.o registers.o zn.o
+ LIB = -lc -lm -L/usr/X11R6/lib -L/usr/lib
+ 
+@@ -26,14 +23,14 @@
+ 	OBJ+= alsa.o
+ 	LIB+= -lasound
+ 	LINKFLAGS = -shared -Wl,-soname,libspuPeopsALSA.so -o libspuPeopsALSA.so.1.0.9
+-	CCFLAGS3+= -DUSEALSA
++	CFLAGS+= -DUSEALSA
+ else
+ 	OBJ+= oss.o
+ 	LINKFLAGS = -shared -Wl,-soname,libspuPeopsOSS.so -o libspuPeopsOSS.so.1.0.9
+ endif
+ 
+ ifeq ($(NOTHREADLIB), TRUE)
+-	CCFLAGS3+= -DNOTHREADLIB
++	CFLAGS+= -DNOTHREADLIB
+ else
+ 	LIB+= -lpthread
+ endif
+@@ -45,14 +42,14 @@
+ ##############################################################################
+ 
+ spuPeopsOSS :	$(OBJ)
+-		$(LINK) $(LINKFLAGS) $(OBJ) $(LIB)
++		$(CC) $(CFLAGS) $(LDFLAGS) $(LINKFLAGS) $(OBJ) $(LIB)
+ 
+ ##############################################################################
+ # 3. GENERAL RULES
+ ##############################################################################
+ 
+ %.o     : %.c
+-	$(CC) $(CCFLAGS3) $(INCLUDE) $<
++	$(CC) $(CFLAGS) -fPIC -c $(INCLUDE) $<
+ 
+ ##############################################################################
+ # 4. SPECIFIC RULES
