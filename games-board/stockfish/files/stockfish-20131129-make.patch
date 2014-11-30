@@ -1,0 +1,295 @@
+diff --git a/stockfish-dd-src/src/Makefile b/stockfish-dd-src/src/Makefile
+index 0a49ac5..0fadf1d 100644
+--- a/stockfish-dd-src/src/Makefile
++++ b/stockfish-dd-src/src/Makefile
+@@ -43,6 +43,9 @@ OBJS = benchmark.o bitbase.o bitboard.o book.o endgame.o evaluate.o main.o \
+ 	material.o misc.o movegen.o movepick.o notation.o pawns.o position.o \
+ 	search.o thread.o timeman.o tt.o uci.o ucioption.o
+ 
++# libraries
++LIBS += -lpthread
++
+ ### ==========================================================================
+ ### Section 2. High-level Configuration
+ ### ==========================================================================
+@@ -50,8 +53,6 @@ OBJS = benchmark.o bitbase.o bitboard.o book.o endgame.o evaluate.o main.o \
+ # flag                --- Comp switch --- Description
+ # ----------------------------------------------------------------------------
+ #
+-# debug = yes/no      --- -DNDEBUG         --- Enable/Disable debug mode
+-# optimize = yes/no   --- (-O3/-fast etc.) --- Enable/Disable optimizations
+ # arch = (name)       --- (-arch)          --- Target architecture
+ # os = (name)         ---                  --- Target operating system
+ # bits = 64/32        --- -DIS_64BIT       --- 64-/32-bit operating system
+@@ -65,9 +66,6 @@ OBJS = benchmark.o bitbase.o bitboard.o book.o endgame.o evaluate.o main.o \
+ # or modifying existing flags, you have to make sure there are no extra spaces
+ # at the end of the line for flag values.
+ 
+-### 2.1. General
+-debug = no
+-optimize = yes
+ 
+ ### 2.2 Architecture specific
+ 
+@@ -200,145 +198,6 @@ endif
+ ### Section 3. Low-level configuration
+ ### ==========================================================================
+ 
+-### 3.1 Selecting compiler (default = gcc)
+-ifeq ($(COMP),)
+-	COMP=gcc
+-endif
+-
+-ifeq ($(COMP),mingw)
+-	comp=mingw
+-	CXX=g++
+-	profile_prepare = gcc-profile-prepare
+-	profile_make = gcc-profile-make
+-	profile_use = gcc-profile-use
+-	profile_clean = gcc-profile-clean
+-endif
+-
+-ifeq ($(COMP),gcc)
+-	comp=gcc
+-	CXX=g++
+-	profile_prepare = gcc-profile-prepare
+-	profile_make = gcc-profile-make
+-	profile_use = gcc-profile-use
+-	profile_clean = gcc-profile-clean
+-endif
+-
+-ifeq ($(COMP),icc)
+-	comp=icc
+-	CXX=icpc
+-	profile_prepare = icc-profile-prepare
+-	profile_make = icc-profile-make
+-	profile_use = icc-profile-use
+-	profile_clean = icc-profile-clean
+-endif
+-
+-ifeq ($(COMP),clang)
+-	comp=clang
+-	CXX=clang++
+-	profile_prepare = gcc-profile-prepare
+-	profile_make = gcc-profile-make
+-	profile_use = gcc-profile-use
+-	profile_clean = gcc-profile-clean
+-endif
+-
+-### 3.2 General compiler settings
+-CXXFLAGS = -Wall -Wcast-qual -fno-exceptions -fno-rtti $(EXTRACXXFLAGS)
+-
+-ifeq ($(comp),gcc)
+-	CXXFLAGS += -ansi -pedantic -Wno-long-long -Wextra -Wshadow
+-endif
+-
+-ifeq ($(comp),mingw)
+-	CXXFLAGS += -Wextra -Wshadow
+-endif
+-
+-ifeq ($(comp),icc)
+-	CXXFLAGS += -diag-disable 1476,10120 -Wcheck -Wabi -Wdeprecated -strict-ansi
+-endif
+-
+-ifeq ($(comp),clang)
+-	CXXFLAGS += -ansi -pedantic -Wno-long-long -Wextra -Wshadow
+-endif
+-
+-ifeq ($(os),osx)
+-	CXXFLAGS += -arch $(arch) -mmacosx-version-min=10.0
+-endif
+-
+-### 3.3 General linker settings
+-LDFLAGS = $(EXTRALDFLAGS)
+-
+-ifeq ($(comp),mingw)
+-	LDFLAGS += -static-libstdc++ -static-libgcc
+-endif
+-
+-### On mingw use Windows threads, otherwise POSIX
+-ifneq ($(comp),mingw)
+-	# On Android Bionic's C library comes with its own pthread implementation bundled in
+-	ifneq ($(arch),armv7)
+-		# Haiku has pthreads in its libroot, so only link it in on other platforms
+-		ifneq ($(UNAME),Haiku)
+-			LDFLAGS += -lpthread
+-		endif
+-	endif
+-endif
+-
+-ifeq ($(os),osx)
+-	LDFLAGS += -arch $(arch) -mmacosx-version-min=10.0
+-endif
+-
+-### 3.4 Debugging
+-ifeq ($(debug),no)
+-	CXXFLAGS += -DNDEBUG
+-else
+-	CXXFLAGS += -g
+-endif
+-
+-### 3.5 Optimization
+-ifeq ($(optimize),yes)
+-
+-	ifeq ($(comp),gcc)
+-		CXXFLAGS += -O3
+-
+-		ifeq ($(os),osx)
+-			ifeq ($(arch),i386)
+-				CXXFLAGS += -mdynamic-no-pic
+-			endif
+-			ifeq ($(arch),x86_64)
+-				CXXFLAGS += -mdynamic-no-pic
+-			endif
+-		endif
+-
+-		ifeq ($(arch),armv7)
+-			CXXFLAGS += -fno-gcse -mthumb -march=armv7-a -mfloat-abi=softfp
+-		endif
+-	endif
+-
+-	ifeq ($(comp),mingw)
+-		CXXFLAGS += -O3
+-	endif
+-
+-	ifeq ($(comp),icc)
+-		ifeq ($(os),osx)
+-			CXXFLAGS += -fast -mdynamic-no-pic
+-		else
+-			CXXFLAGS += -fast
+-		endif
+-	endif
+-
+-	ifeq ($(comp),clang)
+-		### -O4 requires a linker that supports LLVM's LTO
+-		CXXFLAGS += -O3
+-
+-		ifeq ($(os),osx)
+-			ifeq ($(arch),i386)
+-				CXXFLAGS += -mdynamic-no-pic
+-			endif
+-			ifeq ($(arch),x86_64)
+-				CXXFLAGS += -mdynamic-no-pic
+-			endif
+-		endif
+-	endif
+-endif
+ 
+ ### 3.6. Bits
+ ifeq ($(bits),64)
+@@ -365,21 +224,6 @@ ifeq ($(popcnt),yes)
+ 	CXXFLAGS += -msse3 -DUSE_POPCNT
+ endif
+ 
+-### 3.10 Link Time Optimization, it works since gcc 4.5 but not on mingw.
+-### This is a mix of compile and link time options because the lto link phase
+-### needs access to the optimization flags.
+-ifeq ($(comp),gcc)
+-	ifeq ($(optimize),yes)
+-	ifeq ($(debug),no)
+-		GCC_MAJOR := `$(CXX) -dumpversion | cut -f1 -d.`
+-		GCC_MINOR := `$(CXX) -dumpversion | cut -f2 -d.`
+-		ifeq (1,$(shell expr \( $(GCC_MAJOR) \> 4 \) \| \( $(GCC_MAJOR) \= 4 \& $(GCC_MINOR) \>= 5 \)))
+-			CXXFLAGS += -flto
+-			LDFLAGS += $(CXXFLAGS)
+-		endif
+-	endif
+-	endif
+-endif
+ 
+ ### ==========================================================================
+ ### Section 4. Public targets
+@@ -397,7 +241,6 @@ help:
+ 	@echo "signature-build         > Standard build with embedded signature"
+ 	@echo "profile-build           > PGO build"
+ 	@echo "signature-profile-build > PGO build with embedded signature"
+-	@echo "strip                   > Strip executable"
+ 	@echo "install                 > Install executable"
+ 	@echo "clean                   > Clean up"
+ 	@echo ""
+@@ -470,13 +313,9 @@ signature-build: build embed-signature
+ 
+ signature-profile-build: build embed-signature profile-build
+ 
+-strip:
+-	strip $(EXE)
+-
+ install:
+ 	-mkdir -p -m 755 $(BINDIR)
+ 	-cp $(EXE) $(BINDIR)
+-	-strip $(BINDIR)/$(EXE)
+ 
+ clean:
+ 	$(RM) $(EXE) $(EXE).exe *.o .depend *~ core bench.txt *.gcda
+@@ -493,8 +332,6 @@ all: $(EXE) .depend
+ config-sanity:
+ 	@echo ""
+ 	@echo "Config:"
+-	@echo "debug: '$(debug)'"
+-	@echo "optimize: '$(optimize)'"
+ 	@echo "arch: '$(arch)'"
+ 	@echo "os: '$(os)'"
+ 	@echo "bits: '$(bits)'"
+@@ -508,60 +345,12 @@ config-sanity:
+ 	@echo "CXXFLAGS: $(CXXFLAGS)"
+ 	@echo "LDFLAGS: $(LDFLAGS)"
+ 	@echo ""
+-	@echo "Testing config sanity. If this fails, try 'make help' ..."
+-	@echo ""
+-	@test "$(debug)" = "yes" || test "$(debug)" = "no"
+-	@test "$(optimize)" = "yes" || test "$(optimize)" = "no"
+-	@test "$(arch)" = "any" || test "$(arch)" = "x86_64" || test "$(arch)" = "i386" || \
+-	 test "$(arch)" = "ppc64" || test "$(arch)" = "ppc" || test "$(arch)" = "armv7"
+-	@test "$(os)" = "any" || test "$(os)" = "osx"
+-	@test "$(bits)" = "32" || test "$(bits)" = "64"
+-	@test "$(prefetch)" = "yes" || test "$(prefetch)" = "no"
+-	@test "$(bsfq)" = "yes" || test "$(bsfq)" = "no"
+-	@test "$(popcnt)" = "yes" || test "$(popcnt)" = "no"
+-	@test "$(sse)" = "yes" || test "$(sse)" = "no"
+-	@test "$(comp)" = "gcc" || test "$(comp)" = "icc" || test "$(comp)" = "mingw" || test "$(comp)" = "clang"
+ 
+ $(EXE): $(OBJS)
+-	$(CXX) -o $@ $(OBJS) $(LDFLAGS)
+-
+-gcc-profile-prepare:
+-	$(MAKE) ARCH=$(ARCH) COMP=$(COMP) gcc-profile-clean
+-
+-gcc-profile-make:
+-	$(MAKE) ARCH=$(ARCH) COMP=$(COMP) \
+-	EXTRACXXFLAGS='-fprofile-generate' \
+-	EXTRALDFLAGS='-lgcov' \
+-	all
+-
+-gcc-profile-use:
+-	$(MAKE) ARCH=$(ARCH) COMP=$(COMP) \
+-	EXTRACXXFLAGS='-fprofile-use' \
+-	EXTRALDFLAGS='-lgcov' \
+-	all
+-
+-gcc-profile-clean:
+-	@rm -rf *.gcda *.gcno bench.txt
+-
+-icc-profile-prepare:
+-	$(MAKE) ARCH=$(ARCH) COMP=$(COMP) icc-profile-clean
+-	@mkdir profdir
+-
+-icc-profile-make:
+-	$(MAKE) ARCH=$(ARCH) COMP=$(COMP) \
+-	EXTRACXXFLAGS='-prof-gen=srcpos -prof_dir ./profdir' \
+-	all
+-
+-icc-profile-use:
+-	$(MAKE) ARCH=$(ARCH) COMP=$(COMP) \
+-	EXTRACXXFLAGS='-prof_use -prof_dir ./profdir' \
+-	all
+-
+-icc-profile-clean:
+-	@rm -rf profdir bench.txt
++	$(CXX) $(CXXFLAGS) -o $@ $(OBJS) $(LDFLAGS) $(LIBS)
+ 
+ .depend:
+-	-@$(CXX) $(DEPENDFLAGS) -MM $(OBJS:.o=.cpp) > $@ 2> /dev/null
++	-@$(CXX) $(CXXFLAGS) $(DEPENDFLAGS) -MM $(OBJS:.o=.cpp) > $@ 2> /dev/null
+ 
+ -include .depend
+ 
