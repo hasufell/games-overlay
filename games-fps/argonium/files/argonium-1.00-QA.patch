@@ -1,0 +1,72 @@
+commit f1465c4cd45836635a634d77b9921991547327ce
+Author: hasufell <hasufell@gentoo.org>
+Date:   Wed Jun 26 14:16:56 2013 +0200
+
+    QA and build-fix
+    
+    respect CFLAGS and LDFLAGS, but overwrite optimization level,
+    otherwise we'd get segfault
+
+diff --git a/linux/Makefile b/linux/Makefile
+index f266ea8..b7deba1 100644
+--- a/linux/Makefile
++++ b/linux/Makefile
+@@ -48,18 +48,16 @@ CC=gcc
+ BASE_CFLAGS=-Dstricmp=strcasecmp
+ 
+ ifeq ($(ARCH),axp)
+-RELEASE_CFLAGS=$(BASE_CFLAGS) -O6 -ffast-math -funroll-loops \
+-	-fomit-frame-pointer -fexpensive-optimizations
++RELEASE_CFLAGS=$(BASE_CFLAGS) -O0
+ else
+ # RELEASE_CFLAGS for ppc
+ #RELEASE_CFLAGS=$(BASE_CFLAGS) -g -mcpu=powerpc -O6 -ffast-math -funroll-loops \
+ #	-fomit-frame-pointer -fexpensive-optimizations
+-RELEASE_CFLAGS=$(BASE_CFLAGS) -g -march=pentiumpro -O6 -ffast-math -funroll-loops \
+-	-fomit-frame-pointer -fexpensive-optimizations
++RELEASE_CFLAGS=$(BASE_CFLAGS) -O0
+ endif
+ 
+-DEBUG_CFLAGS=$(BASE_CFLAGS) -g
+-LDFLAGS=-ldl -lm
++DEBUG_CFLAGS=$(BASE_CFLAGS) -O0 -g
++LDFLAGS += -ldl -lm
+ SVGALDFLAGS=-lvga -lm
+ XLDFLAGS=-L/usr/X11R6/lib -lX11 -lXext -lXxf86dga
+ XCFLAGS=
+@@ -107,7 +105,7 @@ build_debug:
+ 		$(BUILD_DEBUG_DIR)/ded \
+ 		$(BUILD_DEBUG_DIR)/ref_gl \
+ 		$(BUILD_DEBUG_DIR)/game
+-	$(MAKE) targets BUILDDIR=$(BUILD_DEBUG_DIR) CFLAGS="$(DEBUG_CFLAGS)"
++	$(MAKE) targets BUILDDIR=$(BUILD_DEBUG_DIR) CFLAGS="$(CFLAGS) $(DEBUG_CFLAGS)"
+ 
+ build_release:
+ 	@-mkdir $(BUILD_RELEASE_DIR) \
+@@ -115,7 +113,7 @@ build_release:
+ 		$(BUILD_RELEASE_DIR)/ded \
+ 		$(BUILD_RELEASE_DIR)/ref_gl \
+ 		$(BUILD_RELEASE_DIR)/game
+-	$(MAKE) targets BUILDDIR=$(BUILD_RELEASE_DIR) CFLAGS="$(RELEASE_CFLAGS)"
++	$(MAKE) targets BUILDDIR=$(BUILD_RELEASE_DIR) CFLAGS="$(CFLAGS) $(RELEASE_CFLAGS)"
+ 
+ all: build_debug build_release
+ 
+@@ -493,7 +491,7 @@ GAME_OBJS = \
+ 	$(BUILDDIR)/game/m_flash.o
+ 
+ $(BUILDDIR)/runtime$(ARCH).$(SHLIBEXT) : $(GAME_OBJS)
+-	$(CC) $(CFLAGS) $(SHLIBLDFLAGS) -o $@ $(GAME_OBJS)
++	$(CC) $(CFLAGS) $(LDFLAGS) $(SHLIBLDFLAGS) -o $@ $(GAME_OBJS)
+ 
+ $(BUILDDIR)/game/g_ai.o :        $(GAME_DIR)/g_ai.c
+ 	$(DO_SHLIB_CC)
+@@ -663,7 +661,7 @@ REF_GL_GLX_OBJS = \
+ 	$(BUILDDIR)/ref_gl/gl_glx.o
+ 
+ $(BUILDDIR)/refresh.$(SHLIBEXT) : $(REF_GL_OBJS) $(REF_GL_GLX_OBJS)
+-	$(CC) $(CFLAGS) $(SHLIBLDFLAGS) -o $@ $(REF_GL_OBJS) $(REF_GL_GLX_OBJS) $(GLXLDFLAGS)
++	$(CC) $(CFLAGS) $(LDFLAGS) $(SHLIBLDFLAGS) -o $@ $(REF_GL_OBJS) $(REF_GL_GLX_OBJS) $(GLXLDFLAGS)
+ 
+ $(BUILDDIR)/ref_gl/gl_draw.o :        $(REF_GL_DIR)/gl_draw.c
+ 	$(DO_GL_SHLIB_CC)

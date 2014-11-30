@@ -1,0 +1,25 @@
+commit eee07c8e404342ff077378c208eacd6575efe15d
+Author: hasufell <hasufell@gentoo.org>
+Date:   Wed Jun 26 13:20:05 2013 +0200
+
+    fix compile error
+    
+    static declaration of 'jacket_armor_index' follows non-static declaration
+
+diff --git a/game/g_local.h b/game/g_local.h
+index e732e20..732f169 100644
+--- a/game/g_local.h
++++ b/game/g_local.h
+@@ -459,9 +459,9 @@ extern	spawn_temp_t	st;
+ extern	int	sm_meat_index;
+ extern	int	snd_fry;
+ 
+-extern	int	jacket_armor_index;
+-extern	int	combat_armor_index;
+-extern	int	body_armor_index;
++static	int	jacket_armor_index;
++static	int	combat_armor_index;
++static	int	body_armor_index;
+ 
+ 
+ // means of death

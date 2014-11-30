@@ -1,0 +1,19 @@
+commit 6445e46e95b1009c5976b093a64cd17510bb5a63
+Author: hasufell <hasufell@gentoo.org>
+Date:   Wed Jun 26 13:41:56 2013 +0200
+
+    fix return value of non-void function
+
+diff --git a/linux/snd_linux.c b/linux/snd_linux.c
+index 6641d60..0b91fbb 100644
+--- a/linux/snd_linux.c
++++ b/linux/snd_linux.c
+@@ -54,7 +54,7 @@ qboolean SNDDMA_Init(void)
+ 	extern uid_t saved_euid;
+ 
+ 	if (snd_inited)
+-		return;
++		return 1;
+ 
+ 	if (!snddevice) {
+ 		sndbits = Cvar_Get("sndbits", "16", CVAR_ARCHIVE);
