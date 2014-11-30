@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer>
+		<email>hasufell@posteo.de</email>
+		<name>Julian Ospald</name>
+	</maintainer>
+	<use>
+		<flag name='mixer'>Enable mixer support via
+			<pkg>media-libs/sdl-mixer</pkg></flag>
+	</use>
+	<upstream>
+		<bugs-to>https://github.com/freeserf/freeserf/issues</bugs-to>
+		<remote-id type="github">freeserf/freeserf</remote-id>
+	</upstream>
+</pkgmetadata>
