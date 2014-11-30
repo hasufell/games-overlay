@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit eutils multilib
+inherit eutils multilib toolchain-funcs
 
 DESCRIPTION="P.E.Op.S Sound Emulation (SPU) PSEmu Plugin"
 HOMEPAGE="http://sourceforge.net/projects/peops/"
@@ -28,6 +28,7 @@ QA_PREBUILT="${GAMES_PREFIX}/lib32/psemu/cfg/cfgPeopsOSS
 S="${WORKDIR}"/src
 
 src_compile() {
+	tc-export CC
 	epatch "${FILESDIR}"/makefile.patch
 
 	if use amd64 ; then
