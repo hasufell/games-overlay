@@ -1,0 +1,113 @@
+From b45eec39f94523c5e0b35169989bbab2a5b7e07b Mon Sep 17 00:00:00 2001
+From: hasufell <hasufell@hasufell.de>
+Date: Sat, 15 Nov 2014 19:19:42 +0100
+Subject: [PATCH 1/5] Add configure switch to optionally use system enet
+
+---
+ configure.ac        | 20 +++++++++++++++++++-
+ lib-src/Makefile.am |  5 ++++-
+ src/Makefile.am     | 14 ++++++++++++--
+ 3 files changed, 35 insertions(+), 4 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index 4f93751..a2bca40 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -45,6 +45,8 @@ AM_PROG_CC_C_O
+ AC_PROG_CXX
+ AC_PROG_CPP
+ AC_PROG_RANLIB
++PKG_PROG_PKG_CONFIG
++
+ dnl do not add the AC_PROG_CXX default CXXFLAGS
+ CXXFLAGS="$CXXTMPFLAGS"
+ 
+@@ -367,10 +369,25 @@ else
+ fi
+ 
+ dnl ----------------------------------------------------------
++dnl Decide whether to use system enet
++dnl ----------------------------------------------------------
++
++AC_MSG_CHECKING(whether to use system enet)
++AC_ARG_WITH(system-enet,
++  AS_HELP_STRING(--with-system-enet, Use system enet), system_enet=$withval,
++  system_enet=no
++)
++AM_CONDITIONAL([SYSTEM_ENET], [test "x$system_enet" = xyes])
++AM_COND_IF([SYSTEM_ENET],
++		   PKG_CHECK_MODULES(LIBENET, [libenet], ,AC_MSG_ERROR([libenet not found!])),
++		   AC_CONFIG_SUBDIRS([lib-src/enet]))
++
++
++
++dnl ----------------------------------------------------------
+ dnl Configure libraries
+ dnl ----------------------------------------------------------
+ AC_CONFIG_SUBDIRS(lib-src/zipios++)
+-AC_CONFIG_SUBDIRS(lib-src/enet)
+ 
+ AC_CONFIG_FILES([Makefile m4/Makefile  intl/Makefile 
+            data/Makefile
+@@ -464,6 +481,7 @@ Enigma is now configured
+    Libraries:           $LIBS
+    Linker options:      $LDFLAGS
+    Languages:		$ALL_LINGUAS
++   System enet:		$system_enet
+ 
+ If these values seem to make sense, you can now run make.
+ ])
+diff --git a/lib-src/Makefile.am b/lib-src/Makefile.am
+index 4d2418a..896bfe7 100644
+--- a/lib-src/Makefile.am
++++ b/lib-src/Makefile.am
+@@ -1 +1,4 @@
+-SUBDIRS = oxydlib lua zipios++ enet enigma-core
++SUBDIRS = oxydlib lua zipios++ enigma-core
++if !SYSTEM_ENET
++SUBDIRS += enet
++endif
+diff --git a/src/Makefile.am b/src/Makefile.am
+index ecdb699..7c7cad2 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -17,10 +17,15 @@ CXXFLAGS = @CXXFLAGS@\
+ 	-I$(top_builddir)/lib-src/zipios++ \
+ 	-I$(top_srcdir)/lib-src/lua \
+ 	-I$(top_srcdir)/lib-src/enigma-core \
+-	-I$(top_srcdir)/lib-src/enet/include \
+ 	-I$(top_srcdir)/lib-src \
+ 	-I$(top_builddir)/intl @SDL_CFLAGS@
+ 
++if SYSTEM_ENET
++CXXFLAGS += $(LIBENET_CFLAGS)
++else
++CXXFLAGS += -I$(top_srcdir)/lib-src/enet/include
++endif
++
+ 
+ enigma_SOURCES = 		\
+ 	actors.hh 		\
+@@ -442,13 +447,18 @@ enigma_LDADD = \
+ 	@LIBINTL@ \
+ 	$(top_builddir)/lib-src/enigma-core/libecl.a \
+ 	$(top_builddir)/lib-src/lua/liblua.a \
+-	$(top_builddir)/lib-src/enet/libenet.a \
+ 	$(top_builddir)/lib-src/oxydlib/liboxyd.a \
+ 	$(top_builddir)/lib-src/zipios++/src/libzipios.a \
+ 	-lz \
+ 	$(mingw_ldadd) \
+ 	@SDL_LIBS@
+ 
++if SYSTEM_ENET
++enigma_LDADD += $(LIBENET_LIBS)
++else
++enigma_LDADD += $(top_builddir)/lib-src/enet/libenet.a
++endif
++
+ # Rule for creating Lua interfaces from package descriptions using 'tolua'
+ TOLUA=@TOLUA@
+ .PHONY: tolua
+-- 
+2.1.3
+

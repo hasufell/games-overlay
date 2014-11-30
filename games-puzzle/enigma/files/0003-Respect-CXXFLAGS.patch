@@ -1,0 +1,25 @@
+From 722dfe71139f7255d2f389c3d5cf10d936225647 Mon Sep 17 00:00:00 2001
+From: hasufell <hasufell@hasufell.de>
+Date: Sat, 15 Nov 2014 20:48:59 +0100
+Subject: [PATCH 2/4] Respect CXXFLAGS
+
+---
+ configure.ac | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index a2bca40..fdd87df 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -294,7 +294,7 @@ if test "x$enable_optimize" = xyes; then
+ 	CXXFLAGS="$CXXFLAGS -O2 -ffast-math -fomit-frame-pointer"
+ 	AC_MSG_RESULT(yes)
+ else
+-	CXXFLAGS="$CXXFLAGS -g"
++	CXXFLAGS="$CXXFLAGS"
+ 	AC_MSG_RESULT(no)
+ fi
+ 
+-- 
+2.1.3
+

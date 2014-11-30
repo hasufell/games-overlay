@@ -1,0 +1,27 @@
+From 9a2f4cdceea71c02c23479f8584babe55520fc49 Mon Sep 17 00:00:00 2001
+From: hasufell <hasufell@hasufell.de>
+Date: Sat, 15 Nov 2014 20:49:53 +0100
+Subject: [PATCH 4/4] Fix localedir destination
+
+Since we set datadir to a custom location different from
+datarootdir.
+---
+ po/Makefile.in.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/po/Makefile.in.in b/po/Makefile.in.in
+index 84b6e2b..d81763f 100644
+--- a/po/Makefile.in.in
++++ b/po/Makefile.in.in
+@@ -24,7 +24,7 @@ builddir = @builddir@
+ prefix = @prefix@
+ exec_prefix = @exec_prefix@
+ datarootdir = @datarootdir@
+-datadir = @datadir@
++datadir = @datarootdir@
+ localedir = $(datadir)/locale
+ gettextsrcdir = $(datadir)/gettext/po
+ 
+-- 
+2.1.3
+

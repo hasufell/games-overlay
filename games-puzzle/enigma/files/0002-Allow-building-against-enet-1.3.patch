@@ -1,0 +1,151 @@
+From e216995b4d784e7fae108ebb522458293bcc645c Mon Sep 17 00:00:00 2001
+From: hasufell <hasufell@hasufell.de>
+Date: Sat, 15 Nov 2014 20:18:46 +0100
+Subject: [PATCH 1/4] Allow building against enet >= 1.3
+
+Unfortunately we had to add a bridge header, because old enet
+has not defined ENET_VERSION, but uses a the ENetVersion enum.
+To avoid #ifdef complexity we defined the ENET_VER_EQ_GT_13 macro.
+
+This patch was first seen in
+http://cvsweb.openbsd.org/cgi-bin/cvsweb/ports/games/enigma/patches/
+---
+ src/Makefile.am |  1 +
+ src/client.cc   |  9 ++++++++-
+ src/enet_ver.hh | 28 ++++++++++++++++++++++++++++
+ src/netgame.cc  | 12 ++++++++++++
+ 4 files changed, 49 insertions(+), 1 deletion(-)
+ create mode 100644 src/enet_ver.hh
+
+diff --git a/src/Makefile.am b/src/Makefile.am
+index 7c7cad2..826b5b6 100644
+--- a/src/Makefile.am
++++ b/src/Makefile.am
+@@ -48,6 +48,7 @@ enigma_SOURCES = 		\
+ 	d_engine.hh		\
+ 	enigma.cc 		\
+ 	enigma.hh		\
++	enet_ver.hh		\
+ 	errors.hh		\
+ 	file.cc 		\
+ 	file.hh 		\
+diff --git a/src/client.cc b/src/client.cc
+index 3e50a19..b380db3 100644
+--- a/src/client.cc
++++ b/src/client.cc
+@@ -42,6 +42,7 @@
+ #include "ecl_sdl.hh"
+ 
+ #include "enet/enet.h"
++#include "enet_ver.hh"
+ 
+ #include <cctype>
+ #include <cstring>
+@@ -141,9 +142,11 @@ bool Client::network_start()
+ {
+     if (m_network_host)
+         return true;
+-
+     m_network_host = enet_host_create (NULL,
+                                        1 /* only allow 1 outgoing connection */,
++#ifdef ENET_VER_EQ_GT_13
++                                       2 /* 2 channels are sufficient */,
++#endif
+                                        57600 / 8 /* 56K modem with 56 Kbps downstream bandwidth */,
+                                        14400 / 8 /* 56K modem with 14 Kbps upstream bandwidth */);
+ 
+@@ -164,7 +167,11 @@ bool Client::network_start()
+     sv_address.port = 12345;
+ 
+     /* Initiate the connection, allocating the two channels 0 and 1. */
++#ifdef ENET_VER_EQ_GT_13
++    m_server = enet_host_connect (m_network_host, &sv_address, 2, 57600);
++#else
+     m_server = enet_host_connect (m_network_host, &sv_address, 2);
++#endif
+ 
+     if (m_server == NULL) {
+        fprintf (stderr,
+diff --git a/src/enet_ver.hh b/src/enet_ver.hh
+new file mode 100644
+index 0000000..6e3eb3d
+--- /dev/null
++++ b/src/enet_ver.hh
+@@ -0,0 +1,28 @@
++/*
++ * Copyright (C) 2004 Daniel Heck
++ * Copyright (C) 2006,2007,2008,2009,2010 Ronald Lamprecht
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License along
++ * with this program; if not, write to the Free Software Foundation, Inc.,
++ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
++ *
++ */
++
++#include "enet/enet.h"
++
++
++#ifdef ENET_VERSION /* old enet does not have this macro */
++#if ENET_VERSION >= ENET_VERSION_CREATE(1, 3, 0)
++#define ENET_VER_EQ_GT_13
++#endif
++#endif
+diff --git a/src/netgame.cc b/src/netgame.cc
+index e0e7316..4a49294 100644
+--- a/src/netgame.cc
++++ b/src/netgame.cc
+@@ -25,6 +25,7 @@
+ #include "server.hh"
+ 
+ #include "enet/enet.h"
++#include "enet_ver.hh"
+ 
+ #include "SDL.h"
+ #include <string>
+@@ -155,7 +156,11 @@ void netgame::Start ()
+     network_address.host = ENET_HOST_ANY;
+     network_address.port = 12345;
+ 
++#ifdef ENET_VER_EQ_GT_13
++    network_host = enet_host_create (&network_address, 1, 0, 0, 0);
++#else
+     network_host = enet_host_create (&network_address, 1, 0, 0);
++#endif
+     if (network_host == NULL) {
+         fprintf (stderr, 
+                  "SV: An error occurred while trying to create an ENet server host.\n");
+@@ -240,6 +245,9 @@ void netgame::Join (std::string hostname, int port)
+     ENetHost *m_network_host;
+     m_network_host = enet_host_create (NULL,
+                                        1 /* only allow 1 outgoing connection */,
++#ifdef ENET_VER_EQ_GT_13
++                                       2 /* 2 channels are sufficient */,
++#endif
+                                        57600 / 8 /* 56K modem with 56 Kbps downstream bandwidth */,
+                                        14400 / 8 /* 56K modem with 14 Kbps upstream bandwidth */);
+ 
+@@ -260,7 +268,11 @@ void netgame::Join (std::string hostname, int port)
+ 
+     /* Initiate the connection, allocating the two channels 0 and 1. */
+     int numchannels = 2;
++#ifdef ENET_VER_EQ_GT_13
++    m_server = enet_host_connect (m_network_host, &sv_address, numchannels, 57600);
++#else
+     m_server = enet_host_connect (m_network_host, &sv_address, numchannels);
++#endif
+     
+     if (m_server == NULL) {
+         fprintf (stderr, 
+-- 
+2.1.3
+

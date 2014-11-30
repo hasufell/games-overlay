@@ -1,0 +1,30 @@
+From 070beaef69d758ad471d4b3048bdd42be68909f1 Mon Sep 17 00:00:00 2001
+From: hasufell <hasufell@hasufell.de>
+Date: Sat, 15 Nov 2014 20:49:20 +0100
+Subject: [PATCH 3/4] Don't build documentation
+
+---
+ Makefile.am | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index 2051a76..149f7c0 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -3,12 +3,9 @@
+ #   tools -> lib-src/lua
+ #   src   -> tools, lib-src
+ #
+-SUBDIRS = m4 lib-src tools intl src data doc po etc
++SUBDIRS = m4 lib-src tools intl src data po etc
+ EXTRA_DIST = enigma CHANGES ACKNOWLEDGEMENTS
+ 
+-docdir = @datadir@/doc/enigma
+-doc_DATA = README CHANGES COPYING ACKNOWLEDGEMENTS
+-
+ ACLOCAL_AMFLAGS = -I m4
+ 
+ .PHONY: tolua
+-- 
+2.1.3
+
