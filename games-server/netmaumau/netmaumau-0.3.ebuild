@@ -4,27 +4,51 @@
 
 EAPI=5
 
+inherit flag-o-matic autotools-utils eutils libtool
+
 DESCRIPTION="Server for the popular card game Mau Mau"
 HOMEPAGE="http://sourceforge.net/projects/netmaumau"
 SRC_URI="mirror://sourceforge/netmaumau/${P}.tar.xz"
 
-LICENSE="GPL-3"
+LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="-static-libs client -doc"
 
-RDEPEND="dev-libs/popt"
+RDEPEND=">=dev-libs/popt-1.10
+	doc? ( >=app-doc/doxygen-1.8.0 )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
+src_prepare() {
+    elibtoolize
+}
+
 src_configure() {
-	econf \
+	append-cppflags -D_GLIBCXX_VISIBILITY=0 -DNDEBUG -Wformat -Wformat-security
+    append-cflags -fstrict-aliasing -fstack-protector --param=ssp-buffer-size=4
+    append-cxxflags -fstrict-aliasing -fstack-protector --param=ssp-buffer-size=4
+    append-ldflags -Wl,-z,relro -Wl,--hash-style=gnu
+    local myeconfargs=(
+        $(use_enable client)
+        $(use_enable doc apidoc)
+        --enable-ai-name="Gentoo Hero"
 		--docdir=/usr/share/doc/${PF}
+    )
+    autotools-utils_src_configure
+}
+
+src_compile() {
+    autotools-utils_src_compile
+}
+
+src_install() {
+    autotools-utils_src_install
 }
 
 pkg_postinst() {
 	elog "This is only the server part, you might want to install"
 	elog "the client too:"
 	elog "  games-board/netmaumau"
+	elog "For a server only install remove the USE-flag 'client'"
 }
-
