@@ -5,7 +5,7 @@
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
 DISTUTILS_IN_SOURCE_BUILD=1
-inherit eutils toolchain-funcs python-r1 versionator gnome2-utils games distutils-r1
+inherit eutils toolchain-funcs python-r1 versionator gnome2-utils distutils-r1
 
 DESCRIPTION="Visual novel engine written in python"
 HOMEPAGE="http://www.renpy.org"
@@ -36,7 +36,6 @@ DEPEND="${RDEPEND}
 S=${WORKDIR}/${P}-source
 
 pkg_setup() {
-	games_pkg_setup
 	export CFLAGS="${CFLAGS} $($(tc-getPKG_CONFIG) --cflags fribidi)"
 }
 
@@ -64,7 +63,6 @@ python_install() {
 	distutils-r1_python_install --install-lib="$(python_get_sitedir)/renpy${MYSLOT}"
 
 	cd "${S}" || die
-	python_scriptinto "${GAMES_BINDIR}"
 	python_newscript renpy.py ${PN}-${SLOT}
 
 	python_moduleinto renpy${MYSLOT}
@@ -86,17 +84,13 @@ python_install_all() {
 	if use doc; then
 		dohtml -r doc
 	fi
-
-	prepgamesdirs
 }
 
 pkg_preinst() {
-	games_pkg_preinst
 	use development && gnome2_icon_savelist
 }
 
 pkg_postinst() {
-	games_pkg_postinst
 	use development && gnome2_icon_cache_update
 
 	einfo "running: eselect renpy update --if-unset"
