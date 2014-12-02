@@ -13,7 +13,7 @@ SRC_URI="mirror://sourceforge/netmaumau/${P}.tar.xz"
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="-static-libs client -doc"
+IUSE="-static-libs +client -doc"
 
 RDEPEND=">=dev-libs/popt-1.10
 	doc? ( >=app-doc/doxygen-1.8.0 )"

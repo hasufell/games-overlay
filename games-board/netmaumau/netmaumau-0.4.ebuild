@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit qmake-utils
+inherit qmake-utils eutils
 
 MY_P=nmm-qt-client${PV}
 
