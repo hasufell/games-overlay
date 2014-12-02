@@ -25,15 +25,12 @@ src_prepare() {
 }
 
 src_configure() {
-	append-cppflags -D_GLIBCXX_VISIBILITY=0 -DNDEBUG -Wformat -Wformat-security
-    append-cflags -fstrict-aliasing -fstack-protector --param=ssp-buffer-size=4
-    append-cxxflags -fstrict-aliasing -fstack-protector --param=ssp-buffer-size=4
-    append-ldflags -Wl,-z,relro -Wl,--hash-style=gnu
+    append-cppflags -DNDEBUG
     local myeconfargs=(
         $(use_enable client)
         $(use_enable doc apidoc)
         --enable-ai-name="Gentoo Hero"
-		--docdir=/usr/share/doc/${PF}
+	--docdir=/usr/share/doc/${PF}
     )
     autotools-utils_src_configure
 }

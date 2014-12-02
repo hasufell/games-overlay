@@ -21,7 +21,7 @@ RDEPEND="
 	dev-qt/qtcore:4
 	dev-qt/qtgui:4
 	dev-qt/qtsvg:4
-	>=games-server/netmaumau-0.4"
+	>=games-server/netmaumau-0.4[client]"
 
 DEPEND="${RDEPEND}"
 
@@ -38,10 +38,8 @@ src_configure() {
 
 src_install() {
 	dobin nmm-qt-client
-	insinto /usr/share/icons/hicolor/256x256/apps
-	doins nmm_qt_client.png
-	insinto /usr/share/applications
-	doins nmm_qt_client.desktop
+	doicon -s 256 nmm_qt_client.png
+	domenu nmm_qt_client.desktop
 	insinto /usr/share/nmm-qt-client
 	doins *.qm
 }
