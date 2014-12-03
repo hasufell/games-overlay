@@ -36,8 +36,9 @@ src_configure() {
 	econf \
 		--enable-client \
 		$(use_enable doc apidoc) \
-		--enable-ai-name="Gentoo Hero"
-		--docdir=/usr/share/doc/${PF}
+		--enable-ai-name="Gentoo Hero" \
+		--docdir=/usr/share/doc/${PF} \
+		$(use_enable static-libs static)
 }
 
 src_install() {
