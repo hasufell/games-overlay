@@ -18,6 +18,7 @@ IUSE="-static-libs +client -doc"
 RDEPEND=">=dev-libs/popt-1.10
 	doc? ( >=app-doc/doxygen-1.8.0 )"
 DEPEND="${RDEPEND}
+	sys-apps/help2man
 	virtual/pkgconfig"
 
 src_prepare() {
