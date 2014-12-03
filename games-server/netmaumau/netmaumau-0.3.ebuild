@@ -4,51 +4,50 @@
 
 EAPI=5
 
-inherit flag-o-matic autotools-utils eutils libtool
+inherit autotools flag-o-matic eutils libtool vcs-snapshot
 
 DESCRIPTION="Server for the popular card game Mau Mau"
 HOMEPAGE="http://sourceforge.net/projects/netmaumau"
-SRC_URI="mirror://sourceforge/netmaumau/${P}.tar.xz"
+SRC_URI="https://github.com/velnias75/NetMauMau/archive/V${PV}.tar.gz -> ${P}-server.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="-static-libs client -doc"
+IUSE="doc static-libs"
 
-RDEPEND=">=dev-libs/popt-1.10
-	doc? ( >=app-doc/doxygen-1.8.0 )"
+RDEPEND="
+	>=dev-libs/popt-1.10
+"
 DEPEND="${RDEPEND}
-	virtual/pkgconfig"
+	sys-apps/help2man
+	virtual/pkgconfig
+	doc? ( >=app-doc/doxygen-1.8.0 )
+"
+
+S=${WORKDIR}/${P}-server
 
 src_prepare() {
-    elibtoolize
+	eautoreconf
 }
 
 src_configure() {
-	append-cppflags -D_GLIBCXX_VISIBILITY=0 -DNDEBUG -Wformat -Wformat-security
-    append-cflags -fstrict-aliasing -fstack-protector --param=ssp-buffer-size=4
-    append-cxxflags -fstrict-aliasing -fstack-protector --param=ssp-buffer-size=4
-    append-ldflags -Wl,-z,relro -Wl,--hash-style=gnu
-    local myeconfargs=(
-        $(use_enable client)
-        $(use_enable doc apidoc)
-        --enable-ai-name="Gentoo Hero"
-		--docdir=/usr/share/doc/${PF}
-    )
-    autotools-utils_src_configure
-}
+	append-cppflags -DNDEBUG
 
-src_compile() {
-    autotools-utils_src_compile
+	econf \
+		--enable-client \
+		$(use_enable doc apidoc) \
+		--enable-ai-name="Gentoo Hero"
+		--docdir=/usr/share/doc/${PF}
 }
 
 src_install() {
-    autotools-utils_src_install
+	default
+	prune_libtool_files
 }
 
 pkg_postinst() {
 	elog "This is only the server part, you might want to install"
 	elog "the client too:"
 	elog "  games-board/netmaumau"
-	elog "For a server only install remove the USE-flag 'client'"
 }
+
