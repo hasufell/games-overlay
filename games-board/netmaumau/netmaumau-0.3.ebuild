@@ -4,13 +4,13 @@
 
 EAPI=5
 
-inherit qmake-utils
+inherit qmake-utils eutils vcs-snapshot
 
 MY_P=nmm-qt-client${PV}
 
 DESCRIPTION="Client for games-server/netmaumau, the popular card game Mau Mau"
 HOMEPAGE="http://sourceforge.net/projects/netmaumau"
-SRC_URI="mirror://sourceforge/netmaumau/${MY_P}.tar.gz"
+SRC_URI="https://github.com/velnias75/NetMauMau-Qt-Client/archive/V${PV}.tar.gz -> ${P}-client.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
@@ -21,28 +21,24 @@ RDEPEND="
 	dev-qt/qtcore:4
 	dev-qt/qtgui:4
 	dev-qt/qtsvg:4
-	>=games-server/netmaumau-0.3"
-
+	~games-server/netmaumau-0.3"
 DEPEND="${RDEPEND}"
 
-S=${WORKDIR}/${MY_P}
-
-src_prepare() {
-    epatch "${FILESDIR}/netmaumau-0.3.patch"
-}
+S=${WORKDIR}/${P}-client
 
 src_configure() {
 	eqmake4
-	lrelease src.pro
+	lrelease src/src.pro
+
+	sed -i \
+		-e 's/unix:QMAKE_CXXFLAGS += .*$/unix:QMAKE_CXXFLAGS += -fstrict-aliasing/' src/src.pro || die
 }
 
 src_install() {
-	dobin nmm-qt-client
-	insinto /usr/share/icons/hicolor/256x256/apps
-	doins nmm_qt_client.png
-	insinto /usr/share/applications
-	doins nmm_qt_client.desktop
+	dobin src/nmm-qt-client
+	doicon -s 256 src/nmm_qt_client.png
+	domenu nmm_qt_client.desktop
 	insinto /usr/share/nmm-qt-client
-	doins *.qm
+	doins src/*.qm
 }
 
