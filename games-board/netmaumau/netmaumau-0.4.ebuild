@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit qmake-utils
+inherit qmake-utils eutils
 
 MY_P=nmm-qt-client${PV}
 
@@ -21,14 +21,14 @@ RDEPEND="
 	dev-qt/qtcore:4
 	dev-qt/qtgui:4
 	dev-qt/qtsvg:4
-	>=games-server/netmaumau-0.3"
+	>=games-server/netmaumau-0.4[client]"
 
 DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/${MY_P}
 
 src_prepare() {
-    epatch "${FILESDIR}/netmaumau-0.3.patch"
+    epatch "${FILESDIR}/netmaumau-0.4.patch"
 }
 
 src_configure() {
@@ -38,10 +38,8 @@ src_configure() {
 
 src_install() {
 	dobin nmm-qt-client
-	insinto /usr/share/icons/hicolor/256x256/apps
-	doins nmm_qt_client.png
-	insinto /usr/share/applications
-	doins nmm_qt_client.desktop
+	doicon -s 256 nmm_qt_client.png
+	domenu nmm_qt_client.desktop
 	insinto /usr/share/nmm-qt-client
 	doins *.qm
 }

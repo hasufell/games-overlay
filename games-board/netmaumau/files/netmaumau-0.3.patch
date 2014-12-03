@@ -1,0 +1,30 @@
+diff -uNr nmm-qt-client0.3.orig/nmm_qt_client.desktop nmm-qt-client0.3/nmm_qt_client.desktop
+--- nmm-qt-client0.3.orig/nmm_qt_client.desktop	1970-01-01 01:00:00.000000000 +0100
++++ nmm-qt-client0.3/nmm_qt_client.desktop	2014-12-01 06:17:16.912135403 +0100
+@@ -0,0 +1,12 @@
++[Desktop Entry]
++Name=NetMauMau Qt Client
++GenericName=Client for NetMauMau
++GenericName[de]=Klient für NetMauMau
++Comment=A proof of concept client for NetMauMau
++Comment[de]=Machbarkeitsstudienklient für NetMauMau
++Exec=nmm-qt-client
++Terminal=false
++Icon=nmm_qt_client
++Type=Application
++Version=1.0
++Categories=Qt;Game;CardGame;
+diff -uNr nmm-qt-client0.3.orig/src.pro nmm-qt-client0.3/src.pro
+--- nmm-qt-client0.3.orig/src.pro	2014-11-29 04:23:43.000000000 +0100
++++ nmm-qt-client0.3/src.pro	2014-12-01 06:16:12.027681628 +0100
+@@ -26,9 +26,7 @@
+      DEFINES += NDEBUG _GLIBCXX_VISIBILITY=0 QT_NO_DEBUG_OUTPUT
+      unix:INCLUDEPATH += "/usr/include/netmaumau"
+      win32:INCLUDEPATH += "/usr/i686-pc-mingw32/usr/include/netmaumau"
+-     unix:QMAKE_CXXFLAGS += -O3 -g -fno-omit-frame-pointer -march=native -fstrict-aliasing -Wformat \
+-     -Wformat-security -Wno-packed-bitfield-compat -Wsuggest-attribute=pure \
+-     -Wsuggest-attribute=const -Wsuggest-attribute=noreturn -Wdisabled-optimization
++     unix:QMAKE_CXXFLAGS += -fomit-frame-pointer -fstrict-aliasing
+      win32:QMAKE_CXXFLAGS += -O2 -fomit-frame-pointer -fstrict-aliasing
+      win32:LIBS    += /usr/i686-pc-mingw32/usr/lib/libnetmaumauclient.a \
+                 /usr/i686-pc-mingw32/usr/lib/libnetmaumaucommon.a
