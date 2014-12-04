@@ -19,8 +19,8 @@ LICENSE="GPL-2 Apache-2.0 FDL-1.3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="server"
-QA_FLAGS_IGNORED=/usr/bin/hwengine # pascal sucks
-QA_PRESTRIPPED=/usr/bin/hwengine # pascal sucks
+QA_FLAGS_IGNORED=/usr/bin/hwengine
+QA_PRESTRIPPED=/usr/bin/hwengine
 
 CDEPEND="
 	dev-lang/lua
