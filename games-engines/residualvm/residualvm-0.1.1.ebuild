@@ -61,7 +61,7 @@ src_compile() {
 src_install() {
 	dobin residualvm
 
-	insinto "${GAMES_DATADIR}/${PN}"
+	insinto /usr/share/${PN}
 	doins gui/themes/modern.zip dists/engine-data/residualvm-grim-patch.lab
 
 	doicon -s scalable icons/${PN}.svg
