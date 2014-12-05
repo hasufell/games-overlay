@@ -39,7 +39,6 @@ DEPEND="${RDEPEND}
 S=${WORKDIR}/${MY_P}
 
 src_prepare() {
-	cp "${FILESDIR}"/premake4.lua . || die
 	# fix broken sdl2 detection
 	# http://forums.te4.org/viewtopic.php?f=42&t=38714
 	sed -i \
