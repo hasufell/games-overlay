@@ -138,6 +138,10 @@ src_install() {
 
 }
 
+pkg_preinst() {
+	gnome2_icon_savelist
+}
+
 pkg_postinst() {
 	einfo
 	elog 'Note about Configuration:'
@@ -150,6 +154,10 @@ pkg_postinst() {
 	elog 'Some graphics cards may require setting Max Lights to 1.'
 	einfo
 
+	gnome2_icon_cache_update
+}
+
+pkg_postrm() {
 	gnome2_icon_cache_update
 }
 

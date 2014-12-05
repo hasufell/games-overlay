@@ -111,10 +111,18 @@ src_install() {
 	fowners sauerbraten:sauerbraten "${STATEDIR}"
 }
 
+pkg_preinst() {
+	gnome2_icon_savelist
+}
+
 pkg_postinst() {
 	gnome2_icon_cache_update
 
 	elog "If you plan to use map editor feature copy all map data from ${DATADIR}"
 	elog "to corresponding folder in your HOME/.${PN}"
+}
+
+pkg_postrm() {
+	gnome2_icon_cache_update
 }
 

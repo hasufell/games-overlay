@@ -39,8 +39,16 @@ src_configure() {
 	cmake-utils_src_configure
 }
 
+pkg_preinst() {
+	gnome2_icon_savelist
+}
+
 pkg_postinst() {
 	elog "Enabling OpenGL in-game seems to cause segfaults/crashes."
+	gnome2_icon_cache_update
+}
+
+pkg_postrm() {
 	gnome2_icon_cache_update
 }
 
