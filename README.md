@@ -17,3 +17,16 @@ With paludis: see [Paludis repository configuration](http://paludis.exherbo.org/
 With layman:
 ```layman -f -o https://raw.github.com/hasufell/games-overlay/master/repository.xml -a games-overlay``` or ```layman -a games-overlay```
 
+### Signature verification
+
+All commits on the first parent (at least) are signed by me.
+You can verify the repository via:
+```
+[ -z "$(git show -q --pretty="format:%G?" $(git rev-list --first-parent master) | grep -v G)" ] && echo "verification success" || echo "verification failure"
+```
+
+If the verification failed, you can examine which commits are not signed
+via
+```
+git show -q --pretty="format:%h %an %G?" $(git rev-list --first-parent master) | grep '.* [NBU]$'
+```
