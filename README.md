@@ -25,7 +25,7 @@ You can verify the repository via:
 [ -z "$(git show -q --pretty="format:%G?" $(git rev-list --first-parent master) | grep -v G)" ] && echo "verification success" || echo "verification failure"
 ```
 
-If the verification failed, you can examine which commits are not signed
+If the verification failed, you can examine which commits did
 via
 ```
 git show -q --pretty="format:%h %an %G?" $(git rev-list --first-parent master) | grep '.* [NBU]$'
