@@ -120,7 +120,7 @@ src_configure() {
 		$(use_enable nls) \
 		$(use_with readline) \
 		$(use_enable sound sdl-mixer) \
-		--enable-fcmp="$(usex modpack "gtk2" "no")" \
+		--enable-fcmp="$(usex modpack "gtk3" "no")" \
 		--enable-sys-lua \
 		${myopts} \
 		--enable-client="${myclient}"
