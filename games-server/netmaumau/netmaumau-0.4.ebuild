@@ -8,7 +8,7 @@ inherit autotools flag-o-matic eutils libtool vcs-snapshot
 
 DESCRIPTION="Server for the popular card game Mau Mau"
 HOMEPAGE="http://sourceforge.net/projects/netmaumau"
-SRC_URI="https://github.com/velnias75/NetMauMau/archive/V${PV}.tar.gz -> ${P}-server.tar.xz"
+SRC_URI="https://github.com/velnias75/NetMauMau/archive/V${PV}.tar.gz -> ${P}-server.tar.gz"
 
 LICENSE="LGPL-3"
 SLOT="0"
