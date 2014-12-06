@@ -31,8 +31,8 @@ src_configure() {
 	lrelease src/src.pro
 
 	sed -i \
-                -e 's/unix:QMAKE_CXXFLAGS += .*$/unix:QMAKE_CXXFLAGS += -fstrict-aliasing/' \
-                -e 's/^[[:space:]]*-Wformat.*$//' -e 's/^[[:space:]]*-Wsugg.*$//' src/src.pro || die
+		-e 's/unix:QMAKE_CXXFLAGS += .*$/unix:QMAKE_CXXFLAGS += -fstrict-aliasing/' \
+		-e 's/^[[:space:]]*-Wformat.*$//' -e 's/^[[:space:]]*-Wsugg.*$//' src/src.pro || die
 }
 
 src_install() {
