@@ -68,10 +68,18 @@ src_install() {
 		DOCUMENTATION.md Lua-API.md
 }
 
+pkg_preinst() {
+	gnome2_icon_savelist
+}
+
 pkg_postinst() {
 	gnome2_icon_cache_update
 
 	elog "optional dependencies:"
 	elog "  media-gfx/nvidia-cg-toolkit (fallback renderer if OpenGL fails)"
+}
+
+pkg_postrm() {
+	gnome2_icon_cache_update
 }
 

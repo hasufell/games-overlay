@@ -48,6 +48,10 @@ src_install() {
 	dodoc NEWS README INSTALL AUTHORS
 }
 
+pkg_preinst() {
+	gnome2_icon_savelist
+}
+
 pkg_postinst() {
 	elog "You have to set \"data_dir = /my/path/to/synd-data\""
 	elog "in \"~/.${PN}/${PN}.ini\"."
@@ -57,6 +61,10 @@ pkg_postinst() {
 		ewarn "game speed is higher."
 	fi
 
+	gnome2_icon_cache_update
+}
+
+pkg_postrm() {
 	gnome2_icon_cache_update
 }
 

@@ -95,11 +95,19 @@ src_install() {
 	fi
 }
 
+pkg_preinst() {
+	gnome2_icon_savelist
+}
+
 pkg_postinst() {
 	einfo
 	elog "This is just the engine, you will need doom resource files in order to play."
 	elog "Check: http://odamex.net/wiki/FAQ#What_data_files_are_required.3F"
 	einfo
+	gnome2_icon_cache_update
+}
+
+pkg_postrm() {
 	gnome2_icon_cache_update
 }
 

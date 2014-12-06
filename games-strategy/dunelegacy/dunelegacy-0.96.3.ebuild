@@ -41,6 +41,10 @@ src_install() {
 	make_desktop_entry ${PN} "Dune Legacy"
 }
 
+pkg_preinst() {
+	gnome2_icon_savelist
+}
+
 pkg_postinst() {
 	gnome2_icon_cache_update
 
@@ -66,5 +70,9 @@ pkg_postinst() {
 	elog
 	elog "For playing in german or french you need additionally"
 	elog "GERMAN.PAK or FRENCH.PAK."
+}
+
+pkg_postrm() {
+	gnome2_icon_cache_update
 }
 
