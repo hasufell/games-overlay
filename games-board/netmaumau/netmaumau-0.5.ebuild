@@ -21,7 +21,7 @@ RDEPEND="
 	dev-qt/qtcore:4
 	dev-qt/qtgui:4
 	dev-qt/qtsvg:4
-	~games-server/netmaumau-0.3"
+	>=games-server/netmaumau-0.5"
 DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/${P}-client
@@ -31,8 +31,8 @@ src_configure() {
 	lrelease src/src.pro
 
 	sed -i \
-                -e 's/unix:QMAKE_CXXFLAGS += .*$/unix:QMAKE_CXXFLAGS += -fstrict-aliasing/' \
-                -e 's/^[[:space:]]*-Wformat.*$//' -e 's/^[[:space:]]*-Wsugg.*$//' src/src.pro || die
+		-e 's/unix:QMAKE_CXXFLAGS += .*$/unix:QMAKE_CXXFLAGS += -fstrict-aliasing/' \
+		-e 's/^[[:space:]]*-Wformat.*$//' -e 's/^[[:space:]]*-Wsugg.*$//' src/src.pro || die
 }
 
 src_install() {
