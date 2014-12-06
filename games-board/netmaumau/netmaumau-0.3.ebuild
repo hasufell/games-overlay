@@ -21,7 +21,7 @@ RDEPEND="
 	dev-qt/qtcore:4
 	dev-qt/qtgui:4
 	dev-qt/qtsvg:4
-	~games-server/netmaumau-0.3"
+	games-server/netmaumau:0/0"
 DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/${P}-client
