@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit multilib pax-utils toolchain-funcs
+inherit eutils multilib pax-utils toolchain-funcs
 
 MY_PN="t-engine4"
 MY_PV="${PV/_/}"
@@ -99,5 +99,7 @@ src_install() {
 	insinto "/usr/share/${PN}"
 	doins -r game
 	newbin t-engine ${PN}
+
+	make_desktop_entry ${PN}
 }
 
