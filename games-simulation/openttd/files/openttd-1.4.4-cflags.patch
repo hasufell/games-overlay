@@ -1,0 +1,37 @@
+--- config.lib.orig	2014-11-16 11:19:52.888297349 -0800
++++ config.lib	2014-11-16 11:25:28.025874009 -0800
+@@ -1455,7 +1455,6 @@
+ 			# -fomit-frame-pointer and -pg do not go well together (gcc errors they are incompatible)
+ 			CFLAGS="-fomit-frame-pointer $CFLAGS"
+ 		fi
+-		CFLAGS="-O2 $CFLAGS"
+ 	else
+ 		OBJS_SUBDIR="debug"
+ 
+@@ -1466,14 +1465,6 @@
+ 				CFLAGS="$CFLAGS -G0"
+ 			fi
+ 		fi
+-		if [ $enable_debug -ge 2 ]; then
+-			CFLAGS="$CFLAGS -fno-inline"
+-		fi
+-		if [ $enable_debug -ge 3 ]; then
+-			CFLAGS="$CFLAGS -O0"
+-		else
+-			CFLAGS="$CFLAGS -O2"
+-		fi
+ 	fi
+ 
+ 	if [ $enable_debug -le 2 ]; then
+@@ -1498,11 +1489,6 @@
+ 		CFLAGS="$CFLAGS -fno-expensive-optimizations"
+ 	fi
+ 
+-	if [ "$enable_profiling" != "0" ]; then
+-		CFLAGS="$CFLAGS -pg"
+-		LDFLAGS="$LDFLAGS -pg"
+-	fi
+-
+ 	if [ "$with_threads" = "0" ]; then
+ 		CFLAGS="$CFLAGS -DNO_THREADS"
+ 	fi
