@@ -5,7 +5,7 @@ Games ebuilds, nothing else. No libraries.
 ### Contributing
 
 * no games.eclass usage
-* proper Copyright header (not Gentoo Foundation)
+* proper Copyright header (not just Gentoo Foundation, unless you want to give them copyright)
 * license should be GPL-2
 * all commits MUST be gpg-signed
 * always provide a metadata.xml with contact information
