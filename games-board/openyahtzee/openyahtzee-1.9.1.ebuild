@@ -4,7 +4,7 @@
 
 EAPI=5
 WX_GTK_VER="2.8"
-inherit wxwidgets versionator
+inherit wxwidgets
 
 DESCRIPTION="A full-featured wxWidgets version of the classic dice game Yahtzee"
 HOMEPAGE="http://openyahtzee.sourceforge.net/"
