@@ -17,8 +17,9 @@ IUSE=""
 # test is incomplete
 RESTRICT="test"
 
-DEPEND="media-libs/libsdl[X,sound,video]
+RDEPEND="media-libs/libsdl[X,sound,video]
 	media-libs/sdl-mixer[wav]"
+DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/${MY_P}/src
 
