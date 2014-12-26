@@ -12,7 +12,7 @@ EGIT_REPO_URI="git://github.com/minetest/${PN}.git"
 LICENSE="LGPL-2.1+ CC-BY-SA-3.0"
 SLOT="0"
 KEYWORDS=""
-IUSE="+curl dedicated leveldb luajit nls redis +server +sound +truetype"
+IUSE="+curl dedicated doc leveldb luajit nls redis +server +sound +truetype"
 
 RDEPEND="dev-db/sqlite:3
 	sys-libs/zlib
@@ -38,6 +38,7 @@ RDEPEND="dev-db/sqlite:3
 	redis? ( dev-libs/hiredis )"
 DEPEND="${RDEPEND}
 	>=dev-games/irrlicht-1.8-r2
+	doc? ( app-doc/doxygen media-gfx/graphviz )
 	nls? ( sys-devel/gettext )"
 
 pkg_setup() {
@@ -86,6 +87,10 @@ src_configure() {
 
 src_compile() {
 	cmake-utils_src_compile
+
+	if use doc ; then
+		emake -C "${CMAKE_BUILD_DIR}" doc
+	fi
 }
 
 src_install() {
@@ -94,6 +99,11 @@ src_install() {
 	if use server || use dedicated ; then
 		newinitd "${FILESDIR}"/minetestserver.initd minetest-server
 		newconfd "${T}"/minetestserver.confd minetest-server
+	fi
+
+	if use doc ; then
+		cd "${CMAKE_BUILD_DIR}"/doc || die
+		dodoc -r html
 	fi
 }
 
