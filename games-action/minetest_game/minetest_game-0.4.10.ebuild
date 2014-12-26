@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
