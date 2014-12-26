@@ -17,8 +17,8 @@ KEYWORDS="~amd64 ~ppc ~x86"
 IUSE=""
 
 DEPEND="${PYTHON_DEPS}
-	media-gfx/imagemagick
 	games-util/deutex
+	media-gfx/imagemagick
 "
 
 src_install() {
