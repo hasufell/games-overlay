@@ -19,9 +19,13 @@ IUSE=""
 RDEPEND="
 	media-libs/alsa-lib
 	media-libs/freetype:2
+	media-libs/libmad
+	media-libs/libmpeg2
 	media-libs/libsdl[X,sound,alsa,joystick,opengl,video]
+	media-libs/libvorbis
 	sys-libs/zlib
 	virtual/glu
+	virtual/jpeg
 	virtual/opengl"
 DEPEND="${RDEPEND}"
 
