@@ -6,8 +6,8 @@
 # unless you like random breakage: 469796, 469798, 424041
 
 EAPI=5
-inherit eutils gnome2-utils # STABLE ARCH
-# inherit autotools eutils gnome2-utils # UNSTABLE ARCH
+WANT_AUTOMAKE=1.13
+inherit autotools eutils gnome2-utils # UNSTABLE ARCH
 
 DESCRIPTION="Free Awale - The game of all Africa"
 HOMEPAGE="http://www.nongnu.org/awale/"
