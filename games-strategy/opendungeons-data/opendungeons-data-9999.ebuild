@@ -11,7 +11,6 @@ MY_PN=${PN%-data}
 DESCRIPTION="Data files for opendungeons"
 HOMEPAGE="http://opendungeons.sourceforge.net"
 EGIT_REPO_URI="https://github.com/OpenDungeons/OpenDungeons-media-source.git"
-EGIT_CLONE_TYPE=shallow
 
 LICENSE="GPL-3 CC-BY-SA-3.0"
 SLOT="0"
