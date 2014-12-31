@@ -12,7 +12,6 @@ DESCRIPTION="An open source, real time strategy game based on the Dungeon Keeper
 HOMEPAGE="http://opendungeons.sourceforge.net"
 EGIT_REPO_URI="https://github.com/OpenDungeons/OpenDungeons.git"
 EGIT_BRANCH="development"
-EGIT_CLONE_TYPE=shallow
 
 LICENSE="GPL-3 CC-BY-SA-3.0"
 SLOT="0"
