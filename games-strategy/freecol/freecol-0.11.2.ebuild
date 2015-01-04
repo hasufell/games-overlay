@@ -16,11 +16,13 @@ IUSE=""
 
 DEPEND="
 	app-arch/unzip
-	>=virtual/jdk-1.5
+	>=virtual/jdk-1.7
 "
 RDEPEND="
-	>=virtual/jre-1.5
+	>=virtual/jre-1.7
 "
+
+JAVA_ANT_ENCODING="iso8859-1"
 
 S=${WORKDIR}/${PN}
 
