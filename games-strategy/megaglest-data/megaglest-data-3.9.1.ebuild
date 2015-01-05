@@ -10,7 +10,7 @@ DESCRIPTION="Data files for the cross-platform 3D realtime strategy game MegaGle
 HOMEPAGE="http://www.megaglest.org/"
 SRC_URI="https://github.com/MegaGlest/megaglest-data/releases/download/${PV}/megaglest-data-${PV}.tar.xz"
 
-LICENSE="CCPL-Attribution-ShareAlike-3.0"
+LICENSE="CC-BY-SA-3.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="doc"
