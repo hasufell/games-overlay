@@ -16,13 +16,14 @@ KEYWORDS="~amd64 ~x86"
 IUSE="doc static-libs"
 
 RDEPEND="
-	>=dev-libs/popt-1.10
-	>=sci-libs/gsl-1.9
 	sys-apps/file
+	>=sci-libs/gsl-1.9
+	>=dev-libs/popt-1.10
 "
 DEPEND="${RDEPEND}
 	sys-apps/help2man
 	virtual/pkgconfig
+	app-editors/vim-core
 	doc? ( >=app-doc/doxygen-1.8.0 )
 "
 
