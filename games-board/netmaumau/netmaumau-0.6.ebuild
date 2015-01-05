@@ -38,7 +38,7 @@ src_configure() {
 src_install() {
 	dobin src/nmm-qt-client
 	doicon -s 256 src/nmm_qt_client.png
-	domenu nmm_qt_client.desktop
+	domenu src/nmm_qt_client.desktop
 	insinto /usr/share/nmm-qt-client
 	doins src/*.qm
 }
