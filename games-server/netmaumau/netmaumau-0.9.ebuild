@@ -1,4 +1,4 @@
-# Copyright 2014 Julian Ospald <hasufell@posteo.de>
+# Copyright 2015 Julian Ospald <hasufell@posteo.de>, Heiko Schaefer <heiko@rangun.de>
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -13,9 +13,11 @@ SRC_URI="https://github.com/velnias75/NetMauMau/archive/V${PV}.tar.gz -> ${P}-se
 LICENSE="LGPL-3"
 SLOT="0/0"
 KEYWORDS="~amd64 ~x86"
-IUSE="doc static-libs"
+IUSE="doc static-libs -cli-client"
 
 RDEPEND="
+	sys-apps/file
+	>=sci-libs/gsl-1.9
 	>=dev-libs/popt-1.10
 "
 DEPEND="${RDEPEND}
@@ -36,6 +38,7 @@ src_configure() {
 
 	econf \
 		--enable-client \
+		$(use_enable cli-client) \
 		$(use_enable doc apidoc) \
 		--enable-ai-name="Gentoo Hero" \
 		--docdir=/usr/share/doc/${PF} \
