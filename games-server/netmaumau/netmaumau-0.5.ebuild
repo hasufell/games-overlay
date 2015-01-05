@@ -21,6 +21,7 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	sys-apps/help2man
 	virtual/pkgconfig
+	app-editors/vim-core
 	doc? ( >=app-doc/doxygen-1.8.0 )
 "
 
