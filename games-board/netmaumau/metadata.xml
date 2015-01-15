@@ -5,4 +5,11 @@
 		<email>hasufell@posteo.de</email>
 		<name>Julian Ospald</name>
 	</maintainer>
+	<upstream>
+		<maintainer>
+			<name>Heiko Schäfer</name>
+			<email>heiko@rangun.de</email>
+		</maintainer>
+		<bugs-to>https://github.com/velnias75/NetMauMau-Qt-Client/issues</bugs-to>
+	</upstream>
 </pkgmetadata>
