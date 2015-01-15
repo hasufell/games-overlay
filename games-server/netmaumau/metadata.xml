@@ -7,8 +7,8 @@
 	</maintainer>
 	<upstream>
 		<maintainer>
-			<name>Heiko Schäfer</name>
 			<email>heiko@rangun.de</email>
+			<name>Heiko Schäfer</name>
 		</maintainer>
 		<bugs-to>https://github.com/velnias75/NetMauMau/issues</bugs-to>
 	</upstream>
