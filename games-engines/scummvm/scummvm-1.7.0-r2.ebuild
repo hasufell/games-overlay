@@ -11,8 +11,8 @@ SRC_URI="mirror://sourceforge/scummvm/${P/_/}.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2.1 BSD GPL-3-with-font-exception"
 SLOT="0"
-KEYWORDS="amd64 ppc ppc64 x86 ~x86-fbsd"
-IUSE="aac alsa debug flac fluidsynth jpeg mpeg2 mp3 opengl png theora jpeg truetype vorbis zlib"
+KEYWORDS="~amd64 ~ppc ~ppc64 ~x86 ~x86-fbsd"
+IUSE="aac alsa debug flac fluidsynth jpeg mpeg2 mp3 opengl png theora truetype unsupported vorbis zlib"
 RESTRICT="test"  # it only looks like there's a test there #77507
 
 RDEPEND=">=media-libs/libsdl-1.2.2[sound,joystick,video]
@@ -65,6 +65,7 @@ src_configure() {
 		--libdir=/usr/$(get_libdir) \
 		--enable-zlib \
 		$(use_enable debug) \
+		$(use_enable !debug release-mode) \
 		$(use_enable zlib) \
 		$(use_enable aac faad) \
 		$(use_enable alsa) \
@@ -78,7 +79,8 @@ src_configure() {
 		$(use_enable theora theoradec) \
 		$(use_enable truetype freetype2) \
 		$(use_enable x86 nasm) \
-		${myconf} || die
+		$(use unsupported && echo --enable-all-engines) \
+		${myconf} ${EXTRA_ECONF} || die
 }
 
 src_compile() {
@@ -103,4 +105,3 @@ pkg_postinst() {
 pkg_postrm() {
 	gnome2_icon_cache_update
 }
-
