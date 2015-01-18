@@ -14,6 +14,5 @@
 	</upstream>
 	<use>
 		<flag name="cli-client">Build a console based client</flag>
-		<flag name="xinetd">Install a xinetd service</flag>
 	</use>
 </pkgmetadata>

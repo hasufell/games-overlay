@@ -13,14 +13,13 @@ SRC_URI="https://github.com/velnias75/NetMauMau/archive/V${PV}.tar.gz -> ${P}-se
 LICENSE="LGPL-3"
 SLOT="0/0"
 KEYWORDS="~amd64 ~x86"
-IUSE="doc static-libs -cli-client -xinetd"
+IUSE="doc static-libs -cli-client"
 
 RDEPEND="
 	>=dev-libs/popt-1.10
 	>=sci-libs/gsl-1.9
 	sys-apps/file
 	dev-db/sqlite:3
-	xinetd? ( sys-apps/xinetd )
 "
 DEPEND="${RDEPEND}
 	app-editors/vim-core
@@ -41,7 +40,7 @@ src_configure() {
 
 	econf \
 		--enable-client \
-		$(use_enable xinetd) \
+		--enable-xinetd \
 		$(use_enable cli-client) \
 		$(use_enable doc apidoc) \
 		--enable-ai-name="Gentoo Hero" \
@@ -61,4 +60,8 @@ pkg_postinst() {
 	elog "This is only the server part, you might want to install"
 	elog "the client too:"
 	elog "  games-board/netmaumau"
+	elog
+	elog "This server also installs a xinetd service. You need"
+	elog "  sys-apps/xinetd"
+	elog "to use it."
 }
