@@ -13,7 +13,7 @@ SRC_URI="https://github.com/velnias75/NetMauMau/archive/V${PV}.tar.gz -> ${P}-se
 LICENSE="LGPL-3"
 SLOT="0/0"
 KEYWORDS="~amd64 ~x86"
-IUSE="doc static-libs -cli-client"
+IUSE="doc static-libs cli-client"
 
 RDEPEND="
 	>=dev-libs/popt-1.10
