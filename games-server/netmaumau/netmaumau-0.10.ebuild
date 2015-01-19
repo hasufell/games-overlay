@@ -63,5 +63,5 @@ pkg_postinst() {
 	elog
 	elog "This server also installs a xinetd service. You need"
 	elog "  sys-apps/xinetd"
-	elog "to use it."
+	elog "if you want to get the server started on demand."
 }
