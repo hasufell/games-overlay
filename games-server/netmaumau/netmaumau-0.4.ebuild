@@ -11,7 +11,7 @@ HOMEPAGE="http://sourceforge.net/projects/netmaumau"
 SRC_URI="https://github.com/velnias75/NetMauMau/archive/V${PV}.tar.gz -> ${P}-server.tar.gz"
 
 LICENSE="LGPL-3"
-SLOT="0/0"
+SLOT="0/1"
 KEYWORDS="~amd64 ~x86"
 IUSE="doc static-libs"
 
