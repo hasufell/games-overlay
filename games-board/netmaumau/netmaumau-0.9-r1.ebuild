@@ -1,4 +1,4 @@
-# Copyright 2014 Julian Ospald <hasufell@posteo.de>
+# Copyright 2015 Julian Ospald <hasufell@posteo.de>, Heiko Schaefer <heiko@rangun.de>
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -21,7 +21,7 @@ RDEPEND="
 	dev-qt/qtcore:4
 	dev-qt/qtgui:4
 	dev-qt/qtsvg:4
-	games-server/netmaumau:0/0"
+	games-server/netmaumau:0/4"
 DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/${P}-client
@@ -38,7 +38,7 @@ src_configure() {
 src_install() {
 	dobin src/nmm-qt-client
 	doicon -s 256 src/nmm_qt_client.png
-	domenu nmm_qt_client.desktop
+	domenu src/nmm_qt_client.desktop
 	insinto /usr/share/nmm-qt-client
 	doins src/*.qm
 }
