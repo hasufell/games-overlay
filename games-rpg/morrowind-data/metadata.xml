@@ -5,5 +5,10 @@
 		<email>hasufell@posteo.de</email>
 		<name>Julian Ospald</name>
 	</maintainer>
+	<use>
+		<flag name="main">Main CD with data files</flag>
+		<flag name="bloodmoon">Blood Moon extension</flag>
+		<flag name="tribunal">Tribunal extension</flag>
+	</use>
 </pkgmetadata>
 
