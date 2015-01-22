@@ -13,7 +13,7 @@ SRC_URI="https://github.com/OpenMW/openmw/archive/${P}.tar.gz"
 LICENSE="GPL-3 MIT BitstreamVera OFL-1.1"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="doc cdinstall devtools +launcher"
+IUSE="doc devtools +launcher"
 
 # XXX static build
 RDEPEND=">=dev-games/mygui-3.2.1
@@ -32,7 +32,6 @@ RDEPEND=">=dev-games/mygui-3.2.1
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	doc? ( app-doc/doxygen media-gfx/graphviz )"
-PDEPEND="cdinstall? ( games-rpg/morrowind-data )"
 
 S=${WORKDIR}/${PN}-${P}
 
@@ -92,14 +91,10 @@ pkg_preinst() {
 pkg_postinst() {
 	gnome2_icon_cache_update
 
-	if use !cdinstall ; then
-		elog "You need the original Morrowind Data files. If you haven't"
-		elog "installed them yet, you can install them straight via the"
-		elog "game launcher (launcher USE flag) which is the officially"
-		elog "supported method or by using the"
-		elog "games-rpg/morrowind-data (cdinstall USE flag) package"
-		elog "(this might not work for all morrowind releases out there)."
-	fi
+	elog "You need the original Morrowind Data files. If you haven't"
+	elog "installed them yet, you can install them straight via the"
+	elog "game launcher (launcher USE flag) which is the officially"
+	elog "supported method."
 }
 
 pkg_postrm() {
