@@ -73,7 +73,7 @@ src_install() {
 	domenu dists/${PN}.desktop
 
 	doman dists/${PN}.6
-	dodoc AUTHORS README KNOWN_BUGS TODO
+	dodoc AUTHORS README.md KNOWN_BUGS TODO
 }
 
 pkg_preinst() {
