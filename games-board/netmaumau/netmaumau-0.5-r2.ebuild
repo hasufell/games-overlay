@@ -18,10 +18,12 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="
-	dev-qt/qtcore:4
-	dev-qt/qtgui:4
-	dev-qt/qtsvg:4
-	games-server/netmaumau:0/1"
+	dev-qt/qtcore:4[exceptions]
+	dev-qt/qtgui:4[exceptions]
+	dev-qt/qtsvg:4[exceptions]
+	games-server/netmaumau:0/1
+"
+
 DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/${P}-client
@@ -38,8 +40,7 @@ src_configure() {
 src_install() {
 	dobin src/nmm-qt-client
 	doicon -s 256 src/nmm_qt_client.png
-	domenu src/nmm_qt_client.desktop
+	domenu nmm_qt_client.desktop
 	insinto /usr/share/nmm-qt-client
 	doins src/*.qm
 }
-

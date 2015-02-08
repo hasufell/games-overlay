@@ -18,10 +18,12 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="
-	dev-qt/qtcore:4
-	dev-qt/qtgui:4
-	dev-qt/qtsvg:4
-	games-server/netmaumau:0/4"
+	dev-qt/qtcore:4[exceptions]
+	dev-qt/qtgui:4[exceptions]
+	dev-qt/qtsvg:4[exceptions]
+	games-server/netmaumau:0/4
+"
+
 DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/${P}-client
