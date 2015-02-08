@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit autotools flag-o-matic eutils libtool vcs-snapshot
+inherit autotools flag-o-matic eutils vcs-snapshot
 
 DESCRIPTION="Server for the popular card game Mau Mau"
 HOMEPAGE="http://sourceforge.net/projects/netmaumau"
@@ -18,10 +18,11 @@ IUSE="doc static-libs"
 RDEPEND="
 	>=dev-libs/popt-1.10
 "
+
 DEPEND="${RDEPEND}
+	doc? ( >=app-doc/doxygen-1.8.0[dot] )
 	sys-apps/help2man
 	virtual/pkgconfig
-	doc? ( >=app-doc/doxygen-1.8.0 )
 "
 
 S=${WORKDIR}/${P}-server
@@ -51,4 +52,3 @@ pkg_postinst() {
 	elog "the client too:"
 	elog "  games-board/netmaumau"
 }
-
