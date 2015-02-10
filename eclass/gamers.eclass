@@ -24,7 +24,7 @@
 # @CODE
 # which fixes all related permissions in /var/lib/games and subdirs and
 # preserves all files inside those dirs. Then make sure pkg_setup() and
-# pkg_preinst() are not overwritten (or call games_pkg_* functions manually)!
+# pkg_preinst() are not overwritten (or call gamers_pkg_* functions manually)!
 #
 # Don't use this for games that don't need it. For server parts you should
 # instead create package-specific user/group and set appropriate permissions.
