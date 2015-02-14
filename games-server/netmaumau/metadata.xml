@@ -13,6 +13,6 @@
 		<bugs-to>https://github.com/velnias75/NetMauMau/issues</bugs-to>
 	</upstream>
 	<use>
-		<flag name="cli-client">Build a console based client</flag>
+		<flag name="cli-client">Build a console based client (needs dedicated USE flag disabled!)</flag>
 	</use>
 </pkgmetadata>
