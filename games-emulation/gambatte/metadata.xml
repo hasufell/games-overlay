@@ -5,4 +5,8 @@
 		<email>hasufell@posteo.de</email>
 		<name>Julian Ospald</name>
 	</maintainer>
+	<use>
+		<flag name='sdl'>Build the sdl cli driven client</flag>
+		<flag name='qt4'>Build the qt4 GUI client</flag>
+	</use>
 </pkgmetadata>

@@ -1,0 +1,11 @@
+--- testrunner/testrunner.cpp
++++ testrunner/testrunner.cpp
+@@ -264,7 +264,7 @@
+ 	long samplesLeft = 35112 * 15;
+ 
+ 	while (samplesLeft >= 0) {
+-		unsigned samples = 35112;
++		std::size_t samples = 35112;
+ 		gb.runFor(framebuf, 160, soundbuf, samples);
+ 		samplesLeft -= samples;
+ 	}
