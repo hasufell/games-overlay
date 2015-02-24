@@ -67,7 +67,6 @@ src_prepare() {
 
 	# jthread is modified
 	# json is modified
-	rm -r src/sqlite || die
 
 	# set paths
 	sed \
