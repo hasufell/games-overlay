@@ -43,6 +43,7 @@ DEPEND="${RDEPEND}
 
 pkg_setup() {
 	if use server || use dedicated ; then
+		enewgroup ${PN}
 		enewuser ${PN} -1 -1 /var/lib/${PN} ${PN}
 	fi
 }
