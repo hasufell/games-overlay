@@ -18,7 +18,7 @@ IUSE="doc devtools"
 # XXX static build
 RDEPEND="
 	app-arch/unshield
-	>=dev-games/mygui-3.2.1
+	>=dev-games/mygui-3.2.1[ogre]
 	>=dev-games/ogre-1.9.0[freeimage,ois,opengl,zip]
 	>=dev-libs/boost-1.46.0
 	dev-libs/tinyxml
