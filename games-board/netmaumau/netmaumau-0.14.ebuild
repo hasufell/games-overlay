@@ -15,13 +15,13 @@ SRC_URI="https://github.com/velnias75/NetMauMau-Qt-Client/archive/V${PV}.tar.gz 
 LICENSE="LGPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="no-espeak"
+IUSE="+espeak"
 
 RDEPEND="
 	dev-qt/qtcore:4[exceptions]
 	dev-qt/qtgui:4[exceptions]
 	dev-qt/qtsvg:4[exceptions]
-	!no-espeak? ( || ( app-accessibility/espeak[portaudio] app-accessibility/espeak[pulseaudio] ) )
+	espeak? ( || ( app-accessibility/espeak[portaudio] app-accessibility/espeak[pulseaudio] ) )
 	games-server/netmaumau:0/7[-dedicated]
 "
 
@@ -33,7 +33,7 @@ DEPEND="
 S=${WORKDIR}/${P}-client
 
 src_configure() {
-	if ! use no-espeak; then USE_ESPEAK='CONFIG+=espeak'; fi
+	if use espeak; then USE_ESPEAK='CONFIG+=espeak'; fi
 	eqmake4 $USE_ESPEAK
 	lrelease src/src.pro
 }
