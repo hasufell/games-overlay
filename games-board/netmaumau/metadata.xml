@@ -13,9 +13,6 @@
 		<bugs-to>https://github.com/velnias75/NetMauMau-Qt-Client/issues</bugs-to>
 	</upstream>
 	<use>
-		<!-- for =games-board/netmaumau-0.13-r1 -->
-		<flag name="espeak">enable speech support (experimental!)</flag>
-		<!-- for >=games-board/netmaumau-0.14 -->
-		<flag name="no-espeak">disable speech support</flag>
+		<flag name="espeak">enable speech support</flag>
 	</use>
 </pkgmetadata>
