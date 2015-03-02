@@ -59,9 +59,9 @@ src_install() {
 
 pkg_postinst() {
 	if ! use dedicated ; then
-		elog "This is only the server part, you might want to install" ;
-		elog "the client too:" ;
-		elog "  games-board/netmaumau" ;
+		elog "This is only the server part, you might want to install"
+		elog "the client too:"
+		elog "  games-board/netmaumau"
 		elog
 	fi
 	elog "This server also installs a xinetd service. You need"
