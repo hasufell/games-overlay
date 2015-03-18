@@ -100,6 +100,6 @@ src_install() {
 	doins -r game
 	newbin t-engine ${PN}
 
-	make_desktop_entry ${PN}
+	make_desktop_entry ${PN} "ToME4"
 }
 
