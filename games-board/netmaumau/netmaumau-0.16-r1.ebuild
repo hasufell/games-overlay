@@ -33,7 +33,7 @@ DEPEND="
 S=${WORKDIR}/${P}-client
 
 src_prepare() {
-	epatch "${FILESDIR}/connect-to-old-servers-${P}.patch"
+	epatch "${FILESDIR}/${P}-connect-to-old-servers.patch"
 }
 
 src_configure() {
