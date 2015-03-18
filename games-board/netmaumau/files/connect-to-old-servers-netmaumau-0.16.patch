@@ -1,0 +1,12 @@
+diff -uNr NetMauMau-Qt-Client-0.16.orig/src/client.cpp NetMauMau-Qt-Client-0.16/src/client.cpp
+--- NetMauMau-Qt-Client-0.16.orig/src/client.cpp	2015-03-07 04:39:42.000000000 +0100
++++ NetMauMau-Qt-Client-0.16/src/client.cpp	2015-03-17 06:44:07.850291172 +0100
+@@ -32,7 +32,7 @@
+ #include "mainwindow.h"
+ #include "base64bridge.h"
+ 
+-#define CLIENTVERSION 16
++#define CLIENTVERSION 15
+ 
+ Client::Client(MainWindow *const w, ConnectionLogDialog *cld, const QString &player,
+ 			   const std::string &server, uint16_t port) : QThread(),
