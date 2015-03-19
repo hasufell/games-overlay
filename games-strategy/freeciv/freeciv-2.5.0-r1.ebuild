@@ -34,9 +34,10 @@ RDEPEND="app-arch/bzip2
 		nls? ( virtual/libintl )
 		qt5? ( dev-qt/qtgui:5 )
 		sdl? (
+			media-libs/freetype:2
 			media-libs/libsdl[video]
 			media-libs/sdl-image[png]
-			media-libs/freetype:2
+			media-libs/sdl-ttf
 		)
 		server? ( aimodules? ( sys-devel/libtool:2 ) )
 		sound? (
