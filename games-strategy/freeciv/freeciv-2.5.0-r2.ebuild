@@ -32,10 +32,14 @@ RDEPEND="app-arch/bzip2
 		mapimg? ( media-gfx/imagemagick )
 		modpack? ( x11-libs/gtk+:3 )
 		nls? ( virtual/libintl )
-		qt5? ( dev-qt/qtgui:5 )
+		qt5? (
+			dev-qt/qtcore:5
+			dev-qt/qtgui:5
+			dev-qt/qtwidgets:5
+		)
 		sdl? (
-			media-libs/freetype:2
 			media-libs/libsdl[video]
+			media-libs/sdl-gfx
 			media-libs/sdl-image[png]
 			media-libs/sdl-ttf
 		)
@@ -70,6 +74,7 @@ src_prepare() {
 		-e 's:^\(icon[0-9]*dir = \)$(datadir)\(.*\):\1/usr/share\2:' \
 		client/Makefile.in \
 		server/Makefile.in \
+		tools/Makefile.in \
 		data/Makefile.in \
 		data/icons/Makefile.in || die
 	sed -i -e 's/=SDL/=X-SDL/' bootstrap/freeciv-sdl.desktop.in || die
@@ -131,7 +136,7 @@ src_install() {
 
 	if use dedicated ; then
 		rm -rf "${D}/usr/share/pixmaps"
-		rm -f "${D}"/usr/share/man/man6/freeciv-{client,gtk2,gtk3,modpack,sdl,xaw}*
+		rm -f "${D}"/usr/share/man/man6/freeciv-{client,gtk2,gtk3,qt,modpack,sdl,xaw}*
 	else
 		if use server ; then
 			# Create and install the html manual. It can't be done for dedicated
@@ -154,3 +159,14 @@ src_install() {
 	prune_libtool_files
 }
 
+pkg_preinst() {
+	gnome2_icon_savelist
+}
+
+pkg_postinst() {
+	gnome2_icon_cache_update
+}
+
+pkg_postrm() {
+	gnome2_icon_cache_update
+}
