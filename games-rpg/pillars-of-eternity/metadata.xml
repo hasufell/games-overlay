@@ -6,6 +6,12 @@
 		<name>Julian Ospald</name>
 	</maintainer>
 	<use>
+		<flag name='dlc1'>Install the Kickstarter Bonus Item</flag>
+	</use>
+	<use>
+		<flag name='dlc2'>Install the Kickstarter Bonus Pet</flag>
+	</use>
+	<use>
 		<flag name='dlc3'>Install the Pre-Order Bonus Item and Pet</flag>
 	</use>
 </pkgmetadata>
