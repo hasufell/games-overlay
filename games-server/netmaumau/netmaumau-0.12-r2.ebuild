@@ -11,7 +11,7 @@ HOMEPAGE="http://sourceforge.net/projects/netmaumau"
 SRC_URI="https://github.com/velnias75/NetMauMau/archive/V${PV}.tar.gz -> ${P}-server.tar.gz"
 
 LICENSE="LGPL-3"
-SLOT="0/6"
+SLOT="0/5"
 KEYWORDS="~amd64 ~x86"
 IUSE="cli-client doc static-libs"
 
@@ -32,6 +32,7 @@ DEPEND="${RDEPEND}
 S=${WORKDIR}/${P}-server
 
 src_prepare() {
+	epatch "${FILESDIR}/${PN}-fix-lto-inetd.patch"
 	eautoreconf
 }
 

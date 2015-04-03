@@ -11,9 +11,9 @@ HOMEPAGE="http://sourceforge.net/projects/netmaumau"
 SRC_URI="https://github.com/velnias75/NetMauMau/archive/V${PV}.tar.gz -> ${P}-server.tar.gz"
 
 LICENSE="LGPL-3"
-SLOT="0/7"
+SLOT="0/6"
 KEYWORDS="~amd64 ~x86"
-IUSE="branding cli-client dedicated doc static-libs"
+IUSE="cli-client doc static-libs"
 
 RDEPEND="
 	dev-db/sqlite:3
@@ -32,6 +32,7 @@ DEPEND="${RDEPEND}
 S=${WORKDIR}/${P}-server
 
 src_prepare() {
+	epatch "${FILESDIR}/${PN}-fix-lto-inetd.patch"
 	eautoreconf
 }
 
@@ -39,15 +40,14 @@ src_configure() {
 	append-cppflags -DNDEBUG
 
 	econf \
-		$(use_enable !dedicated client) \
+		--enable-client \
 		--enable-xinetd \
-		$(usex dedicated "--disable-cli-client" "$(use_enable cli-client)") \
+		$(use_enable cli-client) \
 		$(use_enable doc apidoc) \
+		--enable-ai-name="Gentoo Hero" \
 		--docdir=/usr/share/doc/${PF} \
 		--localstatedir=/var/lib/games/ \
-		$(use_enable static-libs static) \
-		"$(use_enable branding ai-name 'Gentoo Hero')" \
-		$(use_enable branding ai-image "${FILESDIR}"/gblend.png)
+		$(use_enable static-libs static)
 }
 
 src_install() {
@@ -58,12 +58,10 @@ src_install() {
 }
 
 pkg_postinst() {
-	if ! use dedicated ; then
-		elog "This is only the server part, you might want to install"
-		elog "the client too:"
-		elog "  games-board/netmaumau"
-		elog
-	fi
+	elog "This is only the server part, you might want to install"
+	elog "the client too:"
+	elog "  games-board/netmaumau"
+	elog
 	elog "This server also installs a xinetd service. You need"
 	elog "  sys-apps/xinetd"
 	elog "if you want to get the server started on demand."

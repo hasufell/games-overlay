@@ -1,0 +1,13 @@
+diff -uNr NetMauMau-0.12.orig/src/common/basiclogger.h NetMauMau-0.12/src/common/basiclogger.h
+--- NetMauMau-0.12.orig/src/common/basiclogger.h	2015-01-28 13:32:03.000000000 +0100
++++ NetMauMau-0.12/src/common/basiclogger.h	2015-04-03 11:23:33.389799063 +0200
+@@ -181,7 +181,8 @@
+ 		size_t fatal;
+ 	} m_logCount;
+ 
+-	static unsigned char m_silentMask;
++	// we need this in order to get the combination LTO & inetd to work
++	__attribute__((externally_visible)) static unsigned char m_silentMask;
+ 
+ 	LEVEL m_level;
+ 
