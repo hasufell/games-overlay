@@ -19,7 +19,7 @@ IUSE="development doc examples"
 REQUIRED_USE="examples? ( development )"
 
 RDEPEND="
-	>=app-admin/eselect-renpy-0.5
+	>=app-eselect/eselect-renpy-0.5
 	dev-libs/fribidi
 	dev-python/pygame[X,${PYTHON_USEDEP}]
 	>=dev-lang/python-exec-0.3[${PYTHON_USEDEP}]
