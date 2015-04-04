@@ -9,7 +9,7 @@ inherit distutils-r1
 
 DESCRIPTION="Reimplementation of portions of the pygame API using SDL2"
 HOMEPAGE="https://github.com/renpy/pygame_sdl2"
-SRC_URI="http://www.renpy.org/dl/6.99.1/pygame_sdl2-for-renpy-${PV}.tar.bz2"
+SRC_URI="http://www.renpy.org/dl/${PV}/pygame_sdl2-for-renpy-${PV}.tar.bz2"
 
 LICENSE="LGPL-2.1 ZLIB"
 SLOT="0"
