@@ -34,6 +34,7 @@ DEPEND="${RDEPEND}
 S=${WORKDIR}/${P}-server
 
 src_prepare() {
+	epatch "${FILESDIR}/${P}-fix-global-buffer-overflow.patch"
 	eautoreconf
 }
 
