@@ -51,7 +51,6 @@ pkg_nofetch() {
 
 src_prepare() {
 	# rm steam stuff
-	rm game/libsteam_api.so || die
 	rm game/PillarsOfEternity_Data/Plugins/x86_64/{libCSteamworks,libsteam_api}.so || die
 }
 
