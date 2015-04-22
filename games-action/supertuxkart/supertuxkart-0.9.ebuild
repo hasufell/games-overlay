@@ -15,8 +15,7 @@ SLOT="0"
 KEYWORDS="amd64 ~ppc x86"
 IUSE="debug fribidi wiimote"
 
-RDEPEND="media-libs/freeglut
-	media-libs/libpng:0
+RDEPEND="media-libs/libpng:0
 	media-libs/libvorbis
 	media-libs/openal
 	net-misc/curl
