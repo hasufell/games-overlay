@@ -22,7 +22,7 @@ RDEPEND="media-libs/freeglut
 	net-misc/curl
 	sys-libs/zlib
 	virtual/glu
-	virtual/jpeg
+	virtual/jpeg:62
 	virtual/libintl
 	virtual/opengl
 	x11-libs/libX11
