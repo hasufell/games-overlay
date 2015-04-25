@@ -1,0 +1,42 @@
+Cannot use openclonk in target_link_libraries declarations before it has been
+declared a a binary to build (at least with cmake-3.1.0).
+
+diff -Naur openclonk-release-6.0-src.orig/CMakeLists.txt openclonk-release-6.0-src/CMakeLists.txt
+--- openclonk-release-6.0-src.orig/CMakeLists.txt	2015-04-25 08:07:16.000000000 +0000
++++ openclonk-release-6.0-src/CMakeLists.txt	2015-04-25 08:22:16.000000000 +0000
+@@ -914,17 +914,6 @@
+ 	link_directories(${MAPE_GTK_LIBRARY_DIRS})
+ endif()
+ 
+-# Select an audio library
+-find_package("Audio")
+-
+-# SDL
+-if(USE_SDL_MAINLOOP OR (Audio_TK STREQUAL "SDL_Mixer"))
+-	find_package(SDL)
+-	SET(HAVE_SDL ${SDL_FOUND})
+-	include_directories(${SDL_INCLUDE_DIR})
+-	target_link_libraries(openclonk ${SDL_LIBRARY})
+-endif()
+-
+ ############################################################################
+ # Precompiled header support, part 1 (pre-target)
+ ############################################################################
+@@ -1052,6 +1041,17 @@
+ src/lib/C4SimpleLog.cpp
+ )
+ 
++# Select an audio library
++find_package("Audio")
++
++# SDL
++if(USE_SDL_MAINLOOP OR (Audio_TK STREQUAL "SDL_Mixer"))
++	find_package(SDL)
++	SET(HAVE_SDL ${SDL_FOUND})
++	include_directories(${SDL_INCLUDE_DIR})
++	target_link_libraries(openclonk ${SDL_LIBRARY})
++endif()
++
+ target_link_libraries(libmisc ${ZLIB_LIBRARIES})
+ 
+ add_library(libc4script

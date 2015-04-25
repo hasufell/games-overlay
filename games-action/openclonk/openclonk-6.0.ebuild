@@ -6,7 +6,7 @@
 EAPI=5
 
 PYTHON_COMPAT=( python2_7 )
-inherit cmake-utils eutils gnome2-utils python-any-r1
+inherit cmake-utils eutils gnome2-utils python-any-r1 fdo-mime
 
 MY_P=${PN}-release-${PV}-src
 
@@ -54,6 +54,8 @@ DEPEND="${RDEPEND}
 
 PATCHES=(
 	"${FILESDIR}"/${P}-paths.patch
+	"${FILESDIR}"/${P}-build.patch
+	"${FILESDIR}"/${P}-jpeg9.patch
 	"${FILESDIR}"/${P}-tinyxml.patch
 )
 S=${WORKDIR}/${PN}-release-${PV}-src
@@ -108,9 +110,11 @@ pkg_preinst() {
 
 pkg_postinst() {
 	gnome2_icon_cache_update
+	fdo-mime_desktop_database_update
 }
 
 pkg_postrm() {
 	gnome2_icon_cache_update
+	fdo-mime_desktop_database_update
 }
 
