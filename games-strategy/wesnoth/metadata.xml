@@ -6,6 +6,9 @@
 		<name>Julian Ospald</name>
 	</maintainer>
   <use>
+    <flag name="fribidi">Enable FriBIDi support</flag>
     <flag name="server">Enable compilation of server</flag>
+    <flag name="tools">Enable building and installation of tools
+        for artists and WML maintainers</flag>
   </use>
 </pkgmetadata>
