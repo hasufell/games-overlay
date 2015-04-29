@@ -1,0 +1,2 @@
+# Version 6 is the latest, please upgrade manually!
+=games-board/stockfish-20131129
