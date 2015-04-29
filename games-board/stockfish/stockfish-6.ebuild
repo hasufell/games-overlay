@@ -12,7 +12,7 @@ SRC_URI="https://stockfish.s3.amazonaws.com/stockfish-${PV}-src.zip -> ${P}.zip"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="sse"
+IUSE="cpu_flags_x86_sse"
 RESTRICT="mirror"
 
 RDEPEND=""
@@ -24,7 +24,7 @@ src_compile() {
 	emake CXX="$(tc-getCXX)" CXXFLAGS="${CXXFLAGS}" \
 		arch=any os=any bits=$(usex amd64 "64" "32") \
 		bsfq=no popcnt=no \
-		prefetch=$(usex sse "yes" "no") sse=$(usex sse "yes" "no") \
+		prefetch=$(usex cpu_flags_x86_sse "yes" "no") sse=$(usex cpu_flags_x86_sse "yes" "no") \
 		all
 }
 
