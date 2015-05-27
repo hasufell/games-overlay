@@ -7,7 +7,7 @@ EAPI=5
 inherit eutils mono-env gnome2-utils fdo-mime vcs-snapshot
 
 DESCRIPTION="A free RTS engine supporting games like Command & Conquer and Red Alert"
-HOMEPAGE="http://open-ra.org/"
+HOMEPAGE="http://www.openra.net/"
 SRC_URI="https://dev.gentoo.org/~hasufell/distfiles/${P}.tar.xz"
 
 LICENSE="GPL-3"
@@ -34,17 +34,15 @@ src_configure() { :; }
 
 src_prepare() {
 	# register game-version
-	sed \
-		-e "/Version/s/{DEV_VERSION}/release-${PV}/" \
-		-i mods/{ra,cnc,d2k}/mod.yaml || die
+	emake VERSION="${PV}" version
 	sed \
 		-e "s/@LIBLUA51@/liblua.so.${LUA_V}/" \
 		thirdparty/Eluant.dll.config.in > Eluant.dll.config || die
 }
 
 src_compile() {
-	emake $(usex tools "all" "")
-	emake docs
+	emake VERSION="${PV}" $(usex tools "all" "")
+	emake VERSION="${PV}" docs
 }
 
 src_install() {
@@ -52,15 +50,12 @@ src_install() {
 		datadir="/usr/share" \
 		bindir="/usr/bin" \
 		libdir="/usr/libexec" \
+		VERSION="${PV}" \
 		DESTDIR="${D}" \
-		$(usex tools "install-all" "install") install-linux-scripts install-linux-mime
+		$(usex tools "install-all" "install") install-linux-scripts install-linux-mime install-linux-icons
 
 	exeinto /usr/libexec/openra
 	doexe Eluant.dll.config
-
-	# icons
-	insinto /usr/share/icons/
-	doins -r packaging/linux/hicolor
 
 	# desktop entries
 	make_desktop_entry "${PN} Game.Mods=cnc" "OpenRA CNC" ${PN}
@@ -76,9 +71,6 @@ pkg_postinst() {
 	gnome2_icon_cache_update
 	fdo-mime_desktop_database_update
 	fdo-mime_mime_database_update
-
-	elog "optional dependencies:"
-	elog "  media-gfx/nvidia-cg-toolkit (fallback renderer if OpenGL fails)"
 }
 
 pkg_postrm() {
