@@ -67,7 +67,8 @@ pkg_postinst() {
 	# will use the newly installed instance
 	if [ -n "`pgrep -f "nmm-server"`" ]; then
                 if [ -n "`pgrep -f "inetd"`" ]; then
-                        elog "Stopping nmm-server…"
+			elog "Detected a NetMauMau server started from (x)inetd."
+                        elog "Stopping nmm-server to spawn the newly installed instance at next request…"
                         killall nmm-server
                 fi
         fi
