@@ -1,0 +1,12 @@
+diff -uNr netmaumau-0.21.0~precise.orig/src/engine/easyplayer.cpp netmaumau-0.21.0~precise/src/engine/easyplayer.cpp
+--- netmaumau-0.21.0~precise.orig/src/engine/easyplayer.cpp	2015-06-13 04:41:53.000000000 +0200
++++ netmaumau-0.21.0~precise/src/engine/easyplayer.cpp	2015-06-15 04:44:25.186496994 +0200
+@@ -21,6 +21,8 @@
+ #include "config.h"                     // IWYU pragma: keep
+ #endif
+ 
++#include <ctime>
++
+ #include "easyplayer.h"
+ 
+ #include "random_gen.h"                 // for genRandom
