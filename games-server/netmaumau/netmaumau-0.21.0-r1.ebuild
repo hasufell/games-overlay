@@ -34,6 +34,7 @@ DEPEND="${RDEPEND}
 S=${WORKDIR}/${P}-server
 
 src_prepare() {
+	epatch "${FILESDIR}/${P}-ctime.patch"
 	eautoreconf
 }
 
@@ -69,7 +70,7 @@ pkg_postinst() {
                 if [ -n "`pgrep -f "inetd"`" ]; then
 			elog "Detected a NetMauMau server started from (x)inetd."
                         elog "Stopping nmm-server to spawn the newly installed instance at next request…"
-                        killall nmm-server
+                        killall nmm-server 2> /dev/null
                 fi
         fi
 
