@@ -18,31 +18,11 @@ RESTRICT="fetch bindist"
 
 RDEPEND="
 	!bundled-libs? (
-		amd64? (
-			|| (
-				app-emulation/emul-linux-x86-baselibs[-abi_x86_32(-)]
-				(
-					>=dev-libs/expat-2.1.0-r3[abi_x86_32(-)]
-					>=dev-libs/json-c-0.11-r1[abi_x86_32(-)]
-					>=dev-libs/openssl-1.0.1j[abi_x86_32(-)]
-				)
-			)
-			|| (
-				app-emulation/emul-linux-x86-sdl[-abi_x86_32(-)]
-				>=media-libs/openal-1.15.1-r2[abi_x86_32(-)]
-			)
-			|| (
-				app-emulation/emul-linux-x86-xlibs[-abi_x86_32(-)]
-				>=x11-libs/libX11-1.6.2[abi_x86_32(-)]
-			)
-		)
-		x86? (
-			dev-libs/expat
-			dev-libs/json-c
-			>=dev-libs/openssl-1.0.1j
-			media-libs/openal
-			x11-libs/libX11
-		)
+		>=dev-libs/expat-2.1.0-r3[abi_x86_32(-)]
+		>=dev-libs/json-c-0.11-r1[abi_x86_32(-)]
+		>=dev-libs/openssl-1.0.1j[abi_x86_32(-)]
+		>=media-libs/openal-1.15.1-r2[abi_x86_32(-)]
+		>=x11-libs/libX11-1.6.2[abi_x86_32(-)]
 	)
 	virtual/opengl
 "

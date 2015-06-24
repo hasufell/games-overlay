@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
 inherit fdo-mime gnome2-utils multilib
 
@@ -22,8 +22,7 @@ RDEPEND="games-emulation/psemu-peopsspu
 	opengl? ( games-emulation/psemu-gpupetexgl2
 		games-emulation/psemu-gpupetemesagl )
 	!opengl? ( games-emulation/psemu-peopssoftgpu )
-	amd64? ( app-emulation/emul-linux-x86-gtklibs )
-	x86? ( x11-libs/gtk+:1 )"
+	x11-libs/gtk+:1[abi_x86_32(-)]"
 
 S=${WORKDIR}
 

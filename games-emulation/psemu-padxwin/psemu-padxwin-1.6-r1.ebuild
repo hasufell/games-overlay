@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=3
+EAPI=5
 
 inherit multilib
 
@@ -16,8 +16,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 RESTRICT="strip"
 
-RDEPEND="x86? ( x11-libs/gtk+:1 )
-	amd64? ( app-emulation/emul-linux-x86-gtklibs )"
+RDEPEND="x11-libs/gtk+:1[abi_x86_32(-)]"
 
 S="${WORKDIR}"
 

@@ -16,11 +16,9 @@ KEYWORDS="~amd64 ~x86"
 IUSE="alsa oss"
 REQUIRED_USE="|| ( alsa oss )"
 
-DEPEND="alsa? ( media-libs/alsa-lib )
-	x86? ( x11-libs/gtk+:1 )
-	amd64? ( app-emulation/emul-linux-x86-soundlibs )"
-RDEPEND="${DEPEND}
-	amd64? ( app-emulation/emul-linux-x86-gtklibs )"
+DEPEND="alsa? ( media-libs/alsa-lib[abi_x86_32(-)] )
+	x11-libs/gtk+:1[abi_x86_32(-)]"
+RDEPEND="${DEPEND}"
 
 QA_PREBUILT="${GAMES_PREFIX}/lib32/psemu/cfg/cfgPeopsOSS
 	${GAMES_PREFIX}/lib64/psemu/cfg/cfgPeopsOSS"

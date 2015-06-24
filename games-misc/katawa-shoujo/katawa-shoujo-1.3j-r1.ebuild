@@ -22,9 +22,8 @@ DEPEND="!system-renpy? ( dev-util/patchelf )"
 # make system-renpy optional due to #459742 :(
 RDEPEND="system-renpy? ( games-engines/renpy )
 	!system-renpy? (
-		|| (
+		(
 			>=sys-libs/zlib-1.2.8-r1[abi_x86_32(-)]
-			app-emulation/emul-linux-x86-baselibs[-abi_x86_32(-)]
 		)
 	)" #495270
 
