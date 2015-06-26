@@ -1,2 +1,6 @@
 # Version 6 is the latest, please upgrade manually!
 =games-board/stockfish-20131129
+
+# Vulnerable, see https://bugs.gentoo.org/show_bug.cgi?id=553304
+=games-strategy/wesnoth-1.13.0
+<games-strategy/wesnoth-1.12.4
