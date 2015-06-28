@@ -113,7 +113,7 @@ src_compile() {
 }
 
 src_install() {
-	DOCS="README changelog players_changelog" cmake-utils_src_install
+	DOCS="README.md changelog players_changelog" cmake-utils_src_install
 	if use dedicated || use server; then
 		newinitd "${FILESDIR}"/wesnothd.rc wesnothd
 	fi
