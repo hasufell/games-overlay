@@ -37,6 +37,7 @@ CDEPEND="
 	sys-libs/zlib
 	virtual/ffmpeg
 	server? (
+		dev-haskell/zlib
 		>=dev-libs/gmp-5
 		virtual/libffi
 	)
