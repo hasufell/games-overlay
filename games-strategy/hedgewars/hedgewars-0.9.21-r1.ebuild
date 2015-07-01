@@ -37,7 +37,6 @@ CDEPEND="
 	sys-libs/zlib
 	virtual/ffmpeg
 	server? (
-		dev-haskell/zlib
 		>=dev-libs/gmp-5
 		virtual/libffi
 	)
@@ -59,6 +58,7 @@ DEPEND="${CDEPEND}
 		dev-haskell/sha
 		dev-haskell/utf8-string
 		dev-haskell/vector
+		dev-haskell/zlib
 		>=dev-lang/ghc-7.0
 	)
 "
