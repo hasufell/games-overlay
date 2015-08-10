@@ -1,7 +1,7 @@
 # Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Copyright 2014 <zimous@matfyz.cz>
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 # TODO: when physfs-2.1.0 hits the tree, set
 # -DPHYSFS_SYSTEM=ON

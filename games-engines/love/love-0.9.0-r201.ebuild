@@ -1,7 +1,7 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Id$
 
 # THIS SLOT MAY RANDOMLY CHANGE THE VERSION, USE :0.8, :0.9 etc
 # FOR GAMES THAT NEED A SPECIFIC VERSION INSTEAD.
