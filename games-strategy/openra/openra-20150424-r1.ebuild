@@ -13,7 +13,7 @@ SRC_URI="https://dev.gentoo.org/~hasufell/distfiles/${P}.tar.xz"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="tools"
+IUSE=""
 
 LUA_V=5.1.5
 DEPEND="dev-dotnet/libgdiplus
@@ -41,7 +41,7 @@ src_prepare() {
 }
 
 src_compile() {
-	emake VERSION="${PV}" $(usex tools "all" "")
+	emake VERSION="${PV}" all
 	emake VERSION="${PV}" docs
 }
 
@@ -52,7 +52,7 @@ src_install() {
 		libdir="/usr/libexec" \
 		VERSION="${PV}" \
 		DESTDIR="${D}" \
-		$(usex tools "install-all" "install") install-linux-scripts install-linux-mime install-linux-icons
+		install-all install-linux-scripts install-linux-mime install-linux-icons
 
 	exeinto /usr/libexec/openra
 	doexe Eluant.dll.config

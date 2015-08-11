@@ -10,8 +10,4 @@
 		<doc lang="en">https://github.com/OpenRA/OpenRA/wiki</doc>
 		<bugs-to>https://github.com/OpenRA/OpenRA/issues</bugs-to>
 	</upstream>
-	<use>
-		<flag name="tools">Install some development tools
-			such as editor.</flag>
-	</use>
 </pkgmetadata>
