@@ -57,7 +57,7 @@ DEPEND="${RDEPEND}
 		nls? ( sys-devel/gettext )
 	)"
 
-pkg_setup() {
+pkg_pretend() {
 	if use !dedicated && use !server ; then
 		ewarn "Disabling server USE flag will make it impossible"
 		ewarn "to start local games, but you will still be able to"
