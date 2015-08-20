@@ -31,7 +31,7 @@ RDEPEND="
 	net-libs/miniupnpc
 	net-misc/curl
 	sys-libs/zlib
-	virtual/jpeg
+	virtual/jpeg:62
 	virtual/opengl
 	x11-libs/libX11
 	x11-libs/libXcursor
