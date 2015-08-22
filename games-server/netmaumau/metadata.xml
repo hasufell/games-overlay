@@ -14,5 +14,6 @@
 	</upstream>
 	<use>
 		<flag name="console-client">Build a console based client (needs dedicated USE flag disabled!)</flag>
+		<flag name="http">Enable embedded HTTP server</flag>
 	</use>
 </pkgmetadata>
