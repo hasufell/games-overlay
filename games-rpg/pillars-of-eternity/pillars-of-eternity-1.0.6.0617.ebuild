@@ -30,6 +30,7 @@ RDEPEND="
 	x11-libs/pango
 	virtual/opengl
 "
+DEPEND="app-arch/unzip"
 
 S="${WORKDIR}/data/noarch"
 
