@@ -1,14 +1,14 @@
-# Copyright 2014 Julian Ospald <hasufell@posteo.de>
+# Copyright 2015 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI=5
 
-inherit eutils gnome2-utils multilib
+inherit eutils gnome2-utils multilib unpacker
 
 DESCRIPTION="Baldur's Gate: Enhanced Edition"
 HOMEPAGE="http://www.gog.com/game/baldurs_gate_enhanced_edition"
-SRC_URI="gog_baldurs_gate_enhanced_edition_${PV}.tar.gz"
+SRC_URI="gog_baldur_s_gate_enhanced_edition_2.0.0.2.sh"
 
 LICENSE="all-rights-reserved"
 SLOT="0"
@@ -27,7 +27,18 @@ RDEPEND="
 	virtual/opengl
 "
 
-S="${WORKDIR}/Baldurs Gate Enhanced Edition"
+S="${WORKDIR}/data/noarch"
+
+unpack_mojo_makeself_crap() {
+	local _name=${1}
+	local _offset=${2}
+	dd \
+		ibs="${_offset}" \
+		skip=1 \
+		if="${DISTDIR}/${_name}" \
+		of="${T}"/${_name}.zip || die
+	unpack_zip "${T}"/${_name}.zip
+}
 
 pkg_nofetch() {
 	einfo
@@ -35,6 +46,13 @@ pkg_nofetch() {
 	einfo "  ${HOMEPAGE}"
 	einfo "and move/link it to \"${DISTDIR}\""
 	einfo
+}
+
+src_unpack() {
+	einfo "unpacking data..."
+	unpack_mojo_makeself_crap \
+		${SRC_URI} \
+		"$(head -n 519 "${DISTDIR}/${SRC_URI}" | wc -c | tr -d ' ')"
 }
 
 src_install() {
@@ -62,7 +80,7 @@ src_install() {
 		dosym /usr/$(get_abi_LIBDIR x86)/libjson-c.so "${dir}"/lib/libjson.so.0
 	fi
 
-	newicon -s 256 support/gog-baldurs-gate-enhanced-edition.png ${PN}.png
+	newicon -s 256 support/icon.png ${PN}.png
 	make_wrapper ${PN} "./BaldursGate" "${dir}/game" "${dir}/lib"
 	make_desktop_entry ${PN} "Baldurs Gate Enhanced Edition"
 
