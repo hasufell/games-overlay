@@ -26,6 +26,7 @@ RDEPEND="
 	)
 	virtual/opengl
 "
+DEPEND="app-arch/unzip"
 
 S="${WORKDIR}/data/noarch"
 
