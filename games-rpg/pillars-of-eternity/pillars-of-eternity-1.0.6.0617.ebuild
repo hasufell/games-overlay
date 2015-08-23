@@ -10,8 +10,12 @@ DESCRIPTION="Pillars Of Eternity"
 HOMEPAGE="http://www.gog.com/game/pillars_of_eternity_hero_edition"
 
 BASE_SRC_URI="gog_pillars_of_eternity_2.5.0.8.sh"
+DLC1_SRC_URI="gog_pillars_of_eternity_kickstarter_item_dlc_2.0.0.2.sh"
+DLC2_SRC_URI="gog_pillars_of_eternity_kickstarter_pet_dlc_2.0.0.2.sh"
 DLC3_SRC_URI="gog_pillars_of_eternity_preorder_item_and_pet_dlc_2.0.0.2.sh"
 SRC_URI="${BASE_SRC_URI}
+	dlc1? ( ${DLC1_SRC_URI} )
+	dlc2? ( ${DLC2_SRC_URI} )
 	dlc3? ( ${DLC3_SRC_URI} )"
 
 LICENSE="all-rights-reserved"
@@ -48,6 +52,8 @@ unpack_mojo_makeself_crap() {
 pkg_nofetch() {
 	einfo
 	einfo "Please buy & download \"${BASE_SRC_URI}\""
+	use dlc1 && einfo "and \"${DLC1_SRC_URI}\""
+	use dlc2 && einfo "and \"${DLC2_SRC_URI}\""
 	use dlc3 && einfo "and \"${DLC3_SRC_URI}\""
 	einfo "from:"
 	einfo "  ${HOMEPAGE}"
@@ -56,10 +62,26 @@ pkg_nofetch() {
 }
 
 src_unpack() {
-	einfo "unpacking dlc3 data..."
-	use dlc3 && unpack_mojo_makeself_crap \
-		"${DLC3_SRC_URI}" \
-		"$(head -n 519 "${DISTDIR}/${DLC3_SRC_URI}" | wc -c | tr -d ' ')"
+	if use dlc1 ; then
+		einfo "unpacking dlc1 data..."
+		unpack_mojo_makeself_crap \
+			"${DLC1_SRC_URI}" \
+			"$(head -n 519 "${DISTDIR}/${DLC1_SRC_URI}" | wc -c | tr -d ' ')"
+	fi
+
+	if use dlc2 ; then
+		einfo "unpacking dlc2 data..."
+		unpack_mojo_makeself_crap \
+			"${DLC2_SRC_URI}" \
+			"$(head -n 519 "${DISTDIR}/${DLC2_SRC_URI}" | wc -c | tr -d ' ')"
+	fi
+
+	if use dlc3 ; then
+		einfo "unpacking dlc3 data..."
+		unpack_mojo_makeself_crap \
+			"${DLC3_SRC_URI}" \
+			"$(head -n 519 "${DISTDIR}/${DLC3_SRC_URI}" | wc -c | tr -d ' ')"
+	fi
 
 	einfo "unpacking base data..."
 	unpack_mojo_makeself_crap \
@@ -96,4 +118,3 @@ pkg_postinst() {
 pkg_postrm() {
 	gnome2_icon_cache_update
 }
-
