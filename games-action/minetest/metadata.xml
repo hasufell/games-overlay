@@ -42,6 +42,8 @@
 		<flag name="redis">Enable redis backend via
 			<pkg>dev-libs/hiredis</pkg>
 		</flag>
+		<flag name="spatial">Enable SpatialIndex AreaStore backend
+		</flag>
 		<flag name="server">Build minetest server</flag>
 	</use>
 	<upstream>
