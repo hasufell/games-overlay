@@ -11,7 +11,7 @@ SRC_URI="http://github.com/minetest/minetest/archive/${PV/_rc/-dev}.tar.gz -> ${
 
 LICENSE="LGPL-2.1+ CC-BY-SA-3.0"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="+curl dedicated doc leveldb luajit nls redis +server +sound +truetype"
 
 RDEPEND="dev-db/sqlite:3
