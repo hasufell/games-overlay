@@ -30,17 +30,6 @@ DEPEND="app-arch/unzip"
 
 S="${WORKDIR}/data/noarch"
 
-unpack_mojo_makeself_crap() {
-	local _name=${1}
-	local _offset=${2}
-	dd \
-		ibs="${_offset}" \
-		skip=1 \
-		if="${DISTDIR}/${_name}" \
-		of="${T}"/${_name}.zip || die
-	unpack_zip "${T}"/${_name}.zip
-}
-
 pkg_nofetch() {
 	einfo
 	einfo "Please buy & download \"${SRC_URI}\" from:"
@@ -51,9 +40,7 @@ pkg_nofetch() {
 
 src_unpack() {
 	einfo "unpacking data..."
-	unpack_mojo_makeself_crap \
-		${SRC_URI} \
-		"$(head -n 519 "${DISTDIR}/${SRC_URI}" | wc -c | tr -d ' ')"
+	unpack_zip "${DISTDIR}/${SRC_URI}"
 }
 
 src_install() {
