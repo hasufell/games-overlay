@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=5
-inherit eutils cmake-utils git-2 gnome2-utils vcs-snapshot user
+inherit cmake-utils git-r3 gnome2-utils user
 
 DESCRIPTION="An InfiniMiner/Minecraft inspired game"
 HOMEPAGE="http://minetest.net/"
@@ -12,7 +12,7 @@ EGIT_REPO_URI="git://github.com/minetest/${PN}.git"
 LICENSE="LGPL-2.1+ CC-BY-SA-3.0"
 SLOT="0"
 KEYWORDS=""
-IUSE="+curl dedicated doc leveldb luajit nls redis +server +sound +truetype"
+IUSE="+curl dedicated doc leveldb luajit nls redis +server +sound spatial +truetype"
 
 RDEPEND="dev-db/sqlite:3
 	sys-libs/zlib
@@ -20,6 +20,7 @@ RDEPEND="dev-db/sqlite:3
 	!dedicated? (
 		app-arch/bzip2
 		>=dev-games/irrlicht-1.8-r2
+		dev-libs/gmp:0
 		media-libs/libpng:0
 		virtual/jpeg
 		virtual/opengl
@@ -35,7 +36,8 @@ RDEPEND="dev-db/sqlite:3
 	leveldb? ( dev-libs/leveldb )
 	luajit? ( dev-lang/luajit:2 )
 	nls? ( virtual/libintl )
-	redis? ( dev-libs/hiredis )"
+	redis? ( dev-libs/hiredis )
+	spatial? ( sci-libs/libspatialindex )"
 DEPEND="${RDEPEND}
 	>=dev-games/irrlicht-1.8-r2
 	doc? ( app-doc/doxygen media-gfx/graphviz )
@@ -48,11 +50,19 @@ pkg_setup() {
 	fi
 }
 
-src_unpack() {
-	git-2_src_unpack
-}
-
 src_prepare() {
+	# correct gettext behavior
+	if [[ -n "${LINGUAS+x}" ]] ; then
+		for i in $(cd po ; echo *) ; do
+			if ! has ${i} ${LINGUAS} ; then
+				rm -r po/${i} || die
+			fi
+		done
+	fi
+
+	# jthread is modified
+	# json is modified
+
 	# set paths
 	sed \
 		-e "s#@BINDIR@#/usr/bin#g" \
@@ -73,10 +83,10 @@ src_configure() {
 		-DENABLE_GLES=0
 		$(cmake-utils_use_enable leveldb LEVELDB)
 		$(cmake-utils_use_enable redis REDIS)
+		-DENABLE_SPATIAL=$(usex spatial)
 		$(cmake-utils_use_enable sound SOUND)
 		$(cmake-utils_use !luajit DISABLE_LUAJIT)
 		-DRUN_IN_PLACE=0
-		-DWITH_BUNDLED_LUA=0
 		$(use dedicated && {
 			echo "-DIRRLICHT_SOURCE_DIR=/the/irrlicht/source"
 			echo "-DIRRLICHT_INCLUDE_DIR=/usr/include/irrlicht"
@@ -90,7 +100,7 @@ src_compile() {
 	cmake-utils_src_compile
 
 	if use doc ; then
-		emake -C "${CMAKE_BUILD_DIR}" doc
+		cmake-utils_src_compile doc
 	fi
 }
 
