@@ -4,11 +4,11 @@
 
 EAPI=5
 
-inherit eutils gnome2-utils check-reqs
+inherit eutils gnome2-utils check-reqs unpacker
 
 DESCRIPTION="Direct sequel to 1988's Wasteland, the first-ever post-apocalyptic computer RPG and the inspiration behind the Fallout series"
 HOMEPAGE="https://wasteland.inxile-entertainment.com/"
-SRC_URI="gog_wasteland_2_${PV}.tar.gz"
+SRC_URI="gog_wasteland_2_2.9.0.14.sh"
 
 LICENSE="all-rights-reserved"
 SLOT="0"
@@ -32,11 +32,23 @@ RDEPEND="
 	>=virtual/glu-9.0-r1[abi_x86_32(-)]
 	virtual/opengl
 "
+DEPEND="app-arch/unzip"
 
-S="${WORKDIR}/Wasteland 2"
+S="${WORKDIR}/data/noarch"
 
 CHECKREQS_DISK_BUILD="22000M"
 CHECKREQS_DISK_USR="21600M"
+
+unpack_mojo_makeself_crap() {
+	local _name=${1}
+	local _offset=${2}
+	dd \
+		ibs="${_offset}" \
+		skip=1 \
+		if="${DISTDIR}/${_name}" \
+		of="${T}"/${_name}.zip || die
+	unpack_zip "${T}"/${_name}.zip
+}
 
 pkg_nofetch() {
 	einfo
@@ -51,6 +63,13 @@ pkg_nofetch() {
 	einfo
 }
 
+src_unpack() {
+	einfo "unpacking data..."
+	unpack_mojo_makeself_crap \
+		${SRC_URI} \
+		"$(head -n 519 "${DISTDIR}/${SRC_URI}" | wc -c | tr -d ' ')"
+}
+
 src_install() {
 	local dir=/opt/${PN}
 
@@ -61,7 +80,7 @@ src_install() {
 	doexe game/WL2
 
 	make_wrapper ${PN} ./WL2 "${dir}"
-	newicon -s 256 support/gog-wasteland-2.png ${PN}.png
+	newicon -s 256 support/icon.png ${PN}.png
 	make_desktop_entry ${PN} "Wasteland 2"
 
 	dodoc docs/*.pdf
