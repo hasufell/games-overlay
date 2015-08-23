@@ -4,18 +4,14 @@
 
 EAPI=5
 
-inherit eutils gnome2-utils multilib
+inherit eutils gnome2-utils multilib unpacker
 
 DESCRIPTION="Pillars Of Eternity"
 HOMEPAGE="http://www.gog.com/game/pillars_of_eternity_hero_edition"
 
-BASE_SRC_URI="gog_pillars_of_eternity_${PV}.tar.gz"
-DLC1_SRC_URI="gog_pillars_of_eternity_dlc1_1.0.0.1.tar.gz "
-DLC2_SRC_URI="gog_pillars_of_eternity_dlc2_1.0.0.1.tar.gz "
-DLC3_SRC_URI="gog_pillars_of_eternity_dlc3_1.0.0.1.tar.gz"
+BASE_SRC_URI="gog_pillars_of_eternity_2.5.0.8.sh"
+DLC3_SRC_URI="gog_pillars_of_eternity_preorder_item_and_pet_dlc_2.0.0.2.sh"
 SRC_URI="${BASE_SRC_URI}
-	dlc1? ( ${DLC1_SRC_URI} )
-	dlc2? ( ${DLC2_SRC_URI} )
 	dlc3? ( ${DLC3_SRC_URI} )"
 
 LICENSE="all-rights-reserved"
@@ -35,13 +31,22 @@ RDEPEND="
 	virtual/opengl
 "
 
-S="${WORKDIR}/Pillars of Eternity"
+S="${WORKDIR}/data/noarch"
+
+unpack_mojo_makeself_crap() {
+	local _name=${1}
+	local _offset=${2}
+	dd \
+		ibs="${_offset}" \
+		skip=1 \
+		if="${DISTDIR}/${_name}" \
+		of="${T}"/${_name}.zip || die
+	unpack_zip "${T}"/${_name}.zip
+}
 
 pkg_nofetch() {
 	einfo
 	einfo "Please buy & download \"${BASE_SRC_URI}\""
-	use dlc1 && einfo "and \"${DLC1_SRC_URI}\""
-	use dlc2 && einfo "and \"${DLC2_SRC_URI}\""
 	use dlc3 && einfo "and \"${DLC3_SRC_URI}\""
 	einfo "from:"
 	einfo "  ${HOMEPAGE}"
@@ -49,9 +54,16 @@ pkg_nofetch() {
 	einfo
 }
 
-src_prepare() {
-	# rm steam stuff
-	rm game/PillarsOfEternity_Data/Plugins/x86_64/{libCSteamworks,libsteam_api}.so || die
+src_unpack() {
+	einfo "unpacking dlc3 data..."
+	use dlc3 && unpack_mojo_makeself_crap \
+		"${DLC3_SRC_URI}" \
+		"$(head -n 519 "${DISTDIR}/${DLC3_SRC_URI}" | wc -c | tr -d ' ')"
+
+	einfo "unpacking base data..."
+	unpack_mojo_makeself_crap \
+		"${BASE_SRC_URI}" \
+		"$(head -n 519 "${DISTDIR}/${BASE_SRC_URI}" | wc -c | tr -d ' ')"
 }
 
 src_install() {
@@ -64,16 +76,12 @@ src_install() {
 	dodoc game/Docs/{pe-game-manual.pdf,readme.txt}
 
 	dodir "${dir}"
+	rm "${S}"/game/PillarsOfEternity_Data/Plugins/x86_64/libCSteamworks.so \
+		"${S}"/game/PillarsOfEternity_Data/Plugins/x86_64/libsteam_api.so || die
 	mv "${S}/game" "${D}${dir}/" || die
 	fperms +x "${dir}"/game/PillarsOfEternity
 
 	insinto "${dir}"/game
-	use dlc1 &&
-		doins -r "${WORKDIR}/Pillars of Eternity Kickstarter Item DLC/content/PillarsOfEternity_Data"
-	use dlc2 &&
-		doins -r "${WORKDIR}/Pillars of Eternity Kickstarter Pet DLC/content/PillarsOfEternity_Data"
-	use dlc3 &&
-		doins -r "${WORKDIR}/Pillars of Eternity Preorder Item and Pet DLC/content/PillarsOfEternity_Data"
 }
 
 pkg_preinst() {

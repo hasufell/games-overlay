@@ -4,3 +4,8 @@
 # Vulnerable, see https://bugs.gentoo.org/show_bug.cgi?id=553304
 =games-strategy/wesnoth-1.13.0
 <games-strategy/wesnoth-1.12.4
+
+# The old version scheme was broken, please uninstall
+# games-rpg/pillars-of-eternity-1.5.0.7 and reinstall the
+# new version.
+=games-rpg/pillars-of-eternity-1.5.0.7*
