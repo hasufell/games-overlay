@@ -38,17 +38,6 @@ DEPEND="app-arch/unzip"
 
 S="${WORKDIR}/data/noarch"
 
-unpack_mojo_makeself_crap() {
-	local _name=${1}
-	local _offset=${2}
-	dd \
-		ibs="${_offset}" \
-		skip=1 \
-		if="${DISTDIR}/${_name}" \
-		of="${T}"/${_name}.zip || die
-	unpack_zip "${T}"/${_name}.zip
-}
-
 pkg_nofetch() {
 	einfo
 	einfo "Please buy & download \"${BASE_SRC_URI}\""
@@ -64,29 +53,21 @@ pkg_nofetch() {
 src_unpack() {
 	if use dlc1 ; then
 		einfo "unpacking dlc1 data..."
-		unpack_mojo_makeself_crap \
-			"${DLC1_SRC_URI}" \
-			"$(head -n 519 "${DISTDIR}/${DLC1_SRC_URI}" | wc -c | tr -d ' ')"
+		unpack_zip "${DISTDIR}/${DLC1_SRC_URI}"
 	fi
 
 	if use dlc2 ; then
 		einfo "unpacking dlc2 data..."
-		unpack_mojo_makeself_crap \
-			"${DLC2_SRC_URI}" \
-			"$(head -n 519 "${DISTDIR}/${DLC2_SRC_URI}" | wc -c | tr -d ' ')"
+		unpack_zip "${DISTDIR}/${DLC2_SRC_URI}"
 	fi
 
 	if use dlc3 ; then
 		einfo "unpacking dlc3 data..."
-		unpack_mojo_makeself_crap \
-			"${DLC3_SRC_URI}" \
-			"$(head -n 519 "${DISTDIR}/${DLC3_SRC_URI}" | wc -c | tr -d ' ')"
+		unpack_zip "${DISTDIR}/${DLC3_SRC_URI}"
 	fi
 
 	einfo "unpacking base data..."
-	unpack_mojo_makeself_crap \
-		"${BASE_SRC_URI}" \
-		"$(head -n 519 "${DISTDIR}/${BASE_SRC_URI}" | wc -c | tr -d ' ')"
+	unpack_zip "${DISTDIR}/${BASE_SRC_URI}"
 }
 
 src_install() {
