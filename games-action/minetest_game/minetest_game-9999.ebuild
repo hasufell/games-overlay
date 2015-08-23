@@ -1,9 +1,9 @@
-# Copyright 2014 Julian Ospald <hasufell@posteo.de>
+# Copyright 2015 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI=5
-inherit git-2
+inherit git-r3
 
 DESCRIPTION="The main game for the Minetest game engine"
 HOMEPAGE="http://github.com/minetest/minetest_game"
@@ -15,10 +15,6 @@ KEYWORDS=""
 IUSE=""
 
 RDEPEND="~games-action/minetest-${PV}"
-
-src_unpack() {
-	git-2_src_unpack
-}
 
 src_install() {
 	insinto /usr/share/minetest/games/${PN}
