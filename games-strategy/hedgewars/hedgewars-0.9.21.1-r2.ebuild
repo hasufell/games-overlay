@@ -48,7 +48,6 @@ DEPEND="${CDEPEND}
 		dev-haskell/binary
 		dev-haskell/bytestring-show
 		dev-haskell/dataenc
-		dev-haskell/deepseq
 		dev-haskell/entropy
 		dev-haskell/hslogger
 		>=dev-haskell/mtl-2.0.1.0
