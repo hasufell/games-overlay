@@ -89,8 +89,9 @@ src_configure() {
 		$(cmake-utils_use_enable redis REDIS)
 		-DENABLE_SPATIAL=$(usex spatial)
 		$(cmake-utils_use_enable sound SOUND)
-		$(cmake-utils_use !luajit DISABLE_LUAJIT)
+		$(cmake-utils_use luajit ENABLE_LUAJIT)
 		-DRUN_IN_PLACE=0
+		-DCUSTOM_EXAMPLE_CONF_DIR=/usr/share/doc/${PF}
 		$(use dedicated && {
 			echo "-DIRRLICHT_SOURCE_DIR=/the/irrlicht/source"
 			echo "-DIRRLICHT_INCLUDE_DIR=/usr/include/irrlicht"
