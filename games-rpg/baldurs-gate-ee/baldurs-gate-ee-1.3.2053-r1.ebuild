@@ -8,7 +8,7 @@ inherit eutils gnome2-utils multilib unpacker
 
 DESCRIPTION="Baldur's Gate: Enhanced Edition"
 HOMEPAGE="http://www.gog.com/game/baldurs_gate_enhanced_edition"
-SRC_URI="gog_baldur_s_gate_enhanced_edition_2.0.0.2.sh"
+SRC_URI="gog_baldur_s_gate_enhanced_edition_2.0.0.3.sh"
 
 LICENSE="all-rights-reserved"
 SLOT="0"
