@@ -24,6 +24,7 @@ RDEPEND="
 	dev-libs/tinyxml
 	>=dev-qt/qtcore-4.7.0:4
 	>=dev-qt/qtgui-4.7.0:4
+	media-libs/freeimage[png,jpeg]
 	media-libs/freetype:2
 	media-libs/libsdl2[X,video]
 	media-libs/openal
