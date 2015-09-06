@@ -9,7 +9,7 @@ inherit eutils gnome2-utils multilib unpacker
 DESCRIPTION="Pillars Of Eternity"
 HOMEPAGE="http://www.gog.com/game/pillars_of_eternity_hero_edition"
 
-BASE_SRC_URI="gog_pillars_of_eternity_2.6.0.9.sh"
+BASE_SRC_URI="gog_pillars_of_eternity_2.7.0.10.sh"
 DLC1_SRC_URI="gog_pillars_of_eternity_kickstarter_item_dlc_2.0.0.2.sh"
 DLC2_SRC_URI="gog_pillars_of_eternity_kickstarter_pet_dlc_2.0.0.2.sh"
 DLC3_SRC_URI="gog_pillars_of_eternity_preorder_item_and_pet_dlc_2.0.0.2.sh"
