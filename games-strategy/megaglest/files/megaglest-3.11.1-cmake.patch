@@ -1,0 +1,62 @@
+From ff8704854ddf4b931ac1f1e27dee8a440ef07e75 Mon Sep 17 00:00:00 2001
+From: hasufell <hasufell@gentoo.org>
+Date: Sat, 10 Oct 2015 23:00:06 +0200
+Subject: [PATCH] Fix build with >=cmake-3.2
+
+The FindOpenGL module no longer pulls in X11 libraries.
+---
+ source/g3d_viewer/CMakeLists.txt | 3 ++-
+ source/glest_game/CMakeLists.txt | 3 ++-
+ source/shared_lib/CMakeLists.txt | 3 ++-
+ 3 files changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/source/g3d_viewer/CMakeLists.txt b/source/g3d_viewer/CMakeLists.txt
+index 9e3cd5c..456092f 100644
+--- a/source/g3d_viewer/CMakeLists.txt
++++ b/source/g3d_viewer/CMakeLists.txt
+@@ -16,8 +16,9 @@ IF(BUILD_MEGAGLEST_MODEL_VIEWER)
+ 	SET(EXTERNAL_LIBS ${EXTERNAL_LIBS} ${SDL_LIBRARY})
+ 
+ 	FIND_PACKAGE(OpenGL REQUIRED)
++	FIND_PACKAGE(X11 REQUIRED)
+ 	INCLUDE_DIRECTORIES(${OPENGL_INCLUDE_DIR})
+-	SET(EXTERNAL_LIBS ${EXTERNAL_LIBS} ${OPENGL_LIBRARY})
++	SET(EXTERNAL_LIBS ${EXTERNAL_LIBS} ${OPENGL_LIBRARY} ${X11_LIBRARIES})
+ 
+ 	FIND_PACKAGE(GLEW REQUIRED)
+ 	INCLUDE_DIRECTORIES(${GLEW_INCLUDE_PATH})
+diff --git a/source/glest_game/CMakeLists.txt b/source/glest_game/CMakeLists.txt
+index 9b6025d..312ee07 100644
+--- a/source/glest_game/CMakeLists.txt
++++ b/source/glest_game/CMakeLists.txt
+@@ -36,9 +36,10 @@ IF(BUILD_MEGAGLEST)
+ 	ENDIF()
+ 
+ 	FIND_PACKAGE(OpenGL REQUIRED)
++	FIND_PACKAGE(X11 REQUIRED)
+ 	INCLUDE_DIRECTORIES(${OPENGL_INCLUDE_DIR})
+ 	IF(UNIX)
+-		SET(EXTERNAL_LIBS ${EXTERNAL_LIBS} ${OPENGL_LIBRARY})
++		SET(EXTERNAL_LIBS ${EXTERNAL_LIBS} ${OPENGL_LIBRARY} ${X11_LIBRARIES})
+ 	ENDIF()
+ 
+         IF(WANT_XERCES)
+diff --git a/source/shared_lib/CMakeLists.txt b/source/shared_lib/CMakeLists.txt
+index 9a4c7c9..8034e37 100644
+--- a/source/shared_lib/CMakeLists.txt
++++ b/source/shared_lib/CMakeLists.txt
+@@ -90,9 +90,10 @@ IF(BUILD_MEGAGLEST_MODEL_VIEWER OR BUILD_MEGAGLEST_MAP_EDITOR OR BUILD_MEGAGLEST
+ 	ENDIF()
+ 
+ 	FIND_PACKAGE(OpenGL REQUIRED)
++	FIND_PACKAGE(X11 REQUIRED)
+ 	INCLUDE_DIRECTORIES(${OPENGL_INCLUDE_DIR})
+ 	IF(UNIX)
+-		SET(EXTERNAL_LIBS ${EXTERNAL_LIBS} ${OPENGL_LIBRARY})
++		SET(EXTERNAL_LIBS ${EXTERNAL_LIBS} ${OPENGL_LIBRARY} ${X11_LIBRARIES})
+ 	ENDIF()
+ 
+ 
+-- 
+2.6.0
+
