@@ -47,7 +47,6 @@ RDEPEND="
 		)
 	videos? ( media-video/vlc )"
 DEPEND="${RDEPEND}
-	sys-apps/help2man
 	virtual/pkgconfig
 	editor? ( ${VIRTUALX_DEPEND} )
 	model-viewer? ( ${VIRTUALX_DEPEND} )
@@ -69,6 +68,12 @@ src_prepare() {
 		WX_GTK_VER="2.8"
 		need-wxwidgets unicode
 	fi
+
+	# help2man rules are currently broken for ninja, just skip this,
+	# not vital stuff anyway, just duplicated --help info
+	sed -i \
+		-e '/FIND_PROGRAM(HELP2MAN/d' \
+		CMakeLists.txt source/*/CMakeLists.txt || die
 
 	epatch "${FILESDIR}"/${PN}-3.9.1-static-build.patch \
 		"${FILESDIR}"/${P}-cmake.patch \
@@ -125,8 +130,12 @@ src_compile() {
 }
 
 src_install() {
-	# rebuilds some targets randomly without fast option
-	emake -C "${CMAKE_BUILD_DIR}" DESTDIR="${D}" "$@" install/fast
+	if [[ ${CMAKE_MAKEFILE_GENERATOR} != emake ]] ; then
+		cmake-utils_src_install
+	else
+		# rebuilds some targets randomly without fast option
+		emake -C "${BUILD_DIR}" DESTDIR="${D}" "$@" install/fast
+	fi
 
 	dodoc docs/{AUTHORS.source_code,CHANGELOG,README}.txt
 	doicon -s 48 ${PN}.png
