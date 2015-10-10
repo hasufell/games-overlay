@@ -19,7 +19,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="debug +editor fribidi cpu_flags_x86_sse cpu_flags_x86_sse2 cpu_flags_x86_sse3 static +streflop +tools +unicode wxuniversal +model-viewer videos"
 
 RDEPEND="
-	>=dev-lang/lua-5.1
+	>=dev-lang/lua-5.1:0
 	dev-libs/libxml2
 	media-libs/fontconfig
 	media-libs/freetype
@@ -43,7 +43,7 @@ RDEPEND="
 		net-libs/libircclient
 		>=net-libs/miniupnpc-1.8
 		net-misc/curl
-		virtual/jpeg
+		virtual/jpeg:0
 		)
 	videos? ( media-video/vlc )"
 DEPEND="${RDEPEND}
@@ -60,7 +60,7 @@ DEPEND="${RDEPEND}
 		net-libs/libircclient[static-libs]
 		net-libs/miniupnpc[static-libs]
 		net-misc/curl[static-libs]
-		virtual/jpeg[static-libs]
+		virtual/jpeg:0[static-libs]
 	)"
 PDEPEND="~games-strategy/${PN}-data-${PV}"
 
