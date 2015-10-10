@@ -71,7 +71,8 @@ src_prepare() {
 	fi
 
 	epatch "${FILESDIR}"/${PN}-3.9.1-static-build.patch \
-		"${FILESDIR}"/${P}-cmake.patch
+		"${FILESDIR}"/${P}-cmake.patch \
+		"${FILESDIR}"/${P}-miniupnpc.patch
 }
 
 src_configure() {
