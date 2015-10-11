@@ -1,0 +1,53 @@
+# HG changeset patch
+# User unc0rr
+# Date 1433363096 -10800
+# Node ID 6aba07ea908b2fef52e36b7be0ca5e7e2d3fdf1d
+# Parent  caf81db532ed3851da591ee536d09f8a60d7c9e2
+Lazy fix for server build
+
+diff -r caf81db532ed -r 6aba07ea908b gameServer/CoreTypes.hs
+--- a/gameServer/CoreTypes.hs	Tue Jun 02 19:53:30 2015 +0100
++++ b/gameServer/CoreTypes.hs	Wed Jun 03 23:24:56 2015 +0300
+@@ -38,7 +38,7 @@
+ instance NFData B.ByteString
+ #endif
+ 
+-instance NFData (Chan a) where rnf a  = ()
++instance NFData (Chan a) where rnf a  = a `seq` ()
+ 
+ instance NFData Action where
+     rnf (AnswerClients chans msg) = chans `deepseq` msg `deepseq` ()
+diff -r caf81db532ed -r 6aba07ea908b gameServer/EngineInteraction.hs
+--- a/gameServer/EngineInteraction.hs	Tue Jun 02 19:53:30 2015 +0100
++++ b/gameServer/EngineInteraction.hs	Wed Jun 03 23:24:56 2015 +0300
+@@ -16,9 +16,13 @@
+  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+  \-}
+ 
+-{-# LANGUAGE OverloadedStrings #-}
++{-# LANGUAGE CPP, OverloadedStrings #-}
+ 
++#if defined(OFFICIAL_SERVER)
+ module EngineInteraction(replayToDemo, checkNetCmd, toEngineMsg, drawnMapData) where
++#else
++module EngineInteraction(checkNetCmd, toEngineMsg, drawnMapData) where
++#endif
+ 
+ import qualified Data.Set as Set
+ import Control.Monad
+@@ -89,6 +93,7 @@
+         slotMessages = "\128\129\130\131\132\133\134\135\136\137\138"
+         timedMessages = Set.fromList $ "+LlRrUuDdZzAaSjJ,NpPwtgfc12345" ++ slotMessages
+ 
++#if defined(OFFICIAL_SERVER)
+ replayToDemo :: [TeamInfo]
+         -> Map.Map B.ByteString B.ByteString
+         -> Map.Map B.ByteString [B.ByteString]
+@@ -152,6 +157,7 @@
+                             ])
+                         $ hedgehogs t
+                         )
++#endif
+ 
+ drawnMapData :: B.ByteString -> [B.ByteString]
+ drawnMapData =

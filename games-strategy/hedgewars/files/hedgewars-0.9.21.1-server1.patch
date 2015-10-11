@@ -1,0 +1,32 @@
+
+# HG changeset patch
+# User koda
+# Date 1433271064 -3600
+# Node ID b2823ea26631508308731aef782508b57b90ffc5
+# Parent  56f07b52213abb00f05608cb8c02647b62eb6f0f
+Fix building hedgewars-server
+
+diff -r 56f07b52213a -r b2823ea26631 gameServer/CoreTypes.hs
+--- a/gameServer/CoreTypes.hs	Tue Jun 02 18:37:40 2015 +0100
++++ b/gameServer/CoreTypes.hs	Tue Jun 02 19:51:04 2015 +0100
+@@ -38,7 +38,7 @@
+ instance NFData B.ByteString
+ #endif
+ 
+-instance NFData (Chan a)
++instance NFData (Chan a) where rnf a  = ()
+ 
+ instance NFData Action where
+     rnf (AnswerClients chans msg) = chans `deepseq` msg `deepseq` ()
+diff -r 56f07b52213a -r b2823ea26631 gameServer/hedgewars-server.cabal
+--- a/gameServer/hedgewars-server.cabal	Tue Jun 02 18:37:40 2015 +0100
++++ b/gameServer/hedgewars-server.cabal	Tue Jun 02 19:51:04 2015 +0100
+@@ -33,7 +33,7 @@
+     utf8-string,
+     SHA,
+     entropy,
+-    zlib
++    zlib >= 0.5.3 && < 0.6
+ 
+   if !os(windows)
+     build-depends: unix
