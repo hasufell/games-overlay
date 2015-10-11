@@ -64,8 +64,6 @@ DEPEND="${CDEPEND}
 
 S=${WORKDIR}/${PN}-src-${PV:0:6}
 
-PATCHES=( "${FILESDIR}"/${P}-server.patch )
-
 src_configure() {
 	local mycmakeargs=(
 		-DMINIMAL_FLAGS=ON
