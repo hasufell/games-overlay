@@ -73,6 +73,7 @@ src_unpack() {
 	cd "${S}"/thirdparty || die
 	sed -i \
 		-e 's/^function get/function furz/' \
+		-e 's|curl |: |' \
 		fetch-thirdparty-deps.sh || die
 
 	mkdir "${S}"/thirdparty/download || die
