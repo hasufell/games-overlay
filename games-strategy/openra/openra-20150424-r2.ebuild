@@ -19,10 +19,10 @@ LUA_V=5.1.5
 DEPEND="dev-dotnet/libgdiplus
 	~dev-lang/lua-${LUA_V}:0
 	dev-lang/mono
-	media-libs/freetype:2
-	media-libs/libsdl2[opengl,video]
+	media-libs/freetype:2[X]
+	media-libs/libsdl2[X,opengl,video]
 	media-libs/openal
-	virtual/jpeg
+	virtual/jpeg:0
 	virtual/opengl"
 RDEPEND="${DEPEND}"
 
