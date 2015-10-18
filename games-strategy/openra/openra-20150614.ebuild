@@ -51,7 +51,7 @@ IUSE=""
 RESTRICT="mirror"
 
 LUA_V=5.1.5
-DEPEND="dev-dotnet/libgdiplus
+RDEPEND="dev-dotnet/libgdiplus
 	~dev-lang/lua-${LUA_V}:0
 	dev-lang/mono
 	media-libs/freetype:2
@@ -59,7 +59,8 @@ DEPEND="dev-dotnet/libgdiplus
 	media-libs/openal
 	virtual/jpeg
 	virtual/opengl"
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}
+	app-arch/unzip"
 
 S=${WORKDIR}/OpenRA-release-${PV}
 
@@ -75,12 +76,12 @@ src_unpack() {
 
 	mkdir "${S}"/thirdparty/download || die
 	get() {
+		# don't add dies here
 		local archive="${1/./_}"
 		local version="${2}"
-		mkdir -p "${S}"/thirdparty/download/${1} || die
-		cd "${S}"/thirdparty/download/${1} || die
-		unpack ${archive}-${version}.zip
-		cd "${S}"/thirdparty/download || die
+		mkdir -p "${S}"/thirdparty/download/${1}
+		unzip -o -qq "${DISTDIR}"/${archive}-${version}.zip \
+			-d "${S}"/thirdparty/download/${1}
 	}
 	export -f get
 	./fetch-thirdparty-deps.sh || die
