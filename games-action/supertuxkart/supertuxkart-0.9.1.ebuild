@@ -12,7 +12,7 @@ SRC_URI="mirror://sourceforge/supertuxkart/SuperTuxKart/${PV}/${P}-src.tar.xz
 
 LICENSE="GPL-2 GPL-3 CC-BY-SA-3.0 public-domain"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="debug fribidi wiimote"
 
 RDEPEND="
