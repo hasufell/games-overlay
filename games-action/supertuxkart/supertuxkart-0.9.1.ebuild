@@ -50,8 +50,6 @@ src_configure() {
 	local mycmakeargs=(
 		$(cmake-utils_use_use fribidi FRIBIDI)
 		$(cmake-utils_use_use wiimote WIIUSE)
-		-DSTK_INSTALL_BINARY_DIR=/usr/bin
-		-DSTK_INSTALL_DATA_DIR=/usr/share/${PN}
 		-DUSE_SYSTEM_ANGELSCRIPT=ON
 	)
 
