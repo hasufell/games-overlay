@@ -48,8 +48,8 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		$(cmake-utils_use_use fribidi FRIBIDI)
-		$(cmake-utils_use_use wiimote WIIUSE)
+		-DUSE_WIIUSE=$(usex wiimote)
+		-DUSE_FRIBIDI=$(usex fribidi)
 		-DUSE_SYSTEM_ANGELSCRIPT=ON
 	)
 
