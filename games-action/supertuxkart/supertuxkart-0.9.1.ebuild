@@ -12,10 +12,12 @@ SRC_URI="mirror://sourceforge/supertuxkart/SuperTuxKart/${PV}/${P}-src.tar.xz
 
 LICENSE="GPL-2 GPL-3 CC-BY-SA-3.0 public-domain"
 SLOT="0"
-KEYWORDS="amd64 ~ppc x86"
+KEYWORDS="amd64 x86"
 IUSE="debug fribidi wiimote"
 
-RDEPEND="media-libs/libpng:0
+RDEPEND="
+	>=dev-libs/angelscript-2.30
+	media-libs/libpng:0
 	media-libs/libvorbis
 	media-libs/openal
 	net-misc/curl
@@ -40,6 +42,8 @@ src_prepare() {
 			-e 's/add_definitions(-DNDEBUG)/add_definitions(-DDEBUG)/' \
 			CMakeLists.txt || die
 	fi
+
+	epatch "${FILESDIR}"/${P}-system-angelscript.patch
 }
 
 src_configure() {
@@ -48,6 +52,7 @@ src_configure() {
 		$(cmake-utils_use_use wiimote WIIUSE)
 		-DSTK_INSTALL_BINARY_DIR=/usr/bin
 		-DSTK_INSTALL_DATA_DIR=/usr/share/${PN}
+		-DUSE_SYSTEM_ANGELSCRIPT=ON
 	)
 
 	cmake-utils_src_configure
