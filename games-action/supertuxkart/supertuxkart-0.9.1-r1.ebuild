@@ -16,7 +16,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="debug fribidi wiimote"
 
 RDEPEND="
-	>=dev-libs/angelscript-2.30
+	>=dev-libs/angelscript-2.30:=
 	media-libs/libpng:0
 	media-libs/libvorbis
 	media-libs/openal
