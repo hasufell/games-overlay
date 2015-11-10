@@ -84,8 +84,6 @@ src_install() {
 		"${S}"/game/PillarsOfEternity_Data/Plugins/x86_64/libsteam_api.so || die
 	mv "${S}/game" "${D}${dir}/" || die
 	fperms +x "${dir}"/game/PillarsOfEternity
-
-	insinto "${dir}"/game
 }
 
 pkg_preinst() {
