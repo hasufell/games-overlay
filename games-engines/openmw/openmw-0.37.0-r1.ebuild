@@ -18,8 +18,7 @@ IUSE="doc devtools"
 # XXX static build
 RDEPEND="
 	app-arch/unshield
-	>=dev-games/mygui-3.2.1[ogre]
-	>=dev-games/ogre-1.9.0[-double-precision,freeimage,ois,opengl,zip]
+	>=dev-games/mygui-3.2.1
 	dev-games/openscenegraph[jpeg,png,qt4]
 	>=dev-libs/boost-1.46.0
 	dev-libs/tinyxml
@@ -90,6 +89,9 @@ pkg_postinst() {
 	elog "installation wizard which is the officially"
 	elog "supported method (either by using the launcher or by calling"
 	elog "'openmw-wizard' directly)."
+	elog
+	elog "If you are using opensource drivers you should consider installing:"
+	elog "    media-libs/libtxc_dxtn"
 }
 
 pkg_postrm() {
