@@ -15,7 +15,7 @@ Games ebuilds, nothing else. No libraries.
 With paludis: see [Paludis repository configuration](http://paludis.exherbo.org/configuration/repositories/index.html)
 
 With layman:
-```layman -f -o https://raw.github.com/hasufell/games-overlay/master/repository.xml -a games-overlay``` or ```layman -a games-overlay```
+```layman -a games-overlay``` or ```layman -f -o https://raw.github.com/hasufell/games-overlay/master/repository.xml -a games-overlay```
 
 ### Signature verification
 
