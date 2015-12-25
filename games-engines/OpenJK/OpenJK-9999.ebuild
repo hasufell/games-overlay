@@ -29,11 +29,6 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 
 src_prepare() {
-	# gentoos zlib is terrible
-	sed -i \
-		-e '1i#define OF(x) x' \
-		lib/minizip/* || die "sed failed"
-
 	# respect our build type, needs hax
 	sed -i \
 		-e 's/COMPILE_DEFINITIONS_RELEASE/COMPILE_DEFINITIONS/g' \
