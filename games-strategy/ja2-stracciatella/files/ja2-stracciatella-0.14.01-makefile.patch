@@ -1,0 +1,18 @@
+diff --git a/Makefile b/Makefile
+index 27ef953..cc1e2cd 100644
+--- a/Makefile
++++ b/Makefile
+@@ -610,11 +610,11 @@ install: $(BINARY)
+ 	test -z "$(INSTALLABLE)" || install -d $(BINARY_DIR)
+ 	test -z "$(INSTALLABLE)" || install -d $(MANPAGE_DIR)
+ 	test -z "$(INSTALLABLE)" || install -d $(FULL_PATH_EXTRA_DATA_DIR)
+-	test -z "$(INSTALLABLE)" || install -m 555 $(BINARY) $(BINARY_DIR)
++	test -z "$(INSTALLABLE)" || install -m 755 $(BINARY) $(BINARY_DIR)
+ 	test -z "$(INSTALLABLE)" || cp -r externalized $(FULL_PATH_EXTRA_DATA_DIR)
+ 	test -z "$(INSTALLABLE)" || cp -r mods         $(FULL_PATH_EXTRA_DATA_DIR)
+ 	test -z "$(INSTALLABLE)" || cp -r _unittests   $(FULL_PATH_EXTRA_DATA_DIR)
+-	test -z "$(INSTALLABLE)" || install -m 444 ja2_manpage $(MANPAGE_DIR)/ja2.6
++	test -z "$(INSTALLABLE)" || install -m 644 ja2_manpage $(MANPAGE_DIR)/ja2.6
+ 
+ 	@test -n "$(INSTALLABLE)" || echo "------------------------------------------------------------------------------"
+ 	@test -n "$(INSTALLABLE)" || echo "This build doesn't support installation."
