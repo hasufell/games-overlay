@@ -79,7 +79,3 @@ src_install() {
 	fi
 }
 
-pkg_postinst() {
-	elog "This is just the data portion of the game. You will need to install"
-	elog "games-strategy/ja2-stracciatella to play the game."
-}
