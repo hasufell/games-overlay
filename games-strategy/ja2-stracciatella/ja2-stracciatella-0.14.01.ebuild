@@ -7,7 +7,7 @@ EAPI=5
 inherit eutils vcs-snapshot
 
 DESCRIPTION="A port of Jagged Alliance 2 to SDL"
-HOMEPAGE="http://tron.homeunix.org/ja2/"
+HOMEPAGE="https://bitbucket.org/gennady/ja2-stracciatella http://tron.homeunix.org/ja2/"
 SRC_URI="https://bitbucket.org/gennady/ja2-stracciatella/get/v${PV}.tar.gz -> ${P}.tar.gz
 	editor? ( http://tron.homeunix.org/ja2/editor.slf.gz )"
 
