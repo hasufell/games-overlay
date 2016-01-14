@@ -1,0 +1,36 @@
+diff --git a/driver/audio/SDL/src/CMakeLists.txt b/driver/audio/SDL/src/CMakeLists.txt
+index 64137db..f57e77d 100644
+--- a/driver/audio/SDL/src/CMakeLists.txt
++++ b/driver/audio/SDL/src/CMakeLists.txt
+@@ -20,6 +20,7 @@ IF (SDL_FOUND)
+         
+         ADD_LIBRARY(audioSDL SHARED SDL.cpp SDL.h main.h SoundSDL_Music.cpp SoundSDL_Music.h SoundSDL_Effect.cpp SoundSDL_Effect.h ${PROJECT_SOURCE_DIR}/build_version.cpp ../../../src/DriverInterface.cpp ../../../src/tempname.cpp ../../../src/tempname.h)
+     
++    	ADD_DEFINITIONS(-fPIC)
+         ADD_FLAGS(CMAKE_C_FLAGS -I${SDL_INCLUDE_DIR} -I${SDLMIXER_INCLUDE_DIR})
+         ADD_FLAGS(CMAKE_CXX_FLAGS -I${SDL_INCLUDE_DIR} -I${SDLMIXER_INCLUDE_DIR})
+ 
+diff --git a/driver/video/GLFW/src/CMakeLists.txt b/driver/video/GLFW/src/CMakeLists.txt
+index 5a8f6d6..e2ea88e 100644
+--- a/driver/video/GLFW/src/CMakeLists.txt
++++ b/driver/video/GLFW/src/CMakeLists.txt
+@@ -13,6 +13,7 @@ IF ("${COMPILEFOR}/${COMPILEARCH}" STREQUAL "linux/i386" )
+ 
+ 		ADD_LIBRARY(videoGLFW SHARED GLFW.cpp GLFW.h oem.cpp oem.h main.h ../../../../build_version.cpp ../../../src/DriverInterface.cpp)
+ 	
++		ADD_DEFINITIONS(-fPIC)
+ 		TARGET_LINK_LIBRARIES(videoGLFW videodrv ${GLFW_LIBRARY})
+ 	
+ 		ADD_CUSTOM_COMMAND(TARGET videoGLFW POST_BUILD COMMAND ln -fvs GLFW/src/${CMAKE_SHARED_LIBRARY_PREFIX}videoGLFW${CMAKE_SHARED_LIBRARY_SUFFIX} ../../videoGLFW${CMAKE_SHARED_LIBRARY_SUFFIX})
+diff --git a/driver/video/SDL/src/CMakeLists.txt b/driver/video/SDL/src/CMakeLists.txt
+index ed0bef4..415cdeb 100644
+--- a/driver/video/SDL/src/CMakeLists.txt
++++ b/driver/video/SDL/src/CMakeLists.txt
+@@ -16,6 +16,7 @@ IF (SDL_FOUND)
+ 
+ 	ADD_LIBRARY(videoSDL SHARED SDL.cpp SDL.h main.h ../../../../build_version.cpp ../../../src/DriverInterface.cpp)
+ 
++	ADD_DEFINITIONS(-fPIC)
+ 	ADD_FLAGS(CMAKE_C_FLAGS -I${SDL_INCLUDE_DIR})
+ 	ADD_FLAGS(CMAKE_CXX_FLAGS -I${SDL_INCLUDE_DIR})
+ 
