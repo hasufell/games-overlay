@@ -6,7 +6,7 @@
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
-inherit python-r1 eutils qt5-build
+inherit python-r1 eutils qmake-utils
 
 DESCRIPTION="A modern gaming engine for Doom, Heretic, and Hexen"
 HOMEPAGE="http://www.dengine.net/"
@@ -90,8 +90,6 @@ src_prepare() {
 		use openal && echo "CONFIG += deng_openal"
 
 	} > config_user.pri || die
-
-	qt5-build_src_prepare
 }
 
 #Usage: doom_make_wrapper <name> <game> <icon> <desktop entry title> [args]
@@ -103,12 +101,11 @@ doom_make_wrapper() {
 }
 
 src_configure() {
-	qt5-build_src_configure
+	eqmake5 doomsday.pro
 }
 
 src_install() {
-	qt5-build_src_install
-
+	emake INSTALL_ROOT="${D}" install
 	dodoc "${S}"/../README.md
 
 	mv "${D%/}"/usr/share/{${PN}/data/jdoom,doom-data} || die
