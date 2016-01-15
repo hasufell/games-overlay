@@ -122,6 +122,7 @@ src_configure() {
 		fi)
 		-DBUILD_GAME_NACL=OFF
 		-DBUILD_TTY_CLIENT=ON
+		-DCMAKE_C_FLAGS_RELEASE=""
 		-DCMAKE_CXX_FLAGS_RELEASE=""
 		-DUSE_DEBUG_OPTIMIZE=OFF
 		$(cmake-utils_use_use geoip GEOIP)
