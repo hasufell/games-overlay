@@ -1,0 +1,49 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 6b5eee7..70e53db 100755
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -100,7 +100,7 @@ if(UNIX)
+ 	# Don't put this into CMAKE_CXX_FLAGS because otherwise it is cached,
+ 	# and when the path is changed both the old and new definition appears
+ 	# in the list of flags.
+-	add_definitions("-DOC_SYSTEM_DATA_DIR=\"${CMAKE_INSTALL_PREFIX}/share/games/openclonk\"")
++	add_definitions("-DOC_SYSTEM_DATA_DIR=\"${CMAKE_INSTALL_PREFIX}/share/openclonk\"")
+ endif()
+ 
+ if(APPLE)
+@@ -1365,12 +1365,6 @@ ENDIF()
+ # hack to build the data on install, see
+ # http://public.kitware.com/Bug/view.php?id=8438
+ add_custom_target(data)
+-install(
+-	CODE
+-	"execute_process(
+-		COMMAND ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR} --target data
+-	)"
+-)
+ 
+ if (NOT APPLE)
+ 	install(
+@@ -1461,7 +1455,7 @@ foreach(group ${OC_C4GROUPS})
+ 			DEPENDS "${native_c4group}"
+ 			VERBATIM
+ 		)
+-		install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${group} DESTINATION share/games/openclonk)
++		install(FILES ${CMAKE_CURRENT_BINARY_DIR}/${group} DESTINATION share/openclonk)
+ 	endif()
+ endforeach()
+ 
+@@ -1471,11 +1465,10 @@ if (NOT APPLE)
+ 	
+ 	# Install new files
+ 	install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/openclonk.desktop DESTINATION share/applications)
+-	# Update the MIME cache -- this makes the clonk:// protocol handler actually work
+-	install(CODE "execute_process(COMMAND update-desktop-database)")
+ 
+ 	# Install binaries
+-	install(TARGETS openclonk DESTINATION games)
++	install(TARGETS openclonk DESTINATION bin)
++	install(TARGETS openclonk-server DESTINATION bin)
+ 	install(TARGETS c4group DESTINATION bin)
+ else()
+ 	install(TARGETS openclonk
