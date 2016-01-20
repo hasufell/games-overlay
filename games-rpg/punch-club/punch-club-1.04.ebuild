@@ -7,7 +7,7 @@ EAPI=5
 inherit eutils gnome2-utils unpacker
 
 DESCRIPTION="Pillars Of Eternity"
-HOMEPAGE="http://www.gog.com/game/pillars_of_eternity_hero_edition"
+HOMEPAGE="https://www.gog.com/game/punch_club"
 SRC_URI="gog_punch_club_2.0.0.1.sh"
 
 LICENSE="all-rights-reserved GOG-EULA"
