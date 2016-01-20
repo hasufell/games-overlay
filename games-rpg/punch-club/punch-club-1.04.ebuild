@@ -6,7 +6,7 @@ EAPI=5
 
 inherit eutils gnome2-utils unpacker
 
-DESCRIPTION="Pillars Of Eternity"
+DESCRIPTION="Punch Club is a boxing tycoon management game with multiple branching story lines"
 HOMEPAGE="https://www.gog.com/game/punch_club"
 SRC_URI="gog_punch_club_2.0.0.1.sh"
 
