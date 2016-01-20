@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit eutils gnome2-utils multilib unpacker
+inherit eutils gnome2-utils unpacker
 
 DESCRIPTION="Pillars Of Eternity"
 HOMEPAGE="http://www.gog.com/game/pillars_of_eternity_hero_edition"
