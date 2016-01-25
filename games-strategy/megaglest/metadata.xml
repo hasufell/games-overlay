@@ -12,6 +12,10 @@
 	</upstream>
 	<use>
 		<flag name='editor'>Build map editor</flag>
+		<flag name='irc'>Enable libircclient support</flag>
+		<flag name='fribidi'>Enable fribidi support</flag>
+		<flag name='ftgl'>Use <pkg>media-libs/ftgl</pkg> for on-screen fonts
+			</flag>
 		<flag name='streflop'>Use the library streflop. Out of synchs may
 			occur if not enabled.</flag>
 		<flag name='tools'>Build model import/export tools</flag>
