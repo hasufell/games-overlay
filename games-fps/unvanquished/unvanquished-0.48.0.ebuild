@@ -75,6 +75,7 @@ pkg_pretend() {
 
 pkg_setup() {
 	if use server || use dedicated ; then
+		enewgroup "${PN}-server"
 		enewuser \
 			"${PN}-server" \
 			"-1" \
