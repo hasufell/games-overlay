@@ -1,0 +1,119 @@
+app-eselect/eselect-renpy 0.6-r1: Manages renpy symlink
+dev-games/goatee 0.3.0 0.3.1.1: A monadic take on a 2,500-year-old board game - library
+dev-python/pygame_sdl2 6.99.7 6.99.8: Reimplementation of portions of the pygame API using SDL2
+games-action/brutal-legend 20130615-r1: Crush skulls, ravage the road in the Deuce, and unleash the power of Heavy Metal to reign down fire from the sky
+games-action/chromium-bsu 0.9.15.1: Chromium B.S.U. - an arcade game
+games-action/minetest 0.4.12-r1 0.4.13-r1 0.5.0_rc 9999: An InfiniMiner/Minecraft inspired game
+games-action/minetest_game 0.4.12 0.4.12-r1 0.4.13 9999: The main game for the Minetest game engine
+games-action/openclonk 5.5.1 6.0 6.1 7.0: A free multiplayer action game where you control clonks
+games-action/supertuxkart 0.8.1 0.9 0.9.1-r1 0.9.2: A kart racing game starring Tux, the linux penguin (TuxKart fork)
+games-action/teeworlds 0.6.2-r1 0.6.3: Online multi-player platform 2D shooter
+games-action/trosh 20: A game made in 20 hours for a friend. It has explosions
+games-adventure/pioneer 20150715: Space adventure game set in the Milky Way galaxy at the turn of the 31st century
+games-arcade/berusky 1.6 1.7: free logic game based on an ancient puzzle named Sokoban
+games-arcade/commandergenius 1.7.4.0: Open Source Commander Keen clone (needs original game files)
+games-arcade/lix 99999999: Action-puzzle game, single- and networked multiplayer, inspired by Lemmings
+games-arcade/mari0 1.6: A mix from Nintendo's Super Mario Bros and Valve's Portal
+games-arcade/notpacman 1.0.4: A mashup of "Not" and "Pacman"
+games-arcade/nottetris2 1: The spiritual successor of the classic Tetris mixed with physics
+games-arcade/opensonic 0.1.4-r1: A free open-source game based on the Sonic the Hedgehog universe
+games-arcade/retrobattle 1.0.0-r1: A NES-like platform arcade game
+games-board/awale 1.6: Free Awale - The game of all Africa
+games-board/capicity 1.0: A monopd compatible boardgame to play Monopoly-like games (previously named capitalism)
+games-board/goatee-gtk 0.2.0-r1 0.3.0 0.3.1: A monadic take on a 2,500-year-old board game - GTK+ UI
+games-board/netmaumau 0.12-r1 0.13-r1 0.14 0.15 0.16-r1 0.17 0.18 0.19 0.20 0.21 0.22 0.23 0.23-r1: Client for games-server/netmaumau, the popular card game Mau Mau
+games-board/openyahtzee 1.9.1 1.9.2: A full-featured wxWidgets version of the classic dice game Yahtzee
+games-board/pioneers 15.3: A clone of the popular board game The Settlers of Catan
+games-board/pychess 0.10.1-r2 0.12_beta4: A chess client for Gnome
+games-board/pysolfc 2.0-r3: An exciting collection of more than 1000 solitaire card games
+games-board/stockfish 6 20131129: A UCI chess engine
+games-emulation/epsxe 1.6.0-r5: ePSXe PlayStation Emulator
+games-emulation/gambatte 0.5.0_p20131102-r1 9999: An accuracy-focused Gameboy / Gameboy Color emulator
+games-emulation/psemu-gpupetemesagl 1.78-r1: PSEmu MesaGL GPU
+games-emulation/psemu-gpupetexgl2 2.0.9-r1: PSEmu XGL2 GPU
+games-emulation/psemu-padxwin 1.6-r1: PSEmu plugin to use the keyboard as a gamepad
+games-emulation/psemu-peopssoftgpu 1.18-r1: P.E.Op.S Software GPU plugin
+games-emulation/psemu-peopsspu 1.0.9-r1: P.E.Op.S Sound Emulation (SPU) PSEmu Plugin
+games-engines/OpenJK 9999: Open Source Jedi Academy and Jedi Outcast games engine
+games-engines/flare 0.19: Free/Libre Action Roleplaying game
+games-engines/freeablo 0.1: Modern reimplementation of the Diablo 1 game engine
+games-engines/gemrb 0.8.1 0.8.2 0.8.3.1: Reimplementation of the Infinity engine
+games-engines/love 0.7.2-r1 0.8.0-r1 0.9.0 0.9.0-r201 0.9.1 0.9.1-r201 0.10.0 0.10.0-r201: A framework for 2D games in Lua
+games-engines/odamex 0.7.0: An online multiplayer, free software engine for Doom and Doom II
+games-engines/openmw 0.36.1-r1 0.37.0-r1 0.38.0: An open source reimplementation of TES III: Morrowind
+games-engines/renpy 6.99.7 6.99.8: Visual novel engine written in python
+games-engines/residualvm 0.1.1-r1 0.2.1: A cross-platform 3D game interpreter for play LucasArts' LUA-based 3D adventures
+games-engines/scummvm 1.7.0-r2: Reimplementation of the SCUMM game engine used in Lucasarts adventures
+games-engines/solarus 1.3.1 1.4.0 1.4.3 1.4.4 1.4.5: An open-source Zelda-like 2D game engine
+games-engines/stratagus 2.2.7: A realtime strategy game engine
+games-fps/argonium 1.00: Multiplayer FPS powered by iD Software's Quake 2 engine
+games-fps/doomsday 1.14.5 1.15.7 1.15.8: A modern gaming engine for Doom, Heretic, and Hexen
+games-fps/duke3d-data 1.0-r3: Duke Nukem 3D data files
+games-fps/eduke32 20131119.4169 99999999: Port of Duke Nukem 3D for SDL
+games-fps/freedoom 0.9: Freedoom - Open Source Doom resources
+games-fps/openarena 0.8.8: Open-source replacement for Quake 3 Arena
+games-fps/sauerbraten 2013.01.04: Cube 2: Sauerbraten is an open source game engine (Cube 2) with freeware game data (Sauerbraten)
+games-fps/tremulous 1.1.0-r4: Team-based aliens vs humans FPS with buildable structures
+games-fps/unvanquished 0.36.0-r1 0.37.0-r1 0.47.0 0.48.0: Daemon engine, a fork of OpenWolf which powers the game Unvanquished
+games-fps/unvanquished-data 0.36.0 0.37.0 0.47.0 0.48.0: Datafiles and maps for unvanquished
+games-fps/urbanterror 4.2.021 4.2.022 4.2.023: Hollywood tactical shooter based on the ioquake3 engine
+games-fps/warsow 1.5.1-r1 2.0 2.0.1: Multiplayer FPS based on the QFusion engine (evolved from Quake 2)
+games-fps/xonotic 0.7.0-r1 0.8.0 0.8.1: Fork of Nexuiz, Deathmatch FPS based on DarkPlaces, an advanced Quake 1 engine
+games-misc/autumns-journey 1.0: Autumn's Journey is the story of an aspiring knight and her two dragon friends.
+games-misc/dont-starve 3: Wilderness survival game full of science and magic
+games-misc/katawa-shoujo 1.3.1: Bishoujo-style visual novel set in the fictional Yamaku High School for disabled children
+games-misc/opengfx 0.5.1-r1: OpenGFX data files for OpenTTD
+games-misc/openmsx 0.3.1-r1: An ambiguously named music replacement set for OpenTTD
+games-misc/opensfx 0.2.3-r1: OpenSFX data files for OpenTTD
+games-puzzle/enigma 1.20-r1 1.21: puzzle game similar to Oxyd
+games-puzzle/opengoo 9999: Free clone of World Of Goo
+games-roguelike/mazesofmonad 1.0.9-r2: Console-based roguelike Role Playing Game similar to nethack
+games-roguelike/nethack 3.4.3-r2: The ultimate old-school single player dungeon exploration game
+games-roguelike/stone-soup 0.15.2 0.16.1 0.16.2 0.17.0 0.17.1: Dungeon Crawl Stone Soup is a role-playing roguelike game of exploration and treasure-hunting in dungeons
+games-roguelike/tome4 1.4.6: Topdown tactical RPG roguelike game and game engine
+games-rpg/arx-fatalis-data 1.21-r3: Arx Fatalis data files
+games-rpg/arx-libertatis 1.1.2: Cross-platform port of Arx Fatalis, a first-person role-playing game
+games-rpg/baldurs-gate-2-ee 1.3.2064-r1: Baldur's Gate 2: Enhanced Edition
+games-rpg/baldurs-gate-ee 1.3.2053-r1: Baldur's Gate: Enhanced Edition
+games-rpg/flare 0.19: Free/Libre Action Roleplaying game
+games-rpg/freedink 108.4: Dink Smallwood is an adventure/role-playing game, similar to Zelda (2D top view)
+games-rpg/freedink-data 1.08.20140901: Freedink game data
+games-rpg/grimrock 20150707: Legend of Grimrock: The Ultimate dungeon crawling RPG + modding engine
+games-rpg/pillars-of-eternity 2.03.0788: Pillars Of Eternity
+games-rpg/punch-club 1.04 1.06: Punch Club is a boxing tycoon management game with multiple branching story lines
+games-rpg/sumwars 0.5.8: a multi-player, 3D action role-playing game
+games-rpg/valyriatear 1.0.0: A free 2D J-RPG based on the Hero of Allacrost engine
+games-rpg/wasteland2 2.9.0.14: Direct sequel to 1988's Wasteland, the first-ever post-apocalyptic computer RPG and the inspiration behind the Fallout series
+games-rpg/zsdx 1.9.0 1.10.2 1.10.3: A free 2D Zelda fangame
+games-rpg/zsxd 1.9.0 1.10.2 1.10.3: A free 2D Zelda fangame parody
+games-server/netmaumau 0.12-r2 0.13-r2 0.14-r1 0.15-r1 0.16-r1 0.17.0-r1 0.17.1-r1 0.18.0 0.19.0 0.20.1 0.21.0-r1 0.22.0 0.23.0 0.24.0: Server for the popular card game Mau Mau
+games-simulation/lincity-ng 2.0: city/country simulation game for X and opengl
+games-simulation/openttd 1.4.4: OpenTTD is a clone of Transport Tycoon Deluxe
+games-strategy/0ad 0.0.18_alpha-r4 0.0.19_alpha: A free, real-time strategy game
+games-strategy/0ad-data 0.0.18_alpha 0.0.19_alpha: Data files for 0ad
+games-strategy/dunelegacy 0.96.3: Updated clone of Westood Studios' Dune2
+games-strategy/endless-sky 0.9.5: Space exploration, trading & combat in the tradition of Terminal Velocity
+games-strategy/freeciv 2.5.0-r3 2.5.1 2.5.2 2.5.3: multiplayer strategy game (Civilization Clone)
+games-strategy/freecol 0.11.2 0.11.3 0.11.5 0.11.6: An open source clone of the game Colonization
+games-strategy/freeorion 0.4.4: A free turn-based space empire and galactic conquest game
+games-strategy/freeserf 0.1.1 9999: Settlers 1 (Serf city) clone
+games-strategy/freesynd 0.7.1 9999: A cross-platform reimplementation of engine for the classic Bullfrog game, Syndicate
+games-strategy/hedgewars 0.9.20.5-r1 0.9.21-r2 0.9.21.1-r2 0.9.22: A turn-based strategy, artillery, action and comedy game
+games-strategy/ja2-stracciatella 0.12.1_p7072-r1 0.12.1_p7072-r2 0.14.01 9999: A port of Jagged Alliance 2 to SDL
+games-strategy/ja2-stracciatella-data 1 1-r2 1-r3: A port of Jagged Alliance 2 to SDL (data files)
+games-strategy/liquidwar6 0.4.3681 0.6.3902: Unique multiplayer wargame between liquids
+games-strategy/megaglest 3.11.1 3.12.0: Cross-platform 3D realtime strategy game
+games-strategy/megaglest-data 3.11.1 3.12.0: Data files for the cross-platform 3D realtime strategy game MegaGlest
+games-strategy/opendungeons 9999: An open source, real time strategy game based on the Dungeon Keeper series
+games-strategy/opendungeons-data 9999: Data files for opendungeons
+games-strategy/openra 20150424-r2 20150614-r1 20150919: A free RTS engine supporting games like Command & Conquer and Red Alert
+games-strategy/s25rttr 0.8.1 0.8.1-r1: Open Source remake of The Settlers II game (needs original game files)
+games-strategy/uqm 0.7.0-r2: The Ur-Quan Masters: Port of Star Control 2
+games-strategy/wargus 2.2.7: Warcraft II for the Stratagus game engine
+games-strategy/wargus-data 0: Warcraft II data for wargus (needs DOS CD)
+games-strategy/wesnoth 1.13.6: Battle for Wesnoth - A fantasy turn-based strategy game
+games-strategy/widelands 0.17: A game similar to Settlers 2
+games-strategy/zod-engine 20110906-r1: Zod engine is a remake of the 1996 classic game by Bitmap Brothers called Z
+games-strategy/zod-engine-data 20110906: Zod engine data files
+games-util/deutex 4.4.902: A wad composer for Doom, Heretic, Hexen and Strife
+games-util/osavul 1.1.1: Unvanquished server browser
