@@ -25,9 +25,9 @@ RDEPEND="
 		dev-libs/glib:2
 		media-libs/fontconfig
 		media-libs/libpng:0
-		>=media-libs/sdl-ttf-2.0.8
-		>=media-libs/sdl-mixer-1.2[vorbis]
-		>=media-libs/sdl-image-1.2[jpeg,png]
+		media-libs/sdl2-ttf
+		media-libs/sdl2-mixer[vorbis]
+		media-libs/sdl2-image[jpeg,png]
 		media-libs/libvorbis
 		sys-libs/readline:0
 		sys-libs/zlib
