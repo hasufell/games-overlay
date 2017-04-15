@@ -30,6 +30,8 @@ RESTRICT="strip"
 RDEPEND="
 	dev-libs/nettle[gmp]
 	dev-libs/gmp:0
+	dev-python/pyyaml
+	dev-python/jinja
 	~games-fps/${PN}-data-${PV}
 	net-misc/curl
 	sys-libs/ncurses:0
@@ -197,4 +199,3 @@ pkg_postinst() {
 pkg_postrm() {
 	gnome2_icon_cache_update
 }
-
