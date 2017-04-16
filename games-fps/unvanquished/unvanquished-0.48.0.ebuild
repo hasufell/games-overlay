@@ -30,8 +30,6 @@ RESTRICT="strip"
 RDEPEND="
 	dev-libs/nettle[gmp]
 	dev-libs/gmp:0
-	dev-python/pyyaml
-	dev-python/jinja
 	~games-fps/${PN}-data-${PV}
 	net-misc/curl
 	sys-libs/ncurses:0
@@ -60,6 +58,8 @@ RDEPEND="
 	geoip? ( dev-libs/geoip )"
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
+	dev-python/pyyaml
+	dev-python/jinja
 	virtual/pkgconfig"
 
 CMAKE_BUILD_TYPE="Release"

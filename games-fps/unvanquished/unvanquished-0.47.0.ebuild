@@ -58,6 +58,8 @@ RDEPEND="
 	geoip? ( dev-libs/geoip )"
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
+	dev-python/pyyaml
+	dev-python/jinja
 	virtual/pkgconfig"
 
 CMAKE_BUILD_TYPE="Release"
@@ -196,4 +198,3 @@ pkg_postinst() {
 pkg_postrm() {
 	gnome2_icon_cache_update
 }
-
