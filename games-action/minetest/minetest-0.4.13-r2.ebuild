@@ -1,9 +1,9 @@
-# Copyright 2014 Julian Ospald <hasufell@posteo.de>
+# Copyright 2015 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI=5
-inherit eutils cmake-utils gnome2-utils vcs-snapshot user
+inherit cmake-utils gnome2-utils pax-utils vcs-snapshot user
 
 DESCRIPTION="An InfiniMiner/Minecraft inspired game"
 HOMEPAGE="http://minetest.net/"
@@ -12,7 +12,7 @@ SRC_URI="http://github.com/minetest/minetest/tarball/${PV} -> ${P}.tar.gz"
 LICENSE="LGPL-2.1+ CC-BY-SA-3.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+curl dedicated doc leveldb luajit nls redis +server +sound +truetype"
+IUSE="+curl dedicated doc leveldb luajit nls redis +server +sound spatial +truetype"
 
 RDEPEND="dev-db/sqlite:3
 	sys-libs/zlib
@@ -20,6 +20,7 @@ RDEPEND="dev-db/sqlite:3
 	!dedicated? (
 		app-arch/bzip2
 		>=dev-games/irrlicht-1.8-r2
+		dev-libs/gmp:0
 		media-libs/libpng:0
 		virtual/jpeg
 		virtual/opengl
@@ -35,7 +36,8 @@ RDEPEND="dev-db/sqlite:3
 	leveldb? ( dev-libs/leveldb )
 	luajit? ( dev-lang/luajit:2 )
 	nls? ( virtual/libintl )
-	redis? ( dev-libs/hiredis )"
+	redis? ( dev-libs/hiredis )
+	spatial? ( sci-libs/libspatialindex )"
 DEPEND="${RDEPEND}
 	>=dev-games/irrlicht-1.8-r2
 	doc? ( app-doc/doxygen media-gfx/graphviz )
@@ -53,10 +55,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	epatch \
-		"${FILESDIR}"/${PN}-0.4.10-shared-irrlicht.patch \
-		"${FILESDIR}"/${PN}-0.4.10-as-needed.patch
-
 	# correct gettext behavior
 	if [[ -n "${LINGUAS+x}" ]] ; then
 		for i in $(cd po ; echo *) ; do
@@ -89,9 +87,11 @@ src_configure() {
 		-DENABLE_GLES=0
 		$(cmake-utils_use_enable leveldb LEVELDB)
 		$(cmake-utils_use_enable redis REDIS)
+		-DENABLE_SPATIAL=$(usex spatial)
 		$(cmake-utils_use_enable sound SOUND)
-		$(cmake-utils_use !luajit DISABLE_LUAJIT)
+		$(cmake-utils_use luajit ENABLE_LUAJIT)
 		-DRUN_IN_PLACE=0
+		-DCUSTOM_EXAMPLE_CONF_DIR=/usr/share/doc/${PF}
 		$(use dedicated && {
 			echo "-DIRRLICHT_SOURCE_DIR=/the/irrlicht/source"
 			echo "-DIRRLICHT_INCLUDE_DIR=/usr/include/irrlicht"
@@ -105,7 +105,7 @@ src_compile() {
 	cmake-utils_src_compile
 
 	if use doc ; then
-		emake -C "${CMAKE_BUILD_DIR}" doc
+		cmake-utils_src_compile doc
 	fi
 }
 
@@ -113,8 +113,13 @@ src_install() {
 	cmake-utils_src_install
 
 	if use server || use dedicated ; then
+		pax-mark m "${D}"usr/bin/minetestserver
 		newinitd "${FILESDIR}"/minetestserver.initd minetest-server
 		newconfd "${T}"/minetestserver.confd minetest-server
+	fi
+
+	if ! use dedicated ; then
+		pax-mark m "${D}"usr/bin/minetest
 	fi
 
 	if use doc ; then
