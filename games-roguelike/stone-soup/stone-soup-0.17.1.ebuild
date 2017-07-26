@@ -7,12 +7,13 @@
 
 EAPI=5
 VIRTUALX_REQUIRED="manual"
-inherit eutils gnome2-utils toolchain-funcs
+inherit eutils gnome2-utils toolchain-funcs versionator
 
 MY_P="stone_soup-${PV}"
+MY_PV_PART=$(get_version_component_range 1-2)
 DESCRIPTION="Dungeon Crawl Stone Soup is a role-playing roguelike game of exploration and treasure-hunting in dungeons"
 HOMEPAGE="http://crawl.develz.org/wordpress/"
-SRC_URI="https://crawl.develz.org/release/stone_soup-${PV}.tar.xz
+SRC_URI="https://crawl.develz.org/release/${MY_PV_PART}/stone_soup-${PV}.tar.xz
 	http://dev.gentoo.org/~hasufell/distfiles/${PN}.png
 	http://dev.gentoo.org/~hasufell/distfiles/${PN}.svg"
 
