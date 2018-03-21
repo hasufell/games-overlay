@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/hasufell/games-overlay.png)](https://travis-ci.org/hasufell/games-overlay)
+
 ### Purpose and scope
 
 Games ebuilds, nothing else. No libraries.
