@@ -1,6 +1,5 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 inherit eutils toolchain-funcs
@@ -108,4 +107,3 @@ src_install() {
 	dodoc doc/devel/netplay/*
 	make_desktop_entry uqm "The Ur-Quan Masters"
 }
-

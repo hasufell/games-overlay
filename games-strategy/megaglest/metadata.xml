@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-	<maintainer>
+	<maintainer type="person">
 		<email>hasufell@posteo.de</email>
 		<name>Julian Ospald</name>
 	</maintainer>
 	<upstream>
-        <changelog>http://megaglest.svn.sourceforge.net/viewvc/megaglest/trunk/docs/CHANGELOG.txt?revision=3397</changelog>
-        <doc lang="en">http://glest.wikia.com/wiki/MG</doc>
-        <bugs-to>https://sourceforge.net/tracker/?group_id=300350&amp;atid=1266776</bugs-to>
+		<changelog>http://megaglest.svn.sourceforge.net/viewvc/megaglest/trunk/docs/CHANGELOG.txt?revision=3397</changelog>
+		<doc lang="en">http://glest.wikia.com/wiki/MG</doc>
+		<bugs-to>https://sourceforge.net/tracker/?group_id=300350&amp;atid=1266776</bugs-to>
 	</upstream>
 	<use>
 		<flag name='editor'>Build map editor</flag>

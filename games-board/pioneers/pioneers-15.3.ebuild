@@ -1,7 +1,6 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 inherit autotools eutils
@@ -43,4 +42,3 @@ src_configure() {
 		$(use_enable help) \
 		$(use_with !dedicated gtk)
 }
-

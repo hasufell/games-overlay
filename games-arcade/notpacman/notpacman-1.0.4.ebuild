@@ -1,6 +1,5 @@
 # Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -9,7 +8,7 @@ inherit eutils gnome2-utils
 DESCRIPTION="A mashup of \"Not\" and \"Pacman\""
 HOMEPAGE="http://stabyourself.net/notpacman/"
 SRC_URI="http://stabyourself.net/dl.php?file=notpacman-1004/notpacman-linux.zip -> ${P}.zip
-	http://dev.gentoo.org/~hasufell/distfiles/${PN}.png"
+	https://dev.gentoo.org/~hasufell/distfiles/${PN}.png"
 
 LICENSE="WTFPL-2"
 SLOT="0"
@@ -46,4 +45,3 @@ pkg_postinst() {
 pkg_postrm() {
 	gnome2_icon_cache_update
 }
-

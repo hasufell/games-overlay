@@ -1,13 +1,12 @@
 # Copyright 2015 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
 inherit eutils autotools gnome2-utils
 
 DESCRIPTION="Space adventure game set in the Milky Way galaxy at the turn of the 31st century"
-HOMEPAGE="http://pioneerspacesim.net/"
+HOMEPAGE="https://pioneerspacesim.net/"
 SRC_URI="https://github.com/pioneerspacesim/pioneer/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 # see AUTHORS.txt

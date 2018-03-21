@@ -1,6 +1,5 @@
 # Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -47,4 +46,3 @@ src_install() {
 	cmake-utils_src_install
 	doman solarus.6
 }
-

@@ -1,11 +1,10 @@
 # Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
 DESCRIPTION="Manages renpy symlink"
-HOMEPAGE="http://www.gentoo.org/proj/en/eselect/"
+HOMEPAGE="https://www.gentoo.org/proj/en/eselect/"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -27,4 +26,3 @@ src_install() {
 	insinto /usr/share/eselect/modules
 	doins renpy.eselect
 }
-

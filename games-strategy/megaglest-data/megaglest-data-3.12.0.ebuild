@@ -1,6 +1,5 @@
 # Copyright 2014-2016 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 inherit cmake-utils
@@ -36,4 +35,3 @@ src_install() {
 
 	cmake-utils_src_install
 }
-

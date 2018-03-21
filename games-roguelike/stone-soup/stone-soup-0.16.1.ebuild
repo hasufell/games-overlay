@@ -1,6 +1,5 @@
 # Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 ## TODO
 # add sound support (no sound files)
@@ -14,8 +13,8 @@ MY_PV_PART=$(get_version_component_range 1-2)
 DESCRIPTION="Dungeon Crawl Stone Soup is a role-playing roguelike game of exploration and treasure-hunting in dungeons"
 HOMEPAGE="http://crawl.develz.org/wordpress/"
 SRC_URI="https://crawl.develz.org/release/${MY_PV_PART}/stone_soup-${PV}.tar.xz
-	http://dev.gentoo.org/~hasufell/distfiles/${PN}.png
-	http://dev.gentoo.org/~hasufell/distfiles/${PN}.svg"
+	https://dev.gentoo.org/~hasufell/distfiles/${PN}.png
+	https://dev.gentoo.org/~hasufell/distfiles/${PN}.svg"
 
 # 3-clause BSD: mt19937ar.cc, MSVC/stdint.h
 # 2-clause BSD: all contributions by Steve Noonan and Jesse Luehrs

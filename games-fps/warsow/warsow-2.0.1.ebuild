@@ -1,6 +1,5 @@
 # Copyright 2015 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 inherit eutils cmake-utils gnome2-utils flag-o-matic toolchain-funcs
@@ -104,4 +103,3 @@ pkg_postinst() {
 pkg_postrm() {
 	gnome2_icon_cache_update
 }
-

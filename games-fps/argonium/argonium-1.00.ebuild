@@ -1,6 +1,5 @@
-# Copyright 1999-2006 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -59,4 +58,3 @@ src_install() {
 	make_wrapper ${PN} ./${PN} "${dir}" "${dir}"
 	make_desktop_entry ${PN} Argonium
 }
-

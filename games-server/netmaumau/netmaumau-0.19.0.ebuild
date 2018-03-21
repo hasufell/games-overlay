@@ -1,13 +1,12 @@
 # Copyright 2015 Julian Ospald <hasufell@posteo.de>, Heiko Schaefer <heiko@rangun.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
 inherit autotools flag-o-matic eutils vcs-snapshot
 
 DESCRIPTION="Server for the popular card game Mau Mau"
-HOMEPAGE="http://sourceforge.net/projects/netmaumau"
+HOMEPAGE="https://sourceforge.net/projects/netmaumau"
 SRC_URI="https://github.com/velnias75/NetMauMau/archive/V${PV}.tar.gz -> ${P}-server.tar.gz"
 
 LICENSE="LGPL-3"

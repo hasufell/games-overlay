@@ -1,6 +1,5 @@
 # Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -9,7 +8,7 @@ inherit eutils git-2
 DESCRIPTION="Action-puzzle game, single- and networked multiplayer, inspired by Lemmings"
 HOMEPAGE="http://asdfasdf.ethz.ch/~simon/index.php"
 EGIT_REPO_URI="https://github.com/SimonN/Lix.git"
-SRC_URI="http://dev.gentoo.org/~hasufell/distfiles/${PN}.png"
+SRC_URI="https://dev.gentoo.org/~hasufell/distfiles/${PN}.png"
 
 LICENSE="CC0-1.0"
 SLOT="0"
@@ -46,4 +45,3 @@ src_install() {
 
 	doicon "${DISTDIR}"/${PN}.png
 }
-

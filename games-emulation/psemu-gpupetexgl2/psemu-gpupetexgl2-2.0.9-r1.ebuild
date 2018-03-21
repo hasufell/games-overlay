@@ -1,6 +1,5 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -37,4 +36,3 @@ src_install() {
 	doins *.fp *.vp *.slf *.slv || die "doins failed"
 	dodoc *.txt
 }
-

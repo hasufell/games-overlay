@@ -1,6 +1,5 @@
 # Copyright 2015 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -8,7 +7,7 @@ inherit eutils
 
 DESCRIPTION="A port of Jagged Alliance 2 to SDL"
 HOMEPAGE="http://tron.homeunix.org/ja2/"
-SRC_URI="http://dev.gentoo.org/~hasufell/distfiles/${P}.tar.xz
+SRC_URI="https://dev.gentoo.org/~hasufell/distfiles/${P}.tar.xz
 	http://tron.homeunix.org/ja2/editor.slf.gz"
 
 LICENSE="SFI-SCLA"
@@ -81,4 +80,3 @@ pkg_postinst() {
 	elog "/usr/bin/ja2-convert"
 	elog "Alternatively, install games-strategy/ja2-stracciatella-data."
 }
-

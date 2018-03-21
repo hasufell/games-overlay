@@ -1,6 +1,5 @@
 # Copyright 2015-2016 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -9,8 +8,8 @@ inherit eutils gnome2-utils
 DESCRIPTION="Bishoujo-style visual novel set in the fictional Yamaku High School for disabled children"
 HOMEPAGE="http://katawa-shoujo.com/"
 SRC_URI="http://dl.katawa-shoujo.com/gold_${PV}/%5B4ls%5D_katawa_shoujo_${PV}-%5Blinux-x86%5D%5B18161880%5D.tar.bz2 -> ${P}.tar.bz2
-	http://dev.gentoo.org/~hasufell/distfiles/katawa-shoujo-48.png
-	http://dev.gentoo.org/~hasufell/distfiles/katawa-shoujo-256.png"
+	https://dev.gentoo.org/~hasufell/distfiles/katawa-shoujo-48.png
+	https://dev.gentoo.org/~hasufell/distfiles/katawa-shoujo-256.png"
 
 LICENSE="CC-BY-NC-ND-3.0"
 SLOT="0"

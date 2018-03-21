@@ -1,6 +1,5 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -9,8 +8,8 @@ PYTHON_COMPAT=( python2_7 )
 inherit eutils qt4-r2 toolchain-funcs python-any-r1
 
 DESCRIPTION="An accuracy-focused Gameboy / Gameboy Color emulator"
-HOMEPAGE="http://sourceforge.net/projects/gambatte"
-SRC_URI="http://dev.gentoo.org/~hasufell/distfiles/${P}.tar.xz"
+HOMEPAGE="https://sourceforge.net/projects/gambatte"
+SRC_URI="https://dev.gentoo.org/~hasufell/distfiles/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -94,4 +93,3 @@ src_install() {
 
 	nonfatal dodoc README changelog
 }
-

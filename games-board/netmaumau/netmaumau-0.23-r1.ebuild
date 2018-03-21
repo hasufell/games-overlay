@@ -1,6 +1,5 @@
 # Copyright 2015 Julian Ospald <hasufell@posteo.de>, Heiko Schaefer <heiko@rangun.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -9,7 +8,7 @@ inherit qmake-utils eutils vcs-snapshot
 MY_P=nmm-qt-client${PV}
 
 DESCRIPTION="Client for games-server/netmaumau, the popular card game Mau Mau"
-HOMEPAGE="http://sourceforge.net/projects/netmaumau"
+HOMEPAGE="https://sourceforge.net/projects/netmaumau"
 SRC_URI="https://github.com/velnias75/NetMauMau-Qt-Client/archive/V${PV}.tar.gz -> ${P}-client.tar.gz"
 
 LICENSE="LGPL-3"

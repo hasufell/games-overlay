@@ -1,6 +1,5 @@
 # Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 inherit eutils gnome2-utils qmake-utils
@@ -63,4 +62,3 @@ pkg_postinst() {
 pkg_postrm() {
 	use dedicated || gnome2_icon_cache_update
 }
-

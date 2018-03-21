@@ -1,6 +1,5 @@
 # Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -25,4 +24,3 @@ src_install() {
 	emake DESTDIR="${D}" DATADIR="/usr/share" install
 	dodoc README.txt README-REPLACEMENTS.txt
 }
-

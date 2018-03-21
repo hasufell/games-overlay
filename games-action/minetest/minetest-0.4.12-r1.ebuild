@@ -1,13 +1,12 @@
 # Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 inherit eutils cmake-utils gnome2-utils vcs-snapshot user
 
 DESCRIPTION="An InfiniMiner/Minecraft inspired game"
 HOMEPAGE="http://minetest.net/"
-SRC_URI="http://github.com/minetest/minetest/tarball/${PV} -> ${P}.tar.gz"
+SRC_URI="https://github.com/minetest/minetest/tarball/${PV} -> ${P}.tar.gz"
 
 LICENSE="LGPL-2.1+ CC-BY-SA-3.0"
 SLOT="0"

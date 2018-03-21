@@ -1,13 +1,12 @@
 # Copyright 2015 Julian Ospald <hasufell@posteo.de>, Heiko Schaefer <heiko@rangun.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
 inherit autotools bash-completion-r1 flag-o-matic eutils vcs-snapshot
 
 DESCRIPTION="Server for the popular card game Mau Mau"
-HOMEPAGE="http://sourceforge.net/projects/netmaumau"
+HOMEPAGE="https://sourceforge.net/projects/netmaumau"
 SRC_URI="https://github.com/velnias75/NetMauMau/archive/V${PV}.tar.gz -> ${P}-server.tar.gz"
 
 LICENSE="LGPL-3"
@@ -67,12 +66,12 @@ pkg_postinst() {
 	# than it get stopped, so the next connection attempt
 	# will use the newly installed instance
 	if [ -n "`pgrep -f "nmm-server"`" ]; then
-                if [ -n "`pgrep -f "inetd"`" ]; then
+		if [ -n "`pgrep -f "inetd"`" ]; then
 			elog "Detected a NetMauMau server started from (x)inetd."
-                        elog "Stopping nmm-server to spawn the newly installed instance at next request…"
-                        killall nmm-server 2> /dev/null
-                fi
-        fi
+			elog "Stopping nmm-server to spawn the newly installed instance at next request…"
+			killall nmm-server 2> /dev/null
+		fi
+	fi
 
 	if ! use dedicated ; then
 		elog "This is only the server part, you might want to install"

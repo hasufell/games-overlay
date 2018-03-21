@@ -1,6 +1,5 @@
 # Copyright 2015 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI="5"
 
@@ -75,4 +74,3 @@ src_install() {
 		doins -r "${S}"/app/data/*
 	fi
 }
-

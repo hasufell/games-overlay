@@ -1,6 +1,5 @@
 # Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 # do not use autotools related stuff in stable ebuilds
 # unless you like random breakage: 469796, 469798, 424041
@@ -12,7 +11,7 @@ inherit eutils gnome2-utils # STABLE ARCH
 DESCRIPTION="Updated clone of Westood Studios' Dune2"
 HOMEPAGE="http://dunelegacy.sourceforge.net"
 SRC_URI="mirror://sourceforge/${PN}/${P}-src.tar.bz2"
-SRC_URI="${SRC_URI} http://dev.gentoo.org/~hasufell/distfiles/${P}-no-autoreconf.patch.xz" # STABLE ARCH
+SRC_URI="${SRC_URI} https://dev.gentoo.org/~hasufell/distfiles/${P}-no-autoreconf.patch.xz" # STABLE ARCH
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -75,4 +74,3 @@ pkg_postinst() {
 pkg_postrm() {
 	gnome2_icon_cache_update
 }
-

@@ -1,13 +1,12 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
 inherit eutils multilib toolchain-funcs
 
 DESCRIPTION="P.E.Op.S Sound Emulation (SPU) PSEmu Plugin"
-HOMEPAGE="http://sourceforge.net/projects/peops/"
+HOMEPAGE="https://sourceforge.net/projects/peops/"
 SRC_URI="mirror://sourceforge/peops/PeopsSpu${PV//./}.tar.gz"
 
 LICENSE="GPL-2"
@@ -64,4 +63,3 @@ src_install() {
 
 	dodoc "${WORKDIR}"/*.txt || die
 }
-

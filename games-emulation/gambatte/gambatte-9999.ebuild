@@ -1,13 +1,12 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
 inherit scons-utils qt4-r2 git-2
 
 DESCRIPTION="An accuracy-focused Gameboy / Gameboy Color emulator"
-HOMEPAGE="http://sourceforge.net/projects/gambatte"
+HOMEPAGE="https://sourceforge.net/projects/gambatte"
 EGIT_REPO_URI="https://github.com/sinamas/gambatte.git"
 
 LICENSE="GPL-2"
@@ -93,4 +92,3 @@ src_install() {
 
 	nonfatal dodoc README changelog
 }
-

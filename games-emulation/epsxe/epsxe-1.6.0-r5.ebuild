@@ -1,6 +1,5 @@
 # Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -9,7 +8,7 @@ inherit fdo-mime gnome2-utils multilib
 DESCRIPTION="ePSXe PlayStation Emulator"
 HOMEPAGE="http://www.epsxe.com/"
 SRC_URI="http://www.epsxe.com/files/epsxe${PV//.}lin.zip
-	http://dev.gentoo.org/~hasufell/distfiles/${PN}.png"
+	https://dev.gentoo.org/~hasufell/distfiles/${PN}.png"
 
 LICENSE="freedist"
 SLOT="0"
@@ -65,4 +64,3 @@ pkg_postrm() {
 	fdo-mime_desktop_database_update
 	gnome2_icon_cache_update
 }
-

@@ -1,6 +1,5 @@
 # Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -50,4 +49,3 @@ src_install() {
 	doicon "${FILESDIR}"/${PN}.svg
 	make_desktop_entry ${MY_PN} ${PN} ${PN}
 }
-

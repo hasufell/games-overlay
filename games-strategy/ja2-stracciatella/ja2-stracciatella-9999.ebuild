@@ -1,6 +1,5 @@
 # Copyright 2015 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -65,4 +64,3 @@ pkg_postinst() {
 	elog "/usr/bin/ja2-convert"
 	elog "Alternatively, install games-strategy/ja2-stracciatella-data."
 }
-

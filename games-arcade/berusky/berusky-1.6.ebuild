@@ -1,6 +1,5 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 inherit autotools eutils gnome2-utils
@@ -10,7 +9,7 @@ DESCRIPTION="free logic game based on an ancient puzzle named Sokoban"
 HOMEPAGE="http://anakreon.cz/?q=node/1"
 SRC_URI="http://www.anakreon.cz/download/${P}.tar.gz
 	http://www.anakreon.cz/download/${DATAFILE}.tar.gz
-	http://dev.gentoo.org/~hasufell/distfiles/${PN}.png"
+	https://dev.gentoo.org/~hasufell/distfiles/${PN}.png"
 
 LICENSE="GPL-2"
 SLOT="0"

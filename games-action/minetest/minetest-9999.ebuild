@@ -1,13 +1,12 @@
 # Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 inherit cmake-utils git-r3 gnome2-utils pax-utils user
 
 DESCRIPTION="An InfiniMiner/Minecraft inspired game"
 HOMEPAGE="http://minetest.net/"
-EGIT_REPO_URI="git://github.com/minetest/${PN}.git"
+EGIT_REPO_URI="https://github.com/minetest/${PN}.git"
 
 LICENSE="LGPL-2.1+ CC-BY-SA-3.0"
 SLOT="0"
@@ -108,14 +107,14 @@ src_install() {
 	cmake-utils_src_install
 
 	if use server || use dedicated ; then
-	        pax-mark m "${D}"usr/bin/minetestserver
+		pax-mark m "${D}"usr/bin/minetestserver
 		newinitd "${FILESDIR}"/minetestserver.initd minetest-server
 		newconfd "${T}"/minetestserver.confd minetest-server
 	fi
 
-        if ! use dedicated ; then
-                pax-mark m "${D}"usr/bin/minetest
-        fi
+	if ! use dedicated ; then
+		pax-mark m "${D}"usr/bin/minetest
+	fi
 
 	if use doc ; then
 		cd "${CMAKE_BUILD_DIR}"/doc || die

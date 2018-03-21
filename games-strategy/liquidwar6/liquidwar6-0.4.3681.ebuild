@@ -1,6 +1,5 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -10,7 +9,7 @@ MY_PV=${PV/_beta/beta}
 MY_P=${PN}-${MY_PV}
 
 DESCRIPTION="Unique multiplayer wargame between liquids"
-HOMEPAGE="http://www.gnu.org/software/liquidwar6/"
+HOMEPAGE="https://www.gnu.org/software/liquidwar6/"
 SRC_URI="http://www.ufoot.org/download/liquidwar/v6/${MY_PV}/${MY_P}.tar.gz
 	maps? ( http://www.ufoot.org/download/liquidwar/v6/${MY_PV}/${PN}-extra-maps-${MY_PV}.tar.gz )"
 
@@ -109,4 +108,3 @@ src_install() {
 	use maps && emake -C "${S_MAPS}" DESTDIR="${D}" install
 	prune_libtool_files --all
 }
-

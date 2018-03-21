@@ -1,6 +1,5 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -88,4 +87,3 @@ pkg_postinst() {
 	elog "    'commandergenius [path-to-keen-data]'"
 	elog "or add your keen data dir to the search paths in cgenius.cfg"
 }
-
