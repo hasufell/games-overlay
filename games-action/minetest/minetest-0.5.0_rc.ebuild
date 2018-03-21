@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=5
-inherit cmake-utils gnome2-utils vcs-snapshot user
+inherit cmake-utils gnome2-utils pax-utils vcs-snapshot user
 
 DESCRIPTION="An InfiniMiner/Minecraft inspired game"
 HOMEPAGE="http://minetest.net/"
@@ -110,8 +110,13 @@ src_install() {
 	cmake-utils_src_install
 
 	if use server || use dedicated ; then
+		pax-mark m "${D}"usr/bin/minetestserver
 		newinitd "${FILESDIR}"/minetestserver.initd minetest-server
 		newconfd "${T}"/minetestserver.confd minetest-server
+	fi
+
+	if ! use dedicated ; then
+		pax-mark m "${D}"usr/bin/minetest
 	fi
 
 	if use doc ; then

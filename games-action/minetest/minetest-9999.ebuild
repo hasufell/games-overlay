@@ -7,7 +7,7 @@ inherit cmake-utils git-r3 gnome2-utils pax-utils user
 
 DESCRIPTION="An InfiniMiner/Minecraft inspired game"
 HOMEPAGE="http://minetest.net/"
-EGIT_REPO_URI="git://github.com/minetest/${PN}.git"
+EGIT_REPO_URI="https://github.com/minetest/${PN}.git"
 
 LICENSE="LGPL-2.1+ CC-BY-SA-3.0"
 SLOT="0"
