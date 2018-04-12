@@ -56,13 +56,21 @@ RDEPEND="
 	)
 	geoip? ( dev-libs/geoip )"
 DEPEND="${RDEPEND}
-	${PYTHON_DEPS}
+	$(python_gen_any_dep '
+		dev-python/pyyaml[${PYTHON_USEDEP}]
+		dev-python/jinja[${PYTHON_USEDEP}]
+	')
 	virtual/pkgconfig"
 
 CMAKE_BUILD_TYPE="Release"
 
 UNV_SERVER_HOME=/var/lib/${PN}-server
 UNV_SERVER_DATA=${UNV_SERVER_HOME}/.Unvanquished/main
+
+python_check_deps() {
+	has_version "dev-python/pyyaml[${PYTHON_USEDEP}]" \
+		&& has_version "dev-python/jinja[${PYTHON_USEDEP}]"
+}
 
 pkg_pretend() {
 	einfo "This package can benefit from the following CFLAGS/CXXFLAGS:"
