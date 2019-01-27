@@ -1,8 +1,8 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Copyright 2014 Julian Ospald <hasufell@posteo.de>
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=7
 
 DESCRIPTION="OpenSFX data files for OpenTTD"
 HOMEPAGE="http://bundles.openttdcoop.org/opensfx/"
@@ -19,7 +19,7 @@ RDEPEND=""
 S=${WORKDIR}/${P}-source
 
 src_install() {
-	insinto "${GAMES_DATADIR}"/openttd/data/
+	insinto "/usr/share/games/openttd/data/"
 	doins opensfx.cat opensfx.obs
 	dodoc docs/{changelog.txt,readme.ptxt}
 }
